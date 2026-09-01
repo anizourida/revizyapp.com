@@ -1,13 +1,12 @@
 /**
- * Moroccan Curriculum Tafqeet & Arabic Number Engine
- * Complies with Moroccan Primary School Curriculum (المنهاج المغربي)
+ * Moroccan Curriculum Tafqeet & Arabic Number Engine (Educational Edition)
+ * Complies with Moroccan Primary & Middle School Curriculum (المنهاج المغربي)
  * Rules:
  *  - Uses "مئة" instead of "مائة"
  *  - Uses separated hundreds: "ثلاث مئة", "أربع مئة", etc. instead of "ثلاثمئة"
- *  - Supports full Tashkeel and plain text
+ *  - Generates both with-tashkeel and without-tashkeel simultaneously
  *  - Supports Nominative (مرفوع) and Accusative/Genitive (منصوب ومجرور)
- *  - Supports Masculine (مذكر) and Feminine (مؤنث) gender rules
- *  - Supports Cheque formatting and Moroccan Dirham currency
+ *  - Place-value breakdown for primary mathematics (الوحدات، العشرات، المئات، الآلاف، الملايين، الملايير)
  *  - Bidirectional: Number -> Arabic Text & Arabic Text -> Number
  */
 
@@ -19,25 +18,21 @@
     masculine: {
       tashkeel: {
         nom: ['', 'وَاحِدٌ', 'اثْنَانِ', 'ثَلَاثَةٌ', 'أَرْبَعَةٌ', 'خَمْسَةٌ', 'سِتَّةٌ', 'سَبْعَةٌ', 'ثَمَانِيَةٌ', 'تِسْعَةٌ'],
-        acc: ['', 'وَاحِدًا', 'اثْنَيْنِ', 'ثَلَاثَةً', 'أَرْبَعَةً', 'خَمْسَةً', 'سِتَّةً', 'سَبْعَةً', 'ثَمَانِيَةً', 'تِسْعَةً'],
-        gen: ['', 'وَاحِدٍ', 'اثْنَيْنِ', 'ثَلَاثَةٍ', 'أَرْبَعَةٍ', 'خَمْسَةٍ', 'سِتَّةٍ', 'سَبْعَةٍ', 'ثَمَانِيَةٍ', 'تِسْعَةٍ']
+        acc: ['', 'وَاحِدًا', 'اثْنَيْنِ', 'ثَلَاثَةً', 'أَرْبَعَةً', 'خَمْسَةً', 'سِتَّةً', 'سَبْعَةً', 'ثَمَانِيَةً', 'تِسْعَةً']
       },
       plain: {
         nom: ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة'],
-        acc: ['', 'واحدا', 'اثنين', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة'],
-        gen: ['', 'واحد', 'اثنين', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة']
+        acc: ['', 'واحدا', 'اثنين', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة']
       }
     },
     feminine: {
       tashkeel: {
         nom: ['', 'إِحْدَى', 'اثْنَتَانِ', 'ثَلَاثٌ', 'أَرْبَعٌ', 'خَمْسٌ', 'سِتٌّ', 'سَبْعٌ', 'ثَمَانٍ', 'تِسْعٌ'],
-        acc: ['', 'إِحْدَى', 'اثْنَتَيْنِ', 'ثَلَاثًا', 'أَرْبَعًا', 'خَمْسًا', 'سِتًّا', 'سَبْعًا', 'ثَمَانِيًا', 'تِسْعًا'],
-        gen: ['', 'إِحْدَى', 'اثْنَتَيْنِ', 'ثَلَاثٍ', 'أَرْبَعٍ', 'خَمْسٍ', 'سِتٍّ', 'سَبْعٍ', 'ثَمَانٍ', 'تِسْعٍ']
+        acc: ['', 'إِحْدَى', 'اثْنَتَيْنِ', 'ثَلَاثًا', 'أَرْبَعًا', 'خَمْسًا', 'سِتًّا', 'سَبْعًا', 'ثَمَانِيًا', 'تِسْعًا']
       },
       plain: {
         nom: ['', 'إحدى', 'اثنتان', 'ثلاث', 'أربع', 'خمس', 'ست', 'سبع', 'ثمان', 'تسع'],
-        acc: ['', 'إحدى', 'اثنتين', 'ثلاثا', 'أربعا', 'خمسا', 'ستا', 'سبعا', 'ثمانيا', 'تسعا'],
-        gen: ['', 'إحدى', 'اثنتين', 'ثلاث', 'أربع', 'خمس', 'ست', 'سبع', 'ثمان', 'تسع']
+        acc: ['', 'إحدى', 'اثنتين', 'ثلاثا', 'أربعا', 'خمسا', 'ستا', 'سبعا', 'ثمانيا', 'تسعا']
       }
     }
   };
@@ -193,62 +188,21 @@
           'سَبْعَ مِئَةٍ',
           'ثَمَانِيَ مِئَةٍ',
           'تِسْعَ مِئَةٍ'
-        ],
-        gen: [
-          'مِئَةٍ',
-          'مِئَتَيْنِ',
-          'ثَلَاثِ مِئَةٍ',
-          'أَرْبَعِ مِئَةٍ',
-          'خَمْسِ مِئَةٍ',
-          'سِتِّ مِئَةٍ',
-          'سَبْعِ مِئَةٍ',
-          'ثَمَانِي مِئَةٍ',
-          'تِسْعِ مِئَةٍ'
         ]
       },
       plain: {
         nom: ['', 'مئة', 'مئتان', 'ثلاث مئة', 'أربع مئة', 'خمس مئة', 'ست مئة', 'سبع مئة', 'ثماني مئة', 'تسع مئة'],
-        acc: ['', 'مئة', 'مئتين', 'ثلاث مئة', 'أربع مئة', 'خمس مئة', 'ست مئة', 'سبع مئة', 'ثماني مئة', 'تسع مئة'],
-        gen: ['', 'مئة', 'مئتين', 'ثلاث مئة', 'أربع مئة', 'خمس مئة', 'ست مئة', 'سبع مئة', 'ثماني مئة', 'تسع مئة']
-      }
-    },
-    traditional: {
-      tashkeel: {
-        nom: [
-          '',
-          'مِائَةٌ',
-          'مِائَتَانِ',
-          'ثَلَاثُمِائَةٍ',
-          'أَرْبَعُمِائَةٍ',
-          'خَمْسُمِائَةٍ',
-          'سِتُّمِائَةٍ',
-          'سَبْعُمِائَةٍ',
-          'ثَمَانِيمِائَةٍ',
-          'تِسْعُمِائَةٍ'
-        ],
-        acc: [
-          'مِائَةً',
-          'مِائَتَيْنِ',
-          'ثَلَاثَمِائَةٍ',
-          'أَرْبَعَمِائَةٍ',
-          'خَمْسَمِائَةٍ',
-          'سِتَّمِائَةٍ',
-          'سَبْعَمِائَةٍ',
-          'ثَمَانِيَمِائَةٍ',
-          'تِسْعَمِائَةٍ'
-        ]
-      },
-      plain: {
-        nom: ['', 'مائة', 'مائتان', 'ثلاثمائة', 'أربعمائة', 'خمسمائة', 'ستمائة', 'سبعمائة', 'ثمانمائة', 'تسعمائة'],
-        acc: ['', 'مائة', 'مائتين', 'ثلاثمائة', 'أربعمائة', 'خمسمائة', 'ستمائة', 'سبعمائة', 'ثمانمائة', 'تسعمائة']
+        acc: ['', 'مئة', 'مئتين', 'ثلاث مئة', 'أربع مئة', 'خمس مئة', 'ست مئة', 'سبع مئة', 'ثماني مئة', 'تسع مئة']
       }
     }
   };
 
-  // Large Scale Groups (المراتب: آلاف، ملايين، ملايير، تريليونات)
+  // Scale Groups: Thousands (آلاف), Millions (ملايين), Billions (ملايير), Trillions (تريليونات)
   const SCALES = [
     {
-      singular: { tashkeel: '', plain: '' },
+      singularNom: { tashkeel: '', plain: '' },
+      singularAcc: { tashkeel: '', plain: '' },
+      singularGen: { tashkeel: '', plain: '' },
       dualNom: { tashkeel: '', plain: '' },
       dualAcc: { tashkeel: '', plain: '' },
       plural: { tashkeel: '', plain: '' }
@@ -272,7 +226,7 @@
       plural: { tashkeel: 'مَلَايِينَ', plain: 'ملايين' }
     },
     {
-      // 10^9: Billions (Milliards in Moroccan/French convention)
+      // 10^9: Billions (Milliards)
       singularNom: { tashkeel: 'مِلْيَارٌ', plain: 'مليار' },
       singularAcc: { tashkeel: 'مِلْيَارًا', plain: 'مليارا' },
       singularGen: { tashkeel: 'مِلْيَارٍ', plain: 'مليار' },
@@ -291,22 +245,17 @@
     }
   ];
 
-  /**
-   * Converts a 1-999 chunk into Arabic words
-   */
-  function convertGroup(num, options, isLastGroup, scaleIndex) {
+  function convertGroup(num, options, scaleIndex) {
     if (num === 0) return '';
 
     const {
       withTashkeel = true,
       grammaticalCase = 'nom',
-      gender = 'masculine',
-      moroccanCurriculum = true
+      gender = 'masculine'
     } = options;
 
     const tashKey = withTashkeel ? 'tashkeel' : 'plain';
     const caseKey = grammaticalCase === 'nom' ? 'nom' : 'acc';
-    const hStyle = moroccanCurriculum ? 'moroccan' : 'traditional';
 
     const h = Math.floor(num / 100);
     const remainder = num % 100;
@@ -317,25 +266,22 @@
 
     // Hundreds
     if (h > 0) {
-      const hundredStr = HUNDREDS[hStyle][tashKey][caseKey][h];
+      const hundredStr = HUNDREDS.moroccan[tashKey][caseKey][h];
       parts.push(hundredStr);
     }
 
     // Remainder (1 - 99)
     if (remainder > 0) {
       if (remainder < 10) {
-        // 1 - 9
         const activeGender = scaleIndex > 0 ? 'masculine' : gender;
         const unitStr = ONES[activeGender][tashKey][caseKey][remainder];
         parts.push(unitStr);
       } else if (remainder >= 10 && remainder <= 19) {
-        // 10 - 19
         const activeGender = scaleIndex > 0 ? 'masculine' : gender;
         const teenIdx = remainder - 10;
         const teenStr = TEENS[activeGender][tashKey][caseKey][teenIdx];
         parts.push(teenStr);
       } else {
-        // 20 - 99
         const activeGender = scaleIndex > 0 ? 'masculine' : gender;
         const unitStr = u > 0 ? ONES[activeGender][tashKey][caseKey][u] : '';
         const tenStr = TENS[tashKey][caseKey][t];
@@ -353,47 +299,35 @@
     return parts.join(conjunction);
   }
 
-  /**
-   * Main Tafqeet Function: Converts number (integer or float string) to Arabic words
-   */
-  function tafqeet(input, opts = {}) {
+  function tafqeetInternal(input, opts = {}) {
     const defaultOptions = {
       withTashkeel: true,
-      grammaticalCase: 'nom', // 'nom', 'acc', 'gen'
-      gender: 'masculine',
-      moroccanCurriculum: true,
-      currency: null // 'MAD', 'USD', 'EUR', or custom object
+      grammaticalCase: 'nom',
+      gender: 'masculine'
     };
 
     const options = Object.assign({}, defaultOptions, opts);
-    const { withTashkeel, grammaticalCase, moroccanCurriculum } = options;
+    const { withTashkeel, grammaticalCase } = options;
     const tashKey = withTashkeel ? 'tashkeel' : 'plain';
     const caseKey = grammaticalCase === 'nom' ? 'nom' : 'acc';
 
-    // Sanitize input
     let str = String(input).trim().replace(/,/g, '');
-    if (!str || isNaN(str)) {
-      return '';
-    }
+    if (!str || isNaN(str)) return '';
 
-    // Check negative
     let isNegative = false;
     if (str.startsWith('-')) {
       isNegative = true;
       str = str.substring(1);
     }
 
-    // Split integer and decimal
     const parts = str.split('.');
     let intPartStr = parts[0] || '0';
     let decPartStr = parts[1] || '';
 
-    // Handle zero
     if (BigInt(intPartStr) === 0n && (!decPartStr || Number(decPartStr) === 0)) {
       return withTashkeel ? 'صِفْرٌ' : 'صفر';
     }
 
-    // Process integer chunk by chunk (groups of 3 digits from right)
     const groups = [];
     let tempStr = intPartStr;
     while (tempStr.length > 0) {
@@ -412,37 +346,30 @@
       const scale = SCALES[i];
 
       if (i === 0) {
-        // Units group (0 - 999)
-        const groupWords = convertGroup(groupVal, options, true, 0);
+        const groupWords = convertGroup(groupVal, options, 0);
         wordsParts.push(groupWords);
       } else {
-        // Scale groups: Thousands (1), Millions (2), Billions (3), Trillions (4)
         if (groupVal === 1) {
           wordsParts.push(scale.singularNom[tashKey]);
         } else if (groupVal === 2) {
           wordsParts.push(caseKey === 'nom' ? scale.dualNom[tashKey] : scale.dualAcc[tashKey]);
         } else if (groupVal >= 3 && groupVal <= 10) {
-          // 3-10: Mudhaf + Plural (ثلاثةُ آلافٍ / خمسةُ ملايينَ)
-          let groupWords = convertGroup(groupVal, Object.assign({}, options, { gender: 'feminine' }), false, i);
-          // Remove nunation from last word if tashkeel is on (ثلاثةٌ -> ثلاثةُ)
+          let groupWords = convertGroup(groupVal, Object.assign({}, options, { gender: 'feminine' }), i);
           if (withTashkeel) {
             groupWords = groupWords.replace(/ٌ$/, 'ُ').replace(/ً$/, 'َ').replace(/ٍ$/, 'ِ');
           }
           wordsParts.push(groupWords + ' ' + scale.plural[tashKey]);
         } else if (groupVal % 100 === 0) {
-          // Exact hundreds (e.g. 100,000 / 500,000,000): Mudhaf + Singular Genitive (مئةُ ألفٍ / خمسُ مئةِ مليونٍ)
-          let groupWords = convertGroup(groupVal, options, false, i);
+          let groupWords = convertGroup(groupVal, options, i);
           if (withTashkeel) {
             groupWords = groupWords.replace(/ٍ$/, 'ِ').replace(/ٌ$/, 'ُ');
           }
           wordsParts.push(groupWords + ' ' + scale.singularGen[tashKey]);
         } else if (groupVal % 100 >= 3 && groupVal % 100 <= 10) {
-          // Ends with 3-10 (e.g. 104,000): مئة وأربعة آلاف
-          const groupWords = convertGroup(groupVal, Object.assign({}, options, { gender: 'feminine' }), false, i);
+          const groupWords = convertGroup(groupVal, Object.assign({}, options, { gender: 'feminine' }), i);
           wordsParts.push(groupWords + ' ' + scale.plural[tashKey]);
         } else {
-          // 11-99: Singular Accusative (خمسة عشر ألفًا / عشرون مليونًا)
-          const groupWords = convertGroup(groupVal, options, false, i);
+          const groupWords = convertGroup(groupVal, options, i);
           wordsParts.push(groupWords + ' ' + scale.singularAcc[tashKey]);
         }
       }
@@ -455,39 +382,32 @@
       result = (withTashkeel ? 'سَالِبُ ' : 'سالب ') + result;
     }
 
-    // Handle Decimals
     if (decPartStr && Number(decPartStr) > 0) {
       const decNum = parseInt(decPartStr.substring(0, 3), 10);
       if (decNum > 0) {
-        if (options.currency === 'MAD') {
-          // Currency decimal is "سنتيم"
-          const centimeWords = tafqeet(decNum, Object.assign({}, options, { currency: null }));
-          const centimeUnit = decNum === 1 ? (withTashkeel ? 'سَنْتِيمٌ' : 'سنتيم') :
-                              decNum === 2 ? (withTashkeel ? 'سَنْتِيمَانِ' : 'سنتيمان') :
-                              decNum <= 10 ? (withTashkeel ? 'سَنْتِيمَاتٍ' : 'سنتيمات') :
-                              (withTashkeel ? 'سَنْتِيمًا' : 'سنتيما');
-          
-          const dirhamUnit = intPartStr === '1' ? (withTashkeel ? 'دِرْهَمٌ' : 'درهم') :
-                             intPartStr === '2' ? (withTashkeel ? 'دِرْهَمَانِ' : 'درهمان') :
-                             parseInt(intPartStr, 10) <= 10 && parseInt(intPartStr, 10) > 0 ? (withTashkeel ? 'دَرَاهِمَ' : 'دراهم') :
-                             (withTashkeel ? 'دِرْهَمًا' : 'درهما');
-
-          return `${result} ${dirhamUnit} ${conjunction}${centimeWords} ${centimeUnit} ${withTashkeel ? 'مَغْرِبِيًّا لَا غَيْر' : 'مغربيا لا غير'}`.trim();
-        } else {
-          const decWords = tafqeet(decNum, Object.assign({}, options, { currency: null }));
-          const fassila = withTashkeel ? ' فَاصِلَة ' : ' فاصلة ';
-          result += fassila + decWords;
-        }
+        const decWords = tafqeetInternal(decNum, Object.assign({}, options));
+        const fassila = withTashkeel ? ' فَاصِلَة ' : ' فاصلة ';
+        result += fassila + decWords;
       }
-    } else if (options.currency === 'MAD') {
-      const dirhamUnit = intPartStr === '1' ? (withTashkeel ? 'دِرْهَمٌ' : 'درهم') :
-                         intPartStr === '2' ? (withTashkeel ? 'دِرْهَمَانِ' : 'درهمان') :
-                         parseInt(intPartStr, 10) <= 10 && parseInt(intPartStr, 10) > 0 ? (withTashkeel ? 'دَرَاهِمَ' : 'دراهم') :
-                         (withTashkeel ? 'دِرْهَمًا' : 'درهما');
-      result += ` ${dirhamUnit} ${withTashkeel ? 'مَغْرِبِيًّا لَا غَيْر' : 'مغربيا لا غير'}`;
     }
 
     return result.trim();
+  }
+
+  /**
+   * Main function: returns both with-tashkeel and without-tashkeel versions
+   */
+  function tafqeetDual(input, opts = {}) {
+    const withTashkeel = tafqeetInternal(input, Object.assign({}, opts, { withTashkeel: true }));
+    const withoutTashkeel = tafqeetInternal(input, Object.assign({}, opts, { withTashkeel: false }));
+    return {
+      withTashkeel,
+      withoutTashkeel
+    };
+  }
+
+  function tafqeet(input, opts = {}) {
+    return tafqeetInternal(input, opts);
   }
 
   /**
@@ -497,16 +417,14 @@
     if (!text || typeof text !== 'string') return null;
 
     let cleaned = text
-      .replace(/[\u064B-\u065F\u0670]/g, '') // remove harakat
+      .replace(/[\u064B-\u065F\u0670]/g, '')
       .replace(/[،,]/g, ' ')
       .replace(/[\(\)\[\]\{\}]/g, ' ')
-      .replace(/درهم(ا|ان|ين)?|سنتيم(ا|ات|ان|ين)?|مغربي(ا)?|فقط|لا غير/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
 
     if (!cleaned) return null;
 
-    // Normalizations for Moroccan & Arabic forms
     cleaned = cleaned
       .replace(/مائة/g, 'مئة')
       .replace(/مائتان/g, 'مئتان')
@@ -610,7 +528,6 @@
       'ترليونات': 1000000000000
     };
 
-    // Remove 'و' prefixes
     const rawTokens = cleaned.split(/\s+/).filter(Boolean);
     const tokens = rawTokens.map(t => {
       if (t.startsWith('و') && t.length > 1 && !wordValues[t] && !scales[t]) {
@@ -690,7 +607,7 @@
     return total;
   }
 
-  // Educational Place-Value Breakdown Helper
+  // Educational Place-Value Breakdown Helper for Mathematics
   function getPlaceValueBreakdown(num) {
     const n = Math.abs(parseInt(num, 10));
     if (isNaN(n)) return null;
@@ -711,6 +628,7 @@
 
   const Engine = {
     tafqeet,
+    tafqeetDual,
     arabicToNumber,
     getPlaceValueBreakdown
   };
