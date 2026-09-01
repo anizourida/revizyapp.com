@@ -940,8 +940,8 @@
     </div>
   </footer>
 
-  <!-- Engine Script -->
-  <script src="assets/moroccan-tafqeet.js"></script>
+  <!-- Engine Script with cache-busting -->
+  <script src="assets/moroccan-tafqeet.js?v=20260901"></script>
 
   <!-- Tool Logic -->
   <script>
@@ -950,6 +950,23 @@
       moroccanCurriculum: true,
       grammaticalCase: 'nom'
     };
+
+    // Robust caller that supports both tafqeetDual and legacy tafqeet
+    function getDualOutput(input, options) {
+      if (!window.MoroccanTafqeet) {
+        return { withTashkeel: '', withoutTashkeel: '' };
+      }
+      if (typeof window.MoroccanTafqeet.tafqeetDual === 'function') {
+        return window.MoroccanTafqeet.tafqeetDual(input, options);
+      }
+      if (typeof window.MoroccanTafqeet.tafqeet === 'function') {
+        return {
+          withTashkeel: window.MoroccanTafqeet.tafqeet(input, Object.assign({}, options, { withTashkeel: true })),
+          withoutTashkeel: window.MoroccanTafqeet.tafqeet(input, Object.assign({}, options, { withTashkeel: false }))
+        };
+      }
+      return { withTashkeel: '', withoutTashkeel: '' };
+    }
 
     function handleNumberInput() {
       const input = document.getElementById('numInput').value.trim();
@@ -968,7 +985,7 @@
       outWithEl.classList.remove('empty');
       outWithoutEl.classList.remove('empty');
 
-      const dual = window.MoroccanTafqeet.tafqeetDual(input, {
+      const dual = getDualOutput(input, {
         moroccanCurriculum: state.moroccanCurriculum,
         grammaticalCase: state.grammaticalCase
       });
@@ -976,8 +993,10 @@
       outWithEl.innerText = dual.withTashkeel || 'يرجى إدخال عدد صحيح أو عشري مناسب.';
       outWithoutEl.innerText = dual.withoutTashkeel || 'يرجى إدخال عدد صحيح أو عشري مناسب.';
 
-      const bd = window.MoroccanTafqeet.getPlaceValueBreakdown(input);
-      updateBreakdown(bd);
+      if (window.MoroccanTafqeet && typeof window.MoroccanTafqeet.getPlaceValueBreakdown === 'function') {
+        const bd = window.MoroccanTafqeet.getPlaceValueBreakdown(input);
+        updateBreakdown(bd);
+      }
     }
 
     function updateBreakdown(bd) {
@@ -1069,11 +1088,13 @@
         outputEl.innerText = 'أدخل نصاً عربياً بالأعلى...';
         return;
       }
-      const num = window.MoroccanTafqeet.arabicToNumber(input);
-      if (num !== null && !isNaN(num)) {
-        outputEl.innerText = num.toLocaleString('fr-FR');
-      } else {
-        outputEl.innerText = 'لم يتم التعرف على العدد';
+      if (window.MoroccanTafqeet && typeof window.MoroccanTafqeet.arabicToNumber === 'function') {
+        const num = window.MoroccanTafqeet.arabicToNumber(input);
+        if (num !== null && !isNaN(num)) {
+          outputEl.innerText = num.toLocaleString('fr-FR');
+        } else {
+          outputEl.innerText = 'لم يتم التعرف على العدد';
+        }
       }
     }
 
