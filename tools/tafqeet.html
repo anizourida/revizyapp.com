@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>محول الأرقام إلى حروف حسب المنهاج المغربي | تفقيط الأعداد بالعربية - Revizy</title>
+  <meta name="title" content="محول الأرقام إلى حروف حسب المنهاج المغربي | تفقيط الأعداد بالعربية - Revizy">
+  <meta name="description" content="أداة مجانية ودقيقة لتحويل الأرقام إلى حروف عربية بالتشكيل وبدونه وفق قواعد المنهاج الدراسي المغربي (مئة، ثلاث مئة، أربع مئة). تدعم التحويل العكسي وكتابة الشيكات بالدرهم المغربي.">
+  <meta name="keywords" content="تحويل الأرقام إلى حروف, تفقيط الأرقام, المنهاج المغربي, كتابة الأعداد بالحروف, مئة أو مائة, ثلاث مئة, درهم مغربي, شيك بالحروف, تحويل نص إلى رقم, موقع ريفيزي, Revizy">
+  <meta name="author" content="Revizy">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://revizyapp.com/tools/tafqeet.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://revizyapp.com/tools/tafqeet.html">
+  <meta property="og:title" content="محول الأرقام إلى حروف حسب المنهاج المغربي | Revizy">
+  <meta property="og:description" content="أداة تحويل الأعداد إلى كلمات عربية بالتشكيل التام معتمدة على قواعد المنهاج المغربي (مئة، ثلاث مئة). مخصصة للأساتذة، التلاميذ، وكتابة الشيكات.">
+  <meta property="og:image" content="https://revizyapp.com/assets/app-icon-DGsvJRQt.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://revizyapp.com/tools/tafqeet.html">
+  <meta property="twitter:title" content="محول الأرقام إلى حروف حسب المنهاج المغربي | Revizy">
+  <meta property="twitter:description" content="تحويل الأعداد إلى كلمات عربية بالتشكيل وفق المنهاج المغربي وكتابة الشيكات بالدرهم.">
+  <meta property="twitter:image" content="https://revizyapp.com/assets/app-icon-DGsvJRQt.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/app-icon-DGsvJRQt.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --primary-light: #ccfbf1;
+      --primary-glow: rgba(13, 148, 136, 0.25);
+      --secondary: #6366f1;
+      --secondary-light: #e0e7ff;
+      --accent: #f59e0b;
+      --accent-light: #fef3c7;
+      --dark: #0f172a;
+      --dark-card: #1e293b;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --morocco-red: #c1272d;
+      --morocco-green: #006233;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --shadow-xl: 0 20px 30px -10px rgba(13, 148, 136, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', 'Readex Pro', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      direction: rtl;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient Background Glow */
+    .bg-blobs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+    }
+    .blob-1 {
+      top: -100px;
+      right: -50px;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, #99f6e4 0%, #ccfbf1 70%);
+    }
+    .blob-2 {
+      top: 30%;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #e0e7ff 0%, #ede9fe 70%);
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      transition: all 0.3s ease;
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+    .brand-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+    .nav-link:hover {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+    }
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    /* Main Container */
+    main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 30px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-badge .flag-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--morocco-red);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .hero-title {
+      font-size: 34px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, #0d9488 0%, #2563eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Tool Card Container */
+    .tool-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: var(--shadow-xl);
+      padding: 32px;
+      backdrop-filter: blur(20px);
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    /* Mode Tabs */
+    .tab-nav {
+      display: flex;
+      background: #f1f5f9;
+      padding: 5px;
+      border-radius: var(--radius-md);
+      margin-bottom: 28px;
+      gap: 6px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 12px 18px;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+    }
+    .tab-btn.active {
+      background: #ffffff;
+      color: var(--primary-dark);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Converter Grid */
+    .converter-body {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Input Section */
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .input-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .input-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .input-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-text-action {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .btn-text-action:hover {
+      background: var(--primary-light);
+    }
+    .main-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .main-input {
+      width: 100%;
+      font-family: 'Cairo', inherit;
+      font-size: 24px;
+      font-weight: 700;
+      padding: 16px 20px;
+      border: 2px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      color: #0f172a;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+    .main-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-glow);
+    }
+    .main-input::placeholder {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    /* Preset Chips */
+    .preset-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .chip {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .chip:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Options Toolbar */
+    .options-panel {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .option-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .segmented-control {
+      display: flex;
+      background: #e2e8f0;
+      padding: 3px;
+      border-radius: 8px;
+    }
+    .segmented-btn {
+      flex: 1;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .segmented-btn.active {
+      background: #ffffff;
+      color: var(--primary-dark);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-weight: 700;
+    }
+
+    /* Output Card */
+    .output-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+      border: 2px solid #99f6e4;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      position: relative;
+      box-shadow: var(--shadow-md);
+    }
+    .output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed #ccfbf1;
+      padding-bottom: 10px;
+    }
+    .output-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .output-badge-rules {
+      font-size: 11px;
+      font-weight: 700;
+      background: #ccfbf1;
+      color: #0f766e;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+    .output-text-content {
+      font-family: 'Amiri', 'Cairo', serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.8;
+      color: #0f172a;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      word-break: break-word;
+    }
+    .output-text-content.empty {
+      font-size: 18px;
+      color: #94a3b8;
+      font-style: italic;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    /* Output Toolbar */
+    .output-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid #e2e8f0;
+    }
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .btn-copy {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    .btn-copy:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+    .btn-audio {
+      background: var(--secondary-light);
+      color: var(--secondary);
+      border-color: #c7d2fe;
+    }
+    .btn-audio:hover {
+      background: #c7d2fe;
+      color: #3730a3;
+    }
+    .btn-cheque {
+      background: var(--accent-light);
+      color: #92400e;
+      border-color: #fde68a;
+    }
+    .btn-cheque:hover {
+      background: #fde68a;
+    }
+
+    /* Moroccan Cheque Preview (Interactive) */
+    .cheque-box {
+      margin-top: 24px;
+      background: #fffbeb;
+      border: 2px dashed #f59e0b;
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      position: relative;
+      display: none;
+    }
+    .cheque-box.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    .cheque-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #92400e;
+    }
+    .cheque-field {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .cheque-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #78350f;
+      min-width: 90px;
+    }
+    .cheque-value {
+      font-family: 'Amiri', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e293b;
+      border-bottom: 1px solid #d97706;
+      flex: 1;
+      padding-bottom: 2px;
+    }
+    .cheque-amount-num {
+      background: #ffffff;
+      border: 2px solid #d97706;
+      padding: 4px 16px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 20px;
+      font-weight: 800;
+      color: #b45309;
+      letter-spacing: 1px;
+    }
+
+    /* Place Value Breakdown Section (Educational for Teachers) */
+    .breakdown-box {
+      margin-top: 28px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+    .breakdown-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .breakdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 14px;
+    }
+    .breakdown-table th {
+      background: #f1f5f9;
+      padding: 10px 8px;
+      font-weight: 700;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+    .breakdown-table td {
+      padding: 12px 8px;
+      border: 1px solid #cbd5e1;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .col-units { background: #fef2f2; color: #991b1b; }
+    .col-tens { background: #fff7ed; color: #9a3412; }
+    .col-hundreds { background: #fefce8; color: #854d0e; }
+    .col-thousands { background: #f0fdf4; color: #166534; }
+    .col-millions { background: #eff6ff; color: #1e40af; }
+    .col-billions { background: #faf5ff; color: #6b21a8; }
+
+    /* Educational Guide & SEO Section */
+    .seo-content {
+      background: #ffffff;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-color);
+      padding: 36px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 40px;
+    }
+    .seo-heading {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 18px;
+      border-right: 4px solid var(--primary);
+      padding-right: 12px;
+    }
+    .seo-subheading {
+      font-size: 18px;
+      font-weight: 700;
+      color: #334155;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+    .seo-text {
+      font-size: 15px;
+      color: #475569;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .comp-card {
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid #e2e8f0;
+    }
+    .comp-morocco {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+    .comp-traditional {
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+    .comp-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .comp-morocco .comp-title { color: #166534; }
+    .comp-traditional .comp-title { color: #991b1b; }
+    .comp-list {
+      list-style: none;
+      font-size: 14px;
+      color: #334155;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* FAQ Section */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .faq-item {
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 16px 20px;
+      background: #f8fafc;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-a {
+      padding: 16px 20px;
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.8;
+      background: #ffffff;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 40px 20px 20px;
+      margin-top: auto;
+      border-top: 1px solid #1e293b;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    .footer-brand {
+      max-width: 380px;
+    }
+    .footer-brand-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .footer-brand-desc {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    .footer-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .footer-link {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-link:hover {
+      color: #38bdf8;
+    }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 20px;
+      border-top: 1px solid #1e293b;
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 26px; }
+      .tool-card { padding: 20px; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .options-panel { grid-template-columns: 1fr; }
+      .output-text-content { font-size: 22px; }
+    }
+  </style>
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "محول الأرقام إلى حروف حسب المنهاج المغربي | تفقيط الأعداد بالعربية",
+    "url": "https://revizyapp.com/tools/tafqeet.html",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "description": "أداة مجانية ودقيقة لتحويل الأعداد إلى كلمات عربية بالتشكيل وبدونه حسب المنهاج المغربي الرسمي وكتابة الشيكات بالدرهم.",
+    "author": {
+      "@type": "Organization",
+      "name": "Revizy"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Ambient Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="../index.html" class="brand-logo">
+        <img src="../assets/app-icon-DGsvJRQt.png" alt="شعار ريفيزي Revizy">
+        <div class="brand-text">
+          <span class="brand-name">Revizy</span>
+          <span class="brand-tag">أدوات تعليمية ذكية</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">جميع الأدوات</a>
+        <a href="../about-us.html" class="nav-link">عن التطبيق</a>
+        <span class="nav-badge">
+          <span>🇲🇦</span> المنهاج المغربي
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Header -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="flag-dot"></span>
+        <span>موافق للمنهاج الدراسي المغربي الجديد (ابتدائي / إعدادي)</span>
+      </div>
+      <h1 class="hero-title">
+        محول الأرقام إلى <span>حروف باللغة العربية</span> (تفقيط الأعداد)
+      </h1>
+      <p class="hero-desc">
+        حول أي عدد إلى نص عربي مكتوب بدقة تامة مع أو بدون تشكيل، وفق القواعد الإملائية المعتمدة في المناهج التعليمية المغربية (مئة، ثلاث مئة منفصلة)، مع كتابة الشيكات بالدرهم والتحويل العكسي.
+      </p>
+    </section>
+
+    <!-- Main Tool Container -->
+    <section class="tool-card">
+      <!-- Mode Tabs -->
+      <div class="tab-nav">
+        <button class="tab-btn active" id="tabNumToText" onclick="switchMode('numToText')">
+          <span>🔢 ⬅️ ✍️</span>
+          <span>تحويل الأرقام إلى حروف (تفقيط)</span>
+        </button>
+        <button class="tab-btn" id="tabTextToNum" onclick="switchMode('textToNum')">
+          <span>✍️ ⬅️ 🔢</span>
+          <span>تحويل الحروف إلى أرقام (عكسي)</span>
+        </button>
+      </div>
+
+      <!-- Mode 1: Number to Text -->
+      <div id="panelNumToText" class="converter-body">
+        <!-- Input Area -->
+        <div class="input-wrapper">
+          <div class="input-label-row">
+            <label for="numInput" class="input-label">
+              <span>أدخل العدد أو المبلغ بالأرقام:</span>
+            </label>
+            <div class="input-actions">
+              <button class="btn-text-action" onclick="clearInput()">مسح ✕</button>
+            </div>
+          </div>
+          <div class="main-input-container">
+            <input 
+              type="text" 
+              id="numInput" 
+              class="main-input" 
+              placeholder="مثال: 1345 أو 250000 أو 1500.50" 
+              value="1345" 
+              autocomplete="off"
+              oninput="handleNumberInput()"
+            >
+          </div>
+          <!-- Presets -->
+          <div class="preset-chips">
+            <span style="font-size:12px; color:#64748b; margin-top:2px;">أمثلة سريعة:</span>
+            <button class="chip" onclick="setPreset('100')">100 (مئة)</button>
+            <button class="chip" onclick="setPreset('300')">300 (ثلاث مئة)</button>
+            <button class="chip" onclick="setPreset('1345')">1,345</button>
+            <button class="chip" onclick="setPreset('15420')">15,420</button>
+            <button class="chip" onclick="setPreset('100000')">100,000</button>
+            <button class="chip" onclick="setPreset('2500000')">2,500,000</button>
+            <button class="chip" onclick="setPreset('2540.50', 'MAD')">2540.50 درهم (شيك)</button>
+          </div>
+        </div>
+
+        <!-- Options Toolbar -->
+        <div class="options-panel">
+          <!-- Tashkeel Option -->
+          <div class="option-group">
+            <span class="option-title">التشكيل (الحركات):</span>
+            <div class="segmented-control">
+              <button class="segmented-btn active" id="optTashkeelYes" onclick="setOption('tashkeel', true)">مع التشكيل</button>
+              <button class="segmented-btn" id="optTashkeelNo" onclick="setOption('tashkeel', false)">بدون تشكيل</button>
+            </div>
+          </div>
+
+          <!-- Curriculum Rule Option -->
+          <div class="option-group">
+            <span class="option-title">النمط الإملائي للمئات:</span>
+            <div class="segmented-control">
+              <button class="segmented-btn active" id="optStyleMorocco" onclick="setOption('moroccan', true)">المنهاج المغربي (مئة / ثلاث مئة)</button>
+              <button class="segmented-btn" id="optStyleTrad" onclick="setOption('moroccan', false)">التقليدي (مائة / ثلاثمائة)</button>
+            </div>
+          </div>
+
+          <!-- Grammatical Case Option -->
+          <div class="option-group">
+            <span class="option-title">الحالة الإعرابية:</span>
+            <div class="segmented-control">
+              <button class="segmented-btn active" id="optCaseNom" onclick="setOption('grammaticalCase', 'nom')">مرفوع (ألف / واو)</button>
+              <button class="segmented-btn" id="optCaseAcc" onclick="setOption('grammaticalCase', 'acc')">منصوب ومجرور (ياء)</button>
+            </div>
+          </div>
+
+          <!-- Currency Option -->
+          <div class="option-group">
+            <span class="option-title">العملة المالية:</span>
+            <div class="segmented-control">
+              <button class="segmented-btn active" id="optCurrNone" onclick="setOption('currency', null)">بدون عملة</button>
+              <button class="segmented-btn" id="optCurrMAD" onclick="setOption('currency', 'MAD')">درهم مغربي (شيك)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Output Display -->
+        <div class="output-card">
+          <div class="output-header">
+            <div class="output-label">
+              <span>النتيجة بالحروف العربية:</span>
+            </div>
+            <div class="output-badge-rules" id="ruleBadge">
+              موافق لمقرر وزارة التربية الوطنية المغربية
+            </div>
+          </div>
+
+          <div id="outputWords" class="output-text-content">
+            أَلْفٌ وَثَلَاثُ مِئَةٍ وَخَمْسَةٌ وَأَرْبَعُونَ
+          </div>
+
+          <!-- Output Toolbar Actions -->
+          <div class="output-toolbar">
+            <button class="action-btn btn-copy" onclick="copyResult()">
+              <span>📋</span> نسخ النص
+            </button>
+            <button class="action-btn btn-audio" onclick="speakResult()">
+              <span>🔊</span> استماع للنطق
+            </button>
+            <button class="action-btn btn-cheque" onclick="toggleCheque()">
+              <span>🏦</span> معاينة الشيك البنكي
+            </button>
+          </div>
+        </div>
+
+        <!-- Cheque Preview -->
+        <div id="chequeBox" class="cheque-box">
+          <div class="cheque-header">
+            <span>نموذج كتابة الشيك بالدرهم المغربي (Chèque Bancaire)</span>
+            <div id="chequeAmountBox" class="cheque-amount-num"># 1345.00 #</div>
+          </div>
+          <div class="cheque-field">
+            <span class="cheque-title">ادفعوا مقابل هذا الشيك:</span>
+            <div id="chequeWords" class="cheque-value">ألف وثلاث مئة وخمسة وأربعون درهما مغربيا لا غير</div>
+          </div>
+          <div class="cheque-field">
+            <span class="cheque-title">لأمر السـيد(ة):</span>
+            <div class="cheque-value" style="color:#94a3b8;">...........................................................................</div>
+          </div>
+        </div>
+
+        <!-- Educational Place-Value Breakdown -->
+        <div id="breakdownBox" class="breakdown-box">
+          <div class="breakdown-title">
+            <span>📊</span> جدول المراتب والمنازل (خاص بالأساتذة والتلاميذ في مادة الرياضيات):
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="breakdown-table">
+              <thead>
+                <tr>
+                  <th class="col-billions">فصل الملايير (10⁹)</th>
+                  <th class="col-millions">فصل الملايين (10⁶)</th>
+                  <th class="col-thousands">فصل الآلاف (10³)</th>
+                  <th class="col-hundreds">المئات (100)</th>
+                  <th class="col-tens">العشرات (10)</th>
+                  <th class="col-units">الوحدات (1)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="bdBillions" class="col-billions">-</td>
+                  <td id="bdMillions" class="col-millions">-</td>
+                  <td id="bdThousands" class="col-thousands">1 (1,000)</td>
+                  <td id="bdHundreds" class="col-hundreds">3 (300)</td>
+                  <td id="bdTens" class="col-tens">4 (40)</td>
+                  <td id="bdUnits" class="col-units">5 (5)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode 2: Arabic Text to Number (Reverse) -->
+      <div id="panelTextToNum" class="converter-body" style="display:none;">
+        <div class="input-wrapper">
+          <div class="input-label-row">
+            <label for="textInputReverse" class="input-label">
+              <span>اكتب الأعداد بالحروف العربية (يدعم النمط المغربي والتقليدي):</span>
+            </label>
+            <div class="input-actions">
+              <button class="btn-text-action" onclick="clearReverseInput()">مسح ✕</button>
+            </div>
+          </div>
+          <div class="main-input-container">
+            <input 
+              type="text" 
+              id="textInputReverse" 
+              class="main-input" 
+              placeholder="مثال: ألف وثلاث مئة وخمسة وأربعون أو مليونان وخمس مئة ألف" 
+              value="ألف وثلاث مئة وخمسة وأربعون" 
+              autocomplete="off"
+              oninput="handleReverseInput()"
+            >
+          </div>
+          <div class="preset-chips">
+            <span style="font-size:12px; color:#64748b; margin-top:2px;">أمثلة جاهزة:</span>
+            <button class="chip" onclick="setReversePreset('ثلاث مئة وخمسة وعشرون')">ثلاث مئة وخمسة وعشرون</button>
+            <button class="chip" onclick="setReversePreset('خمسة عشر ألفا وأربع مئة وعشرون')">خمسة عشر ألفا وأربع مئة وعشرون</button>
+            <button class="chip" onclick="setReversePreset('مليونان وخمس مئة ألف')">مليونان وخمس مئة ألف</button>
+            <button class="chip" onclick="setReversePreset('ملياران وثلاثة ملايين ومئة')">ملياران وثلاثة ملايين ومئة</button>
+          </div>
+        </div>
+
+        <div class="output-card">
+          <div class="output-header">
+            <div class="output-label">
+              <span>العدد الرقمي الناتج:</span>
+            </div>
+          </div>
+
+          <div id="outputReverseNum" class="output-text-content" style="font-family:monospace; font-size:36px; color:var(--primary-dark); letter-spacing:1px;">
+            1,345
+          </div>
+
+          <div class="output-toolbar">
+            <button class="action-btn btn-copy" onclick="copyReverseResult()">
+              <span>📋</span> نسخ الرقم
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Educational & SEO Guide Section -->
+    <section class="seo-content">
+      <h2 class="seo-heading">قواعد كتابة الأعداد بالحروف وفق المنهاج المغربي</h2>
+      <p class="seo-text">
+        تعتمد المناهج الدراسية المغربية الرسمية في مادتي اللغة العربية والرياضيات (بالمستويات الابتدائية من الأول إلى السادس، والتعليم الثانوي الإعدادي) ضوابط إملائية ونحوية حديثة لتيسير تعلم كتابة الأعداد على التلاميذ.
+      </p>
+
+      <div class="comparison-grid">
+        <div class="comp-card comp-morocco">
+          <div class="comp-title">
+            <span>✓</span> قواعد المنهاج المغربي المعاصر
+          </div>
+          <ul class="comp-list">
+            <li><strong>كتابة (مئة):</strong> تُكتب بالهمزة على الياء (النبرة) وبدون ألف زائدة: <code>مئة</code>.</li>
+            <li><strong>فصل المئات:</strong> تُكتب مئات الأعداد منفصلة: <code>ثلاث مئة</code>، <code>أربع مئة</code>، <code>خمس مئة</code>، <code>تسع مئة</code>.</li>
+            <li><strong>المثنى:</strong> <code>مئتان</code> (في الرفع)، <code>مئتين</code> (في النصب والجر).</li>
+          </ul>
+        </div>
+
+        <div class="comp-card comp-traditional">
+          <div class="comp-title">
+            <span>✕</span> الرسم القديم / غير المعتمد في المقررات الحديثة
+          </div>
+          <ul class="comp-list">
+            <li><strong>كتابة (مائة):</strong> كتابة الألف الزائدة المهملة في النطق (رسم قديم كان للتمييز قبل التنقيط).</li>
+            <li><strong>وصل المئات:</strong> شبك الكلمات مثل: <code>ثلاثمائة</code> أو <code>ثلاثمئة</code>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="seo-subheading">كيفية كتابة الشيكات البنكية بالدرهم المغربي بالحروف</h3>
+      <p class="seo-text">
+        عند ملء الشيك البنكي أو الكمبيالة أو الفواتير بالدرهم المغربي، يُشترط تفقيط المبلغ كاملاً بالحروف بدقة لتفادي أي تعديل أو تزوير. يُكتب المبلغ بدءاً بالآلاف ثم المئات ثم الوحدات متبوعاً بعبارة <strong>"درهماً مغربياً لا غير"</strong> مع إضافة السنتيمات إن وجدت.
+      </p>
+
+      <!-- FAQ Accordion -->
+      <h3 class="seo-subheading">أسئلة شائعة حول كتابة الأعداد وتفقيطها</h3>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>هل يُكتب 300 "ثلاث مئة" أم "ثلاثمئة" في الامتحانات والكتب المدرسية؟</span>
+            <span>▼</span>
+          </div>
+          <div class="faq-a">
+            وفق دليل الأستاذ والكتب المدرسية المصادق عليها من وزارة التربية الوطنية والتعليم الأولي والرياضة بالمغرب، تُكتب "ثلاث مئة" ككلمتين منفصلتين لتسهيل القراءة والتحليل الرياضي لمنازل الأعداد.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>هل الأداة تدعم التشكيل التام بالحركات؟</span>
+            <span>▼</span>
+          </div>
+          <div class="faq-a">
+            نعم، توفر الأداة خيار التشكيل التام بالحركات الإعرابية الصحيحة (الضمة، الفتحة، الكسرة، التنوين، والشدة) وخيار النص المجرد بدون تشكيل، مع ضبط الحالات الإعرابية (المرفوع والمنصوب والمجرور).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>هل يمكن استخدام هذه الأداة للمعاملات المالية والشيكات؟</span>
+            <span>▼</span>
+          </div>
+          <div class="faq-a">
+            نعم، عند تفعيل خيار "درهم مغربي"، تقوم الأداة بتوليد الصيغة القانونية المعتمدة في الأبناك المغربية بالدرهم والسنتيم مع إضافة عبارة الإغلاق "لا غير".
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <span>✓</span> <span id="toastMsg">تم النسخ بنجاح!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-brand-title">Revizy - ريفيزي</div>
+        <p class="footer-brand-desc">
+          تطبيق وأدوات تعليمية تفاعلية مصممة لدعم التلاميذ والأساتذة والأولياء وفق المنهاج الدراسي المغربي.
+        </p>
+      </div>
+
+      <div class="footer-links-col">
+        <div class="footer-col-title">الأدوات</div>
+        <a href="tafqeet.html" class="footer-link">محول الأرقام إلى حروف</a>
+        <a href="index.html" class="footer-link">بوابة الأدوات التعليمية</a>
+      </div>
+
+      <div class="footer-links-col">
+        <div class="footer-col-title">روابط مهمة</div>
+        <a href="../about-us.html" class="footer-link">عن ريفيزي</a>
+        <a href="../privacy.html" class="footer-link">سياسة الخصوصية</a>
+        <a href="../terms.html" class="footer-link">الشروط والأحكام</a>
+        <a href="../contact.html" class="footer-link">اتصل بنا</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Revizy (Simple Ed Team). جميع الحقوق محفوظة.
+    </div>
+  </footer>
+
+  <!-- Tafqeet Engine Script -->
+  <script src="../assets/moroccan-tafqeet.js"></script>
+
+  <!-- Tool Page Logic -->
+  <script>
+    const state = {
+      mode: 'numToText',
+      withTashkeel: true,
+      moroccanCurriculum: true,
+      grammaticalCase: 'nom',
+      gender: 'masculine',
+      currency: null,
+      showCheque: false
+    };
+
+    function handleNumberInput() {
+      const input = document.getElementById('numInput').value.trim();
+      const outputEl = document.getElementById('outputWords');
+      const chequeWordsEl = document.getElementById('chequeWords');
+      const chequeAmountEl = document.getElementById('chequeAmountBox');
+
+      if (!input) {
+        outputEl.innerText = 'أدخل عدداً بالأعلى لعرض الكلمات...';
+        outputEl.classList.add('empty');
+        updateBreakdown(null);
+        return;
+      }
+
+      outputEl.classList.remove('empty');
+
+      const words = window.MoroccanTafqeet.tafqeet(input, {
+        withTashkeel: state.withTashkeel,
+        moroccanCurriculum: state.moroccanCurriculum,
+        grammaticalCase: state.grammaticalCase,
+        gender: state.gender,
+        currency: state.currency
+      });
+
+      outputEl.innerText = words || 'يرجى إدخال عدد صحيح أو عشري مناسب.';
+
+      // Cheque format
+      const chequeWords = window.MoroccanTafqeet.tafqeet(input, {
+        withTashkeel: false,
+        moroccanCurriculum: true,
+        grammaticalCase: 'nom',
+        currency: 'MAD'
+      });
+      chequeWordsEl.innerText = chequeWords;
+      chequeAmountEl.innerText = '# ' + Number(input.replace(/,/g, '')).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' #';
+
+      // Educational Breakdown
+      const bd = window.MoroccanTafqeet.getPlaceValueBreakdown(input);
+      updateBreakdown(bd);
+    }
+
+    function updateBreakdown(bd) {
+      if (!bd) {
+        document.getElementById('bdBillions').innerText = '-';
+        document.getElementById('bdMillions').innerText = '-';
+        document.getElementById('bdThousands').innerText = '-';
+        document.getElementById('bdHundreds').innerText = '-';
+        document.getElementById('bdTens').innerText = '-';
+        document.getElementById('bdUnits').innerText = '-';
+        return;
+      }
+
+      document.getElementById('bdBillions').innerText = bd.billions > 0 ? (bd.billions / 1000000000).toLocaleString() : '-';
+      document.getElementById('bdMillions').innerText = bd.millions > 0 ? (bd.millions / 1000000).toLocaleString() : '-';
+      document.getElementById('bdThousands').innerText = bd.thousands > 0 ? (bd.thousands / 1000).toLocaleString() : '-';
+      document.getElementById('bdHundreds').innerText = bd.hundreds > 0 ? (bd.hundreds / 100).toLocaleString() : '-';
+      document.getElementById('bdTens').innerText = bd.tens > 0 ? (bd.tens / 10).toLocaleString() : '-';
+      document.getElementById('bdUnits').innerText = bd.units > 0 ? bd.units.toLocaleString() : '-';
+    }
+
+    function setPreset(num, currency = null) {
+      document.getElementById('numInput').value = num;
+      if (currency) {
+        setOption('currency', 'MAD');
+      }
+      handleNumberInput();
+    }
+
+    function clearInput() {
+      document.getElementById('numInput').value = '';
+      handleNumberInput();
+      document.getElementById('numInput').focus();
+    }
+
+    function setOption(key, val) {
+      state[key] = val;
+
+      // Update button active classes
+      if (key === 'tashkeel') {
+        document.getElementById('optTashkeelYes').classList.toggle('active', val === true);
+        document.getElementById('optTashkeelNo').classList.toggle('active', val === false);
+      } else if (key === 'moroccan') {
+        document.getElementById('optStyleMorocco').classList.toggle('active', val === true);
+        document.getElementById('optStyleTrad').classList.toggle('active', val === false);
+      } else if (key === 'grammaticalCase') {
+        document.getElementById('optCaseNom').classList.toggle('active', val === 'nom');
+        document.getElementById('optCaseAcc').classList.toggle('active', val === 'acc');
+      } else if (key === 'currency') {
+        document.getElementById('optCurrNone').classList.toggle('active', val === null);
+        document.getElementById('optCurrMAD').classList.toggle('active', val === 'MAD');
+      }
+
+      handleNumberInput();
+    }
+
+    function toggleCheque() {
+      const box = document.getElementById('chequeBox');
+      state.showCheque = !state.showCheque;
+      box.classList.toggle('show', state.showCheque);
+      if (state.showCheque) {
+        box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function copyResult() {
+      const text = document.getElementById('outputWords').innerText;
+      if (!text || text.includes('أدخل عدداً')) return;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('تم نسخ النص بالحروف العربية بنجاح!');
+      });
+    }
+
+    function speakResult() {
+      const text = document.getElementById('outputWords').innerText;
+      if (!text || !('speechSynthesis' in window)) {
+        showToast('المتصفح لا يدعم ميزة النطق الصوتي.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ar-SA';
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    /* Reverse Mode Logic */
+    function switchMode(mode) {
+      state.mode = mode;
+      document.getElementById('tabNumToText').classList.toggle('active', mode === 'numToText');
+      document.getElementById('tabTextToNum').classList.toggle('active', mode === 'textToNum');
+      document.getElementById('panelNumToText').style.display = mode === 'numToText' ? 'flex' : 'none';
+      document.getElementById('panelTextToNum').style.display = mode === 'textToNum' ? 'flex' : 'none';
+
+      if (mode === 'textToNum') {
+        handleReverseInput();
+      } else {
+        handleNumberInput();
+      }
+    }
+
+    function handleReverseInput() {
+      const input = document.getElementById('textInputReverse').value.trim();
+      const outputEl = document.getElementById('outputReverseNum');
+      if (!input) {
+        outputEl.innerText = 'أدخل نصاً عربياً بالأعلى...';
+        return;
+      }
+      const num = window.MoroccanTafqeet.arabicToNumber(input);
+      if (num !== null && !isNaN(num)) {
+        outputEl.innerText = num.toLocaleString('fr-FR');
+      } else {
+        outputEl.innerText = 'لم يتم التعرف على العدد';
+      }
+    }
+
+    function setReversePreset(txt) {
+      document.getElementById('textInputReverse').value = txt;
+      handleReverseInput();
+    }
+
+    function clearReverseInput() {
+      document.getElementById('textInputReverse').value = '';
+      handleReverseInput();
+      document.getElementById('textInputReverse').focus();
+    }
+
+    function copyReverseResult() {
+      const text = document.getElementById('outputReverseNum').innerText.replace(/\s/g, '');
+      if (!text || isNaN(Number(text.replace(/,/g, '')))) return;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('تم نسخ الرقم بنجاح!');
+      });
+    }
+
+    function toggleFaq(el) {
+      const ans = el.nextElementSibling;
+      const isOpen = ans.style.display === 'block';
+      ans.style.display = isOpen ? 'none' : 'block';
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Initial run
+    document.addEventListener('DOMContentLoaded', () => {
+      handleNumberInput();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الأدوات التعليمية الذكية | Revizy</title>
+  <meta name="description" content="مجموعة أدوات تعليمية مجانية للأساتذة والتلاميذ وأولياء الأمور وفق المنهاج المغربي: تحويل الأرقام إلى حروف، التشكيل، الرياضيات، واللغة العربية.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://revizyapp.com/tools/">
+  <link rel="icon" type="image/png" href="../assets/app-icon-DGsvJRQt.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --primary-light: #ccfbf1;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --bg-page: #f8fafc;
+      --border-color: #e2e8f0;
+      --radius-lg: 20px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Cairo', system-ui, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      direction: rtl;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand img { width: 38px; height: 38px; border-radius: 8px; }
+    .brand-title { font-size: 20px; font-weight: 800; color: var(--primary); }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+      flex: 1;
+      width: 100%;
+    }
+    .hero { text-align: center; margin-bottom: 40px; }
+    .hero h1 { font-size: 32px; font-weight: 900; margin-bottom: 10px; color: #0f172a; }
+    .hero p { font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+    
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .tool-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px -5px rgba(13, 148, 136, 0.15);
+      border-color: var(--primary);
+    }
+    .tool-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      background: var(--primary-light);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+    }
+    .tool-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .tool-title { font-size: 19px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+    .tool-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; flex: 1; }
+    .tool-action {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="brand">
+        <img src="../assets/app-icon-DGsvJRQt.png" alt="Revizy">
+        <span class="brand-title">Revizy</span>
+      </a>
+      <a href="../index.html" style="text-decoration:none; color:var(--text-muted); font-weight:600; font-size:14px;">العودة للرئيسية ←</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>بوابة الأدوات التعليمية الذكية</h1>
+      <p>أدوات وتطبيقات مصممة لمساعدة الأساتذة والتلاميذ وفق المنهاج الدراسي المغربي</p>
+    </section>
+
+    <div class="tools-grid">
+      <!-- Tool 1: Tafqeet -->
+      <a href="tafqeet.html" class="tool-card">
+        <span class="tool-badge">🇲🇦 المنهاج المغربي</span>
+        <div class="tool-icon">🔢</div>
+        <h2 class="tool-title">محول الأرقام إلى حروف (التفقيط)</h2>
+        <p class="tool-desc">
+          تحويل دقيق للأعداد والمبالغ إلى كلمات بالحروف العربية بالتشكيل وبدونه حسب منهاج وزارة التربية الوطنية (مئة، ثلاث مئة منفصلة)، مع التحويل العكسي ونموذج كتابة الشيك بالدرهم.
+        </p>
+        <div class="tool-action">
+          <span>افتح الأداة الآن</span>
+          <span>←</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Revizy - تطبيق ريفيزي للتعليم التفاعلي. جميع الحقوق محفوظة.
+  </footer>
+</body>
+</html>
