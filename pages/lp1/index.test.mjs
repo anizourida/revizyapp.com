@@ -6,7 +6,7 @@ const page = await readFile(new URL('./index.html', import.meta.url), 'utf8');
 
 test('LP1 contains an accessible custom player for the local Revizy video', () => {
   assert.match(page, /<video[^>]+id="revizy-video"/);
-  assert.match(page, /src="explication-application-revizy-white-intro\.mp4"/);
+  assert.match(page, /src="explication-application-revizy-white-intro-3s\.mp4"/);
   assert.match(page, /<button[^>]+id="video-toggle"/);
   assert.match(page, /aria-label="تشغيل"/);
   assert.match(page, /function toggleVideo\(\)/);
