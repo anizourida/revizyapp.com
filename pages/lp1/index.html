@@ -577,6 +577,73 @@
             font-weight: 700;
         }
 
+        .learning-screens-swiper {
+            position: relative;
+            margin-top: 22px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--bg);
+            touch-action: pan-y;
+        }
+
+        .learning-screens-track {
+            display: flex;
+            direction: ltr;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+
+        .learning-screen-slide {
+            flex: 0 0 100%;
+            min-width: 0;
+            direction: rtl;
+            background: white;
+        }
+
+        .learning-screen-slide img {
+            display: block;
+            width: 100%;
+            height: 355px;
+            object-fit: contain;
+        }
+
+        .learning-screens-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px;
+            border-top: 1px solid var(--border);
+            background: white;
+        }
+
+        .learning-screen-dot {
+            width: 8px;
+            height: 8px;
+            padding: 0;
+            border: 0;
+            border-radius: 999px;
+            background: #CBD5E1;
+            cursor: pointer;
+            transition: width 0.25s ease, background-color 0.25s ease;
+        }
+
+        .learning-screen-dot[aria-current="true"] {
+            width: 24px;
+            background: var(--app-yellow);
+        }
+
+        .learning-screen-dot:focus-visible {
+            outline: 3px solid rgba(251, 191, 36, 0.35);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .learning-screens-track {
+                transition: none;
+            }
+        }
+
         /* Payment Section */
         .payment-section {
             padding: 10px 24px 40px;
@@ -970,6 +1037,20 @@
                 <span class="learning-topic">اللغة الفرنسية</span>
                 <span class="learning-topic">الرياضيات</span>
             </div>
+            <div class="learning-screens-swiper" id="learning-screens-swiper" aria-roledescription="carousel" aria-label="لقطات من تطبيق ريفيزي">
+                <div class="learning-screens-track" id="learning-screens-track">
+                    <figure class="learning-screen-slide">
+                        <img src="images/boy-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذ">
+                    </figure>
+                    <figure class="learning-screen-slide">
+                        <img src="images/girl-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذة">
+                    </figure>
+                </div>
+                <div class="learning-screens-dots" role="tablist" aria-label="اختيار لقطة من التطبيق">
+                    <button class="learning-screen-dot" type="button" data-learning-slide="0" aria-label="الصورة الأولى" aria-current="true"></button>
+                    <button class="learning-screen-dot" type="button" data-learning-slide="1" aria-label="الصورة الثانية" aria-current="false"></button>
+                </div>
+            </div>
         </section>
 
         <section class="testimonials-section is-hidden" aria-labelledby="testimonials-title" hidden>
@@ -1172,6 +1253,64 @@
         video.addEventListener('play', () => updateVideoControl(true));
         video.addEventListener('pause', () => updateVideoControl(false));
         video.addEventListener('ended', () => updateVideoControl(false));
+
+        const learningSwiper = document.getElementById('learning-screens-swiper');
+        const learningTrack = document.getElementById('learning-screens-track');
+        const learningDots = Array.from(document.querySelectorAll('[data-learning-slide]'));
+        const reduceLearningMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let learningSlideIndex = 0;
+        let learningAutoSwipe;
+        let learningStartX;
+
+        function showLearningSlide(index) {
+            learningSlideIndex = (index + learningDots.length) % learningDots.length;
+            learningTrack.style.transform = `translateX(-${learningSlideIndex * 100}%)`;
+            learningDots.forEach((dot, dotIndex) => {
+                dot.setAttribute('aria-current', String(dotIndex === learningSlideIndex));
+            });
+        }
+
+        function stopLearningAutoSwipe() {
+            window.clearInterval(learningAutoSwipe);
+        }
+
+        function startLearningAutoSwipe() {
+            stopLearningAutoSwipe();
+            if (!reduceLearningMotion) {
+                learningAutoSwipe = window.setInterval(() => showLearningSlide(learningSlideIndex + 1), 4000);
+            }
+        }
+
+        learningDots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                showLearningSlide(Number(dot.dataset.learningSlide));
+                startLearningAutoSwipe();
+            });
+        });
+
+        learningSwiper.addEventListener('pointerdown', (event) => {
+            learningStartX = event.clientX;
+            stopLearningAutoSwipe();
+        });
+
+        learningSwiper.addEventListener('pointerup', (event) => {
+            if (typeof learningStartX === 'number') {
+                const swipeDistance = event.clientX - learningStartX;
+                if (Math.abs(swipeDistance) > 35) {
+                    showLearningSlide(learningSlideIndex + (swipeDistance < 0 ? 1 : -1));
+                }
+            }
+            learningStartX = undefined;
+            startLearningAutoSwipe();
+        });
+
+        learningSwiper.addEventListener('pointercancel', () => {
+            learningStartX = undefined;
+            startLearningAutoSwipe();
+        });
+        learningSwiper.addEventListener('mouseenter', stopLearningAutoSwipe);
+        learningSwiper.addEventListener('mouseleave', startLearningAutoSwipe);
+        startLearningAutoSwipe();
 
         function selectPlan(element) {
             document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('active'));

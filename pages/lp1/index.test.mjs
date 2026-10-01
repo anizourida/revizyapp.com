@@ -46,6 +46,15 @@ test('LP1 explains Revizy learning support with original Darija copy', () => {
   assert.equal((page.match(/class="learning-topic"/g) || []).length, 4);
 });
 
+test('LP1 auto-swipes the supplied learning screenshots every four seconds', () => {
+  assert.match(page, /class="learning-screens-swiper"/);
+  assert.match(page, /images\/boy-screenshots\.png/);
+  assert.match(page, /images\/girl-screenshots\.png/);
+  assert.match(page, /function showLearningSlide\(index\)/);
+  assert.match(page, /setInterval\([^;]+, 4000\)/);
+  assert.match(page, /data-learning-slide/);
+});
+
 test('LP1 has an audio-testimonials section with three placeholder voice cards', () => {
   assert.match(page, /class="testimonials-section is-hidden"/);
   assert.match(page, /آراء أولياء الأمور/);
