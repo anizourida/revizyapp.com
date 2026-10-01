@@ -377,42 +377,36 @@
             transform: translate(-50%, -50%) scale(1.04);
         }
 
-        /* Parent voice testimonials — ready for real recordings and portraits. */
+        /* Parent voice testimonials — aligned with the LP1 payment-page system. */
         .testimonials-section {
-            margin: 0 16px 30px;
-            padding: 34px 14px 18px;
-            border: 1px solid #d8e8d8;
-            border-radius: 34px;
-            background: linear-gradient(180deg, #f7fcf5 0%, #edf7eb 100%);
-            text-align: center;
+            margin: 0 24px 30px;
+            padding: 0;
+            text-align: right;
         }
 
         .testimonials-kicker {
-            color: #2b896b;
-            font-size: 0.86rem;
-            font-weight: 800;
-            margin-bottom: 7px;
+            display: none;
         }
 
         .testimonials-title {
-            color: #1f5143;
-            font-size: 1.65rem;
-            line-height: 1.25;
-            margin: 0 0 8px;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            line-height: 1.4;
+            margin: 0 0 4px;
         }
 
         .testimonials-subtitle {
-            color: #71817a;
-            font-size: 0.88rem;
-            font-weight: 600;
-            line-height: 1.6;
-            margin: 0 0 22px;
+            color: var(--text-muted);
+            font-size: 0.84rem;
+            font-weight: 500;
+            line-height: 1.5;
+            margin: 0 0 15px;
         }
 
         .testimonial-list {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .testimonial-card {
@@ -420,30 +414,31 @@
             grid-template-columns: 54px 76px 1fr;
             align-items: center;
             gap: 10px;
-            min-height: 100px;
-            padding: 14px;
-            border: 1px solid #d4e4d4;
-            border-radius: 25px;
+            min-height: 92px;
+            padding: 16px;
+            border: 0;
+            border-radius: 16px;
             background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             text-align: right;
         }
 
         .testimonial-avatar {
-            width: 54px;
-            height: 54px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 4px solid #dcece1;
+            border: 0;
             border-radius: 50%;
-            background: #2b896b;
-            color: white;
-            font-size: 1.2rem;
+            background: var(--app-yellow-light);
+            color: var(--primary);
+            font-size: 1.05rem;
             font-weight: 800;
         }
 
         .testimonial-name {
-            color: #1f5143;
+            color: #334155;
             font-size: 0.97rem;
             font-weight: 800;
             white-space: nowrap;
@@ -451,7 +446,7 @@
 
         .testimonial-city {
             display: block;
-            color: #87968f;
+            color: var(--text-muted);
             font-size: 0.72rem;
             font-weight: 700;
             margin-top: 4px;
@@ -476,8 +471,8 @@
             flex: 0 0 auto;
             border: 0;
             border-radius: 50%;
-            background: #2b896b;
-            color: white;
+            background: var(--app-yellow);
+            color: var(--text-main);
         }
 
         .testimonial-play:disabled {
@@ -498,7 +493,7 @@
             width: 4px;
             flex: 0 0 4px;
             border-radius: 999px;
-            background: #c8e1d7;
+            background: #CBD5E1;
         }
 
         .waveform-bars i:nth-child(3n) { height: 30px; }
@@ -506,7 +501,7 @@
         .waveform-bars i:nth-child(3n + 2) { height: 24px; }
 
         .testimonial-time {
-            color: #71817a;
+            color: var(--text-muted);
             font-size: 0.7rem;
             font-weight: 800;
             white-space: nowrap;
@@ -516,7 +511,7 @@
             height: 6px;
             margin-top: 8px;
             border-radius: 999px;
-            background: #e2eee9;
+            background: #E2E8F0;
         }
 
         /* Payment Section */

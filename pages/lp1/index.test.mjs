@@ -44,4 +44,6 @@ test('LP1 has an audio-testimonials section with three placeholder voice cards',
   assert.match(page, /آراء أولياء الأمور/);
   assert.equal((page.match(/class="testimonial-card"/g) || []).length, 3);
   assert.equal((page.match(/class="waveform-bars"/g) || []).length, 3);
+  assert.doesNotMatch(page, /#2b896b/);
+  assert.match(page, /background:\s*var\(--app-yellow\)/);
 });
