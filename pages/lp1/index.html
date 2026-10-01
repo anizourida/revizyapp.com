@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revizy - Paiement Sécurisé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #243857;
+            --accent: #ff6b2d;
+            --app-yellow: #fbbf24;
+            --app-yellow-light: #FFFBEB;
+            --bg: #F8FAFC;
+            --white: #ffffff;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            font-family: 'Rubik', 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            color: var(--text-main);
+            overflow-x: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--bg);
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            margin: 0;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            padding: 20px 30px 30px;
+            text-align: center;
+            background: linear-gradient(180deg, #ffffff 0%, #F8FAFC 100%);
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .logos img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            max-width: 80%;
+            margin: 0 auto 10px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            padding: 0 24px;
+        }
+
+        /* Subscription Cards (App Style) */
+        .plans {
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .plan-card {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .plan-card.active {
+            border-color: var(--app-yellow);
+            background: var(--app-yellow-light);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.15);
+        }
+
+        .radio-container {
+            margin-left: 16px;
+        }
+
+        .radio-outer {
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            border: 2px solid #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .plan-card.active .radio-outer {
+            border-color: var(--app-yellow);
+        }
+
+        .radio-inner {
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            background: var(--app-yellow);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s;
+        }
+
+        .plan-card.active .radio-inner {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .plan-details {
+            flex: 1;
+        }
+
+        .plan-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .plan-savings {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #10B981;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .price {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--app-yellow);
+        }
+
+        .currency {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-right: 4px;
+        }
+
+        .badge {
+            background: #10B981;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 12px;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+        }
+
+        /* Features (App Style) */
+        .features {
+            padding: 0 24px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 16px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .feature-icon-container {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 12px;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            flex: 1;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #334155;
+        }
+
+        .check-container {
+            width: 28px;
+            height: 28px;
+            border-radius: 14px;
+            background: #D1FAE5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .check-container svg {
+            color: #10B981;
+        }
+
+        /* Payment Section */
+        .payment-section {
+            padding: 10px 24px 40px;
+            margin-top: auto;
+        }
+
+        .bank-select {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            background: white;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 16px center;
+            background-size: 20px;
+            padding-left: 45px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .bank-select:focus {
+            outline: none;
+            border-color: var(--app-yellow);
+        }
+
+        /* Receipt Style Details */
+        .receipt-container {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            padding: 20px 24px 30px;
+            margin-bottom: 30px;
+            position: relative;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .receipt-container.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+            direction: ltr;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .info-row {
+            padding: 15px 0;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .label-fr {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+        }
+
+        .label-ar {
+            font-family: 'Noto Naskh Arabic', 'Rubik', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #111827;
+            word-break: break-all;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .beneficiary {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .copy-btn {
+            background: #F1F5F9;
+            border: none;
+            padding: 6px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--border);
+            color: var(--primary);
+        }
+
+        /* Toast Feedback */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #334155;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* App Style Button */
+        .cta-button {
+            display: block;
+            width: 100%;
+            background: var(--app-yellow);
+            color: var(--text-main);
+            text-align: center;
+            padding: 18px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:active {
+            transform: scale(0.97);
+        }
+
+        /* Checkbox Style */
+        .confirmation-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 16px 20px;
+            background: #F1F5F9;
+            border-radius: 12px;
+        }
+
+        .confirmation-container input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #10B981;
+        }
+
+        .confirmation-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #475569;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            background: #075e54; /* Darker WhatsApp Green */
+            color: white;
+            text-align: center;
+            padding: 18px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.15rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-button img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .whatsapp-button:disabled {
+            background: #94A3B8;
+            box-shadow: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .whatsapp-button:not(:disabled):active {
+            transform: scale(0.97);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 25px;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+
+        .footer-note strong {
+            color: var(--primary);
+        }
+
+        @media (min-width: 481px) {
+            body {
+                padding: 0;
+            }
+            .container {
+                min-height: 100vh;
+                border-radius: 0;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+                margin: 0;
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <div class="logos">
+                <img src="revizy-logo.png" alt="Revizy Logo">
+            </div>
+            <h1>الاشتراك المميز</h1>
+            <p class="subtitle">استمتع بتجربة تعليمية متكاملة بدون حدود.</p>
+        </header>
+
+        <p class="section-title">اختر خطتك</p>
+        <div class="plans">
+            <div class="plan-card" onclick="selectPlan(this)">
+                <div class="radio-container">
+                    <div class="radio-outer">
+                        <div class="radio-inner"></div>
+                    </div>
+                </div>
+                <div class="plan-details">
+                    <div class="plan-title">اشتراك شهري</div>
+                </div>
+                <div class="price-container">
+                    <div class="price">29</div>
+                    <div class="currency">درهم</div>
+                </div>
+            </div>
+
+            <div class="plan-card active" onclick="selectPlan(this)">
+                <span class="badge">وفر 15%</span>
+                <div class="radio-container">
+                    <div class="radio-outer">
+                        <div class="radio-inner"></div>
+                    </div>
+                </div>
+                <div class="plan-details">
+                    <div class="plan-title">اشتراك سنوي</div>
+                    <div class="plan-savings">وفر 99 درهم</div>
+                </div>
+                <div class="price-container">
+                    <div class="price">249</div>
+                    <div class="currency">درهم</div>
+                </div>
+            </div>
+        </div>
+
+        <p class="section-title">مميزات الاشتراك</p>
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(59, 130, 246, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                </div>
+                <div class="feature-text">الوصول الكامل لجميع الوحدات</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(139, 92, 246, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </div>
+                <div class="feature-text">الوصول الكامل لجميع البطاقات التعليمية</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(236, 72, 153, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <div class="feature-text">الوصول الكامل لجميع الحوارات</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(245, 158, 11, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <div class="feature-text">100 وحدة طاقة يومية</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(16, 185, 129, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                </div>
+                <div class="feature-text">حذف الإعلانات</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-section">
+            <p class="section-title" style="padding: 0;">طريقة الدفع (تحويل بنكي)</p>
+            <select class="bank-select" onchange="selectBank(this.value)">
+                <option value="" selected disabled>اختر البنك...</option>
+                <option value="attijari">Attijariwafa Bank</option>
+                <option value="cih">CIH Bank</option>
+            </select>
+
+            <div id="details-attijari" class="receipt-container">
+                <div class="info-row">
+                    <div class="labels">
+                        <span class="label-fr">Banque</span>
+                        <span class="label-ar">البنك</span>
+                    </div>
+                    <div class="value">
+                        <span>Attijariwafa Bank</span>
+                        <button class="copy-btn" onclick="copyToClipboard('Attijariwafa Bank')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="labels">
+                        <span class="label-fr">Numéro de compte</span>
+                        <span class="label-ar">رقم الحساب</span>
+                    </div>
+                    <div class="value">
+                        <span>007095000405530040000532</span>
+                        <button class="copy-btn" onclick="copyToClipboard('007095000405530040000532')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="labels">
+                        <span class="label-fr">Bénéficiaire</span>
+                        <span class="label-ar">المستفيد</span>
+                    </div>
+                    <div class="beneficiary">
+                        <span>Monsieur RIDA ANIZOU</span>
+                        <button class="copy-btn" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="labels">
+                        <span class="label-fr">Montant</span>
+                        <span class="label-ar">المبلغ</span>
+                    </div>
+                    <div class="value" style="display: block; text-align: right;">
+                        <span class="receipt-amount">249</span>
+                        <span style="font-size: 0.9rem; margin-left: 6px;">درهم</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="details-cih" class="receipt-container">
+                <div class="info-row">
+                    <div class="labels">
+                        <span class="label-fr">Banque</span>
+                        <span class="label-ar">البنك</span>
+                    </div>
+                    <div class="value">
+                        <span>CIH Bank</span>
+                        <button class="copy-btn" onclick="copyToClipboard('CIH Bank')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="labels">
+                        <span class="label-fr">Numéro de compte</span>
+                        <span class="label-ar">رقم الحساب</span>
+                    </div>
+                    <div class="value">
+                        <span>42256665211022000</span>
+                        <button class="copy-btn" onclick="copyToClipboard('42256665211022000')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="labels">
+                        <span class="label-fr">Bénéficiaire</span>
+                        <span class="label-ar">المستفيد</span>
+                    </div>
+                    <div class="beneficiary">
+                        <span>Monsieur RIDA ANIZOU</span>
+                        <button class="copy-btn" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="labels">
+                        <span class="label-fr">Montant</span>
+                        <span class="label-ar">المبلغ</span>
+                    </div>
+                    <div class="value" style="display: block; text-align: right;">
+                        <span class="receipt-amount">249</span>
+                        <span style="font-size: 0.9rem; margin-left: 6px;">درهم</span>
+                    </div>
+                </div>
+            </div>
+
+            <label class="confirmation-container">
+                <input type="checkbox" id="confirm-payment" onchange="toggleWhatsAppButton()" disabled>
+                <span class="confirmation-text">لقد قمت بتحويل المبلغ</span>
+            </label>
+
+            <button id="whatsapp-btn" class="whatsapp-button" disabled onclick="sendWhatsApp()">
+                <img src="whatsapp.png" alt="WhatsApp">
+                إرسال وصل الدفع
+            </button>
+            <div id="toast">تم النسخ بنجاح!</div>
+            
+            <p class="footer-note">
+                يرجى إجراء التحويل ثم إرسال الإيصال إلى رقم الواتساب <strong>+212 624-853412</strong>. سيتم تفعيل حسابك خلال 24 ساعة.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function selectPlan(element) {
+            document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            
+            // Update receipt amounts
+            const price = element.querySelector('.price').innerText;
+            document.querySelectorAll('.receipt-amount').forEach(el => {
+                el.innerText = price;
+            });
+        }
+
+        function selectBank(bank) {
+            const detailContainers = document.querySelectorAll('.receipt-container');
+            const checkbox = document.getElementById('confirm-payment');
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            
+            detailContainers.forEach(detail => detail.classList.remove('active'));
+            
+            if (bank) {
+                document.getElementById('details-' + bank).classList.add('active');
+                checkbox.disabled = false;
+            } else {
+                checkbox.disabled = true;
+            }
+            
+            // Reset checkbox and button
+            checkbox.checked = false;
+            whatsappBtn.disabled = true;
+        }
+
+        function toggleWhatsAppButton() {
+            const bankSelect = document.querySelector('.bank-select');
+            const checkbox = document.getElementById('confirm-payment');
+            const button = document.getElementById('whatsapp-btn');
+            
+            if (!bankSelect.value) {
+                checkbox.checked = false;
+                button.disabled = true;
+                return;
+            }
+            
+            button.disabled = !checkbox.checked;
+        }
+
+        function sendWhatsApp() {
+            const bank = document.querySelector('.bank-select').value;
+            const bankName = bank === 'attijari' ? 'Attijariwafa Bank' : 'CIH Bank';
+            const message = `السلام عليكم، لقد قمت بالتحويل البنكي عبر ${bankName} لاشتراك ريفيزي. إليكم وصل الدفع.`;
+            const whatsappUrl = `https://wa.me/212624853412?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.opacity = '1';
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
