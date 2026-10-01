@@ -14,6 +14,10 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
   assert.match(page, /<span id="video-toggle-label">شغّل الفيديو<\/span>/);
   assert.match(page, /وقف الفيديو/);
   assert.match(page, /\.video-toggle\s*\{\s*position:\s*absolute/);
+  assert.match(page, /width:\s*112px/);
+  assert.match(page, /function revealPauseControl\(\)/);
+  assert.match(page, /2000/);
+  assert.match(page, /classList\.add\('is-hidden'\)/);
 });
 
 test('LP1 preserves the original payment design and flow around the video', () => {

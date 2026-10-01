@@ -303,21 +303,26 @@
             justify-content: center;
             flex-direction: column;
             gap: 6px;
-            width: 148px;
-            height: 148px;
-            padding: 18px;
+            width: 112px;
+            height: 112px;
+            padding: 12px;
             border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 50%;
             background: rgba(36, 56, 87, 0.92);
             color: white;
             font-family: inherit;
-            font-size: 0.95rem;
+            font-size: 0.78rem;
             font-weight: 700;
             line-height: 1.35;
             text-align: center;
             cursor: pointer;
             box-shadow: 0 10px 24px rgba(15, 23, 42, 0.28);
-            transition: transform 0.2s;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .video-toggle.is-hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .video-toggle-icon {
@@ -835,6 +840,18 @@
         const video = document.getElementById('revizy-video');
         const videoToggle = document.getElementById('video-toggle');
         const videoToggleLabel = document.getElementById('video-toggle-label');
+        const videoPlayer = document.getElementById('video-player');
+        let pauseControlTimer;
+
+        function revealPauseControl() {
+            if (video.paused || video.ended) return;
+
+            window.clearTimeout(pauseControlTimer);
+            videoToggle.classList.remove('is-hidden');
+            pauseControlTimer = window.setTimeout(() => {
+                videoToggle.classList.add('is-hidden');
+            }, 2000);
+        }
 
         function updateVideoControl(isPlaying) {
             videoToggle.setAttribute('aria-label', isPlaying ? 'إيقاف الفيديو مؤقتاً' : 'تشغيل الفيديو');
@@ -843,6 +860,13 @@
             videoToggle.querySelector('.video-toggle-icon').innerHTML = isPlaying
                 ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3v14H7zm7 0h3v14h-3z"></path></svg>'
                 : '<svg class="video-play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>';
+
+            if (isPlaying) {
+                revealPauseControl();
+            } else {
+                window.clearTimeout(pauseControlTimer);
+                videoToggle.classList.remove('is-hidden');
+            }
         }
 
         function toggleVideo() {
@@ -853,7 +877,15 @@
             }
         }
 
-        videoToggle.addEventListener('click', toggleVideo);
+        videoToggle.addEventListener('click', (event) => {
+            event.stopPropagation();
+            toggleVideo();
+        });
+        videoPlayer.addEventListener('click', (event) => {
+            if (!video.paused && !video.ended && !event.target.closest('#video-toggle')) {
+                revealPauseControl();
+            }
+        });
         video.addEventListener('play', () => updateVideoControl(true));
         video.addEventListener('pause', () => updateVideoControl(false));
         video.addEventListener('ended', () => updateVideoControl(false));
