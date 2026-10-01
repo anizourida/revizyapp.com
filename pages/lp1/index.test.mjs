@@ -12,7 +12,10 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
   assert.match(page, /function toggleVideo\(\)/);
 });
 
-test('LP1 links every primary call-to-action to the subscription section', () => {
-  assert.match(page, /id="subscription"/);
-  assert.match(page, /href="#subscription"/);
+test('LP1 preserves the original payment design and flow around the video', () => {
+  assert.match(page, /<h1>الاشتراك المميز<\/h1>/);
+  assert.match(page, /class="plans"/);
+  assert.match(page, /class="payment-section"/);
+  assert.match(page, /function selectPlan\(element\)/);
+  assert.match(page, /function selectBank\(bank\)/);
 });
