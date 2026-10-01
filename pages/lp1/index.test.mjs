@@ -39,6 +39,13 @@ test('LP1 has a moving annual-plan offer ticker above the header', () => {
   assert.match(page, /@keyframes offerTicker/);
 });
 
+test('LP1 explains Revizy learning support with original Darija copy', () => {
+  assert.match(page, /class="learning-promise"/);
+  assert.match(page, /المراجعة فالدار ما خاصهاش تولّي ضغط/);
+  assert.match(page, /العربية والفرنسية والرياضيات/);
+  assert.equal((page.match(/class="learning-topic"/g) || []).length, 4);
+});
+
 test('LP1 has an audio-testimonials section with three placeholder voice cards', () => {
   assert.match(page, /class="testimonials-section is-hidden"/);
   assert.match(page, /آراء أولياء الأمور/);

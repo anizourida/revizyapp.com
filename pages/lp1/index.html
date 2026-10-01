@@ -514,6 +514,69 @@
             background: #E2E8F0;
         }
 
+        /* A clear, parent-facing promise in the same LP1 card language. */
+        .learning-promise {
+            margin: 0 24px 30px;
+            padding: 28px 20px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+
+        .learning-promise-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: var(--app-yellow-light);
+            color: #a16207;
+            font-size: 0.76rem;
+            font-weight: 800;
+        }
+
+        .learning-promise-kicker::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--app-yellow);
+        }
+
+        .learning-promise h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            line-height: 1.35;
+            margin: 14px 0 10px;
+        }
+
+        .learning-promise p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .learning-topics {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .learning-topic {
+            padding: 9px 12px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg);
+            color: #475569;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
         /* Payment Section */
         .payment-section {
             padding: 10px 24px 40px;
@@ -895,6 +958,19 @@
                 </div>
             </div>
         </div>
+
+        <section class="learning-promise" aria-labelledby="learning-promise-title">
+            <span class="learning-promise-kicker">ريفيزي معاكم فالدار</span>
+            <h2 id="learning-promise-title">المراجعة فالدار ما خاصهاش تولّي ضغط.</h2>
+            <p>ريفيزي كيعطي لولدك طريق واضح باش يراجع دروسو، يفهم فين خاصو يخدم أكثر، ويزيد خطوة بخطوة.</p>
+            <p>محتوى منظم فالعربية والفرنسية والرياضيات، مواكب للدروس اللي كيقراهم فالمدرسة.</p>
+            <div class="learning-topics" aria-label="مجالات التعلم في ريفيزي">
+                <span class="learning-topic">مراجعة المنهاج</span>
+                <span class="learning-topic">اللغة العربية</span>
+                <span class="learning-topic">اللغة الفرنسية</span>
+                <span class="learning-topic">الرياضيات</span>
+            </div>
+        </section>
 
         <section class="testimonials-section is-hidden" aria-labelledby="testimonials-title" hidden>
             <p class="testimonials-kicker">آراء أولياء الأمور</p>
