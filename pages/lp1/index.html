@@ -306,22 +306,21 @@
             width: 112px;
             height: 112px;
             padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 0;
             border-radius: 50%;
-            background: rgba(36, 56, 87, 0.92);
+            background: linear-gradient(135deg, #243857, #304a70);
             color: white;
             font-family: inherit;
-            font-size: 0.78rem;
+            font-size: 0.68rem;
             font-weight: 700;
             line-height: 1.35;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.28);
-            transition: transform 0.2s, opacity 0.2s;
+            transition: transform 0.2s;
         }
 
         .video-toggle.is-hidden {
-            opacity: 0;
+            visibility: hidden;
             pointer-events: none;
         }
 
@@ -329,8 +328,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 20px;
-            height: 20px;
+            width: 38px;
+            height: 38px;
+        }
+
+        .video-toggle-icon svg {
+            width: 38px;
+            height: 38px;
         }
 
         .video-toggle:hover .video-toggle-icon,
@@ -615,11 +619,11 @@
                     <source src="explication-application-revizy.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
-                <button class="video-toggle" id="video-toggle" type="button" aria-label="تشغيل الفيديو" aria-pressed="false">
+                <button class="video-toggle" id="video-toggle" type="button" aria-label="تشغيل" aria-pressed="false">
                     <span class="video-toggle-icon" aria-hidden="true">
                         <svg class="video-play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
                     </span>
-                    <span id="video-toggle-label">شغّل الفيديو</span>
+                    <span id="video-toggle-label">تشغيل</span>
                 </button>
             </div>
             <div class="video-divider" aria-hidden="true"></div>
@@ -854,9 +858,9 @@
         }
 
         function updateVideoControl(isPlaying) {
-            videoToggle.setAttribute('aria-label', isPlaying ? 'إيقاف الفيديو مؤقتاً' : 'تشغيل الفيديو');
+            videoToggle.setAttribute('aria-label', isPlaying ? 'إيقاف' : 'تشغيل');
             videoToggle.setAttribute('aria-pressed', String(isPlaying));
-            videoToggleLabel.textContent = isPlaying ? 'وقف الفيديو' : 'شغّل الفيديو';
+            videoToggleLabel.textContent = isPlaying ? 'إيقاف' : 'تشغيل';
             videoToggle.querySelector('.video-toggle-icon').innerHTML = isPlaying
                 ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3v14H7zm7 0h3v14h-3z"></path></svg>'
                 : '<svg class="video-play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>';

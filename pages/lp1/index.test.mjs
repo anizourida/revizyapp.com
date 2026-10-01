@@ -8,16 +8,18 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
   assert.match(page, /<video[^>]+id="revizy-video"/);
   assert.match(page, /src="explication-application-revizy\.mp4"/);
   assert.match(page, /<button[^>]+id="video-toggle"/);
-  assert.match(page, /aria-label="تشغيل الفيديو"/);
+  assert.match(page, /aria-label="تشغيل"/);
   assert.match(page, /function toggleVideo\(\)/);
   assert.match(page, /class="video-divider"/);
-  assert.match(page, /<span id="video-toggle-label">شغّل الفيديو<\/span>/);
-  assert.match(page, /وقف الفيديو/);
+  assert.match(page, /<span id="video-toggle-label">تشغيل<\/span>/);
+  assert.match(page, /إيقاف/);
   assert.match(page, /\.video-toggle\s*\{\s*position:\s*absolute/);
   assert.match(page, /width:\s*112px/);
   assert.match(page, /function revealPauseControl\(\)/);
   assert.match(page, /2000/);
   assert.match(page, /classList\.add\('is-hidden'\)/);
+  assert.match(page, /linear-gradient\(135deg, #243857, #304a70\)/);
+  assert.match(page, /width:\s*38px/);
 });
 
 test('LP1 preserves the original payment design and flow around the video', () => {
