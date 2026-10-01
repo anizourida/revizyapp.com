@@ -262,7 +262,7 @@
             color: #10B981;
         }
 
-        /* App explanation video — intentionally follows the existing card style. */
+        /* App explanation video — kept completely clear of visual layers. */
         .video-section {
             padding: 0 24px;
             margin-bottom: 30px;
@@ -272,67 +272,55 @@
             padding: 0;
         }
 
+        .video-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 16px 0;
+        }
+
         .video-player {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            border: 2px solid var(--border);
-            background: var(--primary);
             aspect-ratio: 9 / 16;
-            box-shadow: 0 4px 12px rgba(36, 56, 87, 0.12);
         }
 
         #revizy-video {
             width: 100%;
             height: 100%;
             display: block;
-            object-fit: cover;
+            object-fit: contain;
+        }
+
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 16px;
         }
 
         .video-toggle {
-            position: absolute;
-            inset: 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border: 0;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05), rgba(15, 23, 42, 0.28));
-            color: white;
+            gap: 8px;
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
             cursor: pointer;
         }
 
         .video-toggle-icon {
-            width: 70px;
-            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background: rgba(36, 56, 87, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.55);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-            transition: transform 0.2s, opacity 0.2s;
+            width: 20px;
+            height: 20px;
         }
 
         .video-toggle:hover .video-toggle-icon,
         .video-toggle:focus-visible .video-toggle-icon {
-            transform: scale(1.06);
-        }
-
-        .video-player.is-playing .video-toggle {
-            align-items: flex-end;
-            padding-bottom: 18px;
-        }
-
-        .video-player.is-playing .video-toggle-icon {
-            width: 44px;
-            height: 44px;
-            opacity: 0;
-        }
-
-        .video-player.is-playing .video-toggle:hover .video-toggle-icon,
-        .video-player.is-playing .video-toggle:focus-visible .video-toggle-icon {
-            opacity: 1;
+            transform: scale(1.1);
         }
 
         /* Payment Section */
@@ -601,15 +589,20 @@
 
         <section class="video-section" aria-labelledby="video-title">
             <p class="section-title" id="video-title">تعرف على تطبيق ريفيزي</p>
+            <div class="video-divider" aria-hidden="true"></div>
             <div class="video-player" id="video-player">
                 <video id="revizy-video" preload="metadata" playsinline aria-label="فيديو يشرح تطبيق ريفيزي">
                     <source src="explication-application-revizy.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
+            </div>
+            <div class="video-divider" aria-hidden="true"></div>
+            <div class="video-controls">
                 <button class="video-toggle" id="video-toggle" type="button" aria-label="تشغيل الفيديو" aria-pressed="false">
                     <span class="video-toggle-icon" aria-hidden="true">
                         <svg class="video-play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
                     </span>
+                    <span id="video-toggle-label">شغّل الفيديو</span>
                 </button>
             </div>
         </section>
@@ -828,12 +821,12 @@
     <script>
         const video = document.getElementById('revizy-video');
         const videoToggle = document.getElementById('video-toggle');
-        const videoPlayer = document.getElementById('video-player');
+        const videoToggleLabel = document.getElementById('video-toggle-label');
 
         function updateVideoControl(isPlaying) {
-            videoPlayer.classList.toggle('is-playing', isPlaying);
             videoToggle.setAttribute('aria-label', isPlaying ? 'إيقاف الفيديو مؤقتاً' : 'تشغيل الفيديو');
             videoToggle.setAttribute('aria-pressed', String(isPlaying));
+            videoToggleLabel.textContent = isPlaying ? 'وقف الفيديو' : 'شغّل الفيديو';
             videoToggle.querySelector('.video-toggle-icon').innerHTML = isPlaying
                 ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3v14H7zm7 0h3v14h-3z"></path></svg>'
                 : '<svg class="video-play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>';
