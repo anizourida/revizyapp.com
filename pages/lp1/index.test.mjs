@@ -38,3 +38,10 @@ test('LP1 has a moving annual-plan offer ticker above the header', () => {
   assert.match(page, /وفر 99 درهم/);
   assert.match(page, /@keyframes offerTicker/);
 });
+
+test('LP1 has an audio-testimonials section with three placeholder voice cards', () => {
+  assert.match(page, /class="testimonials-section"/);
+  assert.match(page, /آراء أولياء الأمور/);
+  assert.equal((page.match(/class="testimonial-card"/g) || []).length, 3);
+  assert.equal((page.match(/class="waveform-bars"/g) || []).length, 3);
+});

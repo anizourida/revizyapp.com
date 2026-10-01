@@ -377,6 +377,148 @@
             transform: translate(-50%, -50%) scale(1.04);
         }
 
+        /* Parent voice testimonials — ready for real recordings and portraits. */
+        .testimonials-section {
+            margin: 0 16px 30px;
+            padding: 34px 14px 18px;
+            border: 1px solid #d8e8d8;
+            border-radius: 34px;
+            background: linear-gradient(180deg, #f7fcf5 0%, #edf7eb 100%);
+            text-align: center;
+        }
+
+        .testimonials-kicker {
+            color: #2b896b;
+            font-size: 0.86rem;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .testimonials-title {
+            color: #1f5143;
+            font-size: 1.65rem;
+            line-height: 1.25;
+            margin: 0 0 8px;
+        }
+
+        .testimonials-subtitle {
+            color: #71817a;
+            font-size: 0.88rem;
+            font-weight: 600;
+            line-height: 1.6;
+            margin: 0 0 22px;
+        }
+
+        .testimonial-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .testimonial-card {
+            display: grid;
+            grid-template-columns: 54px 76px 1fr;
+            align-items: center;
+            gap: 10px;
+            min-height: 100px;
+            padding: 14px;
+            border: 1px solid #d4e4d4;
+            border-radius: 25px;
+            background: white;
+            text-align: right;
+        }
+
+        .testimonial-avatar {
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid #dcece1;
+            border-radius: 50%;
+            background: #2b896b;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .testimonial-name {
+            color: #1f5143;
+            font-size: 0.97rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .testimonial-city {
+            display: block;
+            color: #87968f;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .testimonial-audio {
+            min-width: 0;
+        }
+
+        .testimonial-audio-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .testimonial-play {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            border: 0;
+            border-radius: 50%;
+            background: #2b896b;
+            color: white;
+        }
+
+        .testimonial-play:disabled {
+            cursor: not-allowed;
+        }
+
+        .waveform-bars {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 34px;
+            min-width: 0;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .waveform-bars i {
+            width: 4px;
+            flex: 0 0 4px;
+            border-radius: 999px;
+            background: #c8e1d7;
+        }
+
+        .waveform-bars i:nth-child(3n) { height: 30px; }
+        .waveform-bars i:nth-child(3n + 1) { height: 18px; }
+        .waveform-bars i:nth-child(3n + 2) { height: 24px; }
+
+        .testimonial-time {
+            color: #71817a;
+            font-size: 0.7rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .testimonial-progress {
+            height: 6px;
+            margin-top: 8px;
+            border-radius: 999px;
+            background: #e2eee9;
+        }
+
         /* Payment Section */
         .payment-section {
             padding: 10px 24px 40px;
@@ -758,6 +900,30 @@
                 </div>
             </div>
         </div>
+
+        <section class="testimonials-section" aria-labelledby="testimonials-title">
+            <p class="testimonials-kicker">آراء أولياء الأمور</p>
+            <h2 class="testimonials-title" id="testimonials-title">كلمات من آباء وأمهات</h2>
+            <p class="testimonials-subtitle">سيتم إضافة التسجيلات الصوتية الحقيقية هنا قريباً.</p>
+
+            <div class="testimonial-list">
+                <article class="testimonial-card">
+                    <div class="testimonial-avatar" aria-hidden="true">أ</div>
+                    <div><span class="testimonial-name">ولي أمر 1</span><span class="testimonial-city">تسجيل صوتي قريباً</span></div>
+                    <div class="testimonial-audio"><div class="testimonial-audio-row"><button class="testimonial-play" type="button" disabled aria-label="تسجيل صوتي قريباً"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></button><span class="waveform-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="testimonial-time">0:00 / 0:00</span></div><div class="testimonial-progress"></div></div>
+                </article>
+                <article class="testimonial-card">
+                    <div class="testimonial-avatar" aria-hidden="true">م</div>
+                    <div><span class="testimonial-name">ولي أمر 2</span><span class="testimonial-city">تسجيل صوتي قريباً</span></div>
+                    <div class="testimonial-audio"><div class="testimonial-audio-row"><button class="testimonial-play" type="button" disabled aria-label="تسجيل صوتي قريباً"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></button><span class="waveform-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="testimonial-time">0:00 / 0:00</span></div><div class="testimonial-progress"></div></div>
+                </article>
+                <article class="testimonial-card">
+                    <div class="testimonial-avatar" aria-hidden="true">س</div>
+                    <div><span class="testimonial-name">ولي أمر 3</span><span class="testimonial-city">تسجيل صوتي قريباً</span></div>
+                    <div class="testimonial-audio"><div class="testimonial-audio-row"><button class="testimonial-play" type="button" disabled aria-label="تسجيل صوتي قريباً"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></button><span class="waveform-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="testimonial-time">0:00 / 0:00</span></div><div class="testimonial-progress"></div></div>
+                </article>
+            </div>
+        </section>
 
         <div class="payment-section">
             <p class="section-title" style="padding: 0;">طريقة الدفع (تحويل بنكي)</p>
