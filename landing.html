@@ -3,43 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>تطبيق ريفيزي التعليمي | انضم إلى بريميوم وتفوق في دراستك</title>
-    <meta name="description" content="تطبيق ريفيزي التعليمي رقم 1 في المغرب. كويزات، تمارين وبطاقات تفاعلية متطابقة 100% مع المقرر المغربي. حول وقت هاتف طفلك إلى تفوق دراسي حقيقي!">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Revizy App - انضم إلى بريميوم">
-    <meta property="og:description" content="استمتع بتجربة تعليمية متكاملة بدون حدود مع تطبيق ريفيزي">
-    <meta property="og:image" content="assets/revizy-logo.png">
-
-    <!-- Fonts: Rubik (Per USER_PREFERENCES.md and revizyapp AppText standard) -->
+    <title>Revizy - تطبيق ريفيزي التعليمي | الاشتراك المميز</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* ==========================================================================
-           RevizyApp Design Tokens (Extracted directly from revizyapp & SubscriptionScreen.jsx)
-           ========================================================================== */
         :root {
-            --app-bg: #F8FAFC;
-            --app-white: #FFFFFF;
-            --app-primary: #464F71;          /* RevizyApp Primary Navy */
-            --app-primary-shadow: #373b54;   /* 3D button shadow */
-            --app-yellow: #fbbf24;           /* RevizyApp Golden Yellow */
-            --app-yellow-light: #FFFBEB;     /* Active plan background */
-            --app-yellow-shadow: #d97706;    /* 3D button shadow for yellow */
-            --app-green: #10B981;            /* RevizyApp Success Green */
-            --app-green-dark: #16a34a;       /* 3D button face green */
-            --app-green-shadow: #166534;     /* 3D button shadow green */
-            --app-green-light: #D1FAE5;      /* Check circle background */
-            --app-text-main: #1E293B;        /* AppText Primary */
-            --app-text-sub: #334155;         /* Benefit text */
-            --app-text-muted: #64748B;       /* Subtitles / captions */
-            --app-border: #E2E8F0;          /* Inactive card border */
-            --app-border-radio: #CBD5E1;     /* Inactive radio outer border */
-            --app-font: 'Rubik', sans-serif;
-            --app-radius-card: 20px;
-            --app-radius-btn: 16px;
+            --primary: #243857;
+            --accent: #ff6b2d;
+            --app-yellow: #fbbf24;
+            --app-yellow-dark: #d97706;
+            --app-yellow-light: #FFFBEB;
+            --bg: #F8FAFC;
+            --white: #ffffff;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+            --green: #10B981;
+            --green-light: #D1FAE5;
         }
 
         * {
@@ -50,162 +31,139 @@
         }
 
         body {
-            font-family: var(--app-font);
-            background-color: #EEF2F6;
-            color: var(--app-text-main);
-            direction: rtl;
-            text-align: right;
-            line-height: 1.5;
+            background-color: #ECEFF3;
+            font-family: 'Rubik', 'Inter', sans-serif;
             display: flex;
             justify-content: center;
             min-height: 100vh;
+            color: var(--text-main);
+            overflow-x: hidden;
             padding: 0;
             margin: 0;
-            overflow-x: hidden;
+            direction: rtl;
         }
 
-        /* --- App Wrapper Frame (Authentic Mobile-App Canvas) --- */
-        .app-shell {
+        .container {
             width: 100%;
-            max-width: 500px;
-            background: var(--app-bg);
+            max-width: 480px;
+            background: var(--bg);
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            padding-bottom: 110px; /* Space for fixed bottom CTA */
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            margin: 0;
+            padding-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
         }
 
-        /* --- Top Urgency Strip (Moroccan Conversion Bar) --- */
-        .top-urgency-banner {
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Top Moroccan Urgency Strip */
+        .promo-top-bar {
             background: #1E293B;
-            color: #FFFFFF;
-            font-size: 0.82rem;
-            font-weight: 700;
+            color: white;
             padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            direction: rtl;
             border-bottom: 2px solid var(--app-yellow);
         }
 
-        .urgency-badge {
+        .promo-tag {
             background: var(--app-yellow);
             color: #1E293B;
-            font-size: 0.72rem;
-            font-weight: 800;
             padding: 2px 8px;
             border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 800;
         }
 
-        .countdown-time {
+        .promo-timer {
             font-family: monospace;
             color: var(--app-yellow);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             direction: ltr;
         }
 
-        /* ==========================================================================
-           1. RevizyApp Signature Golden Gradient Header
-           Matches: SubscriptionScreen.jsx (LinearGradient ['#fbbf24', '#fcd34d', '#fde68a'])
-           ========================================================================== */
-        .app-header {
-            background: linear-gradient(135deg, #fbbf24 0%, #fcd34d 60%, #fde68a 100%);
-            padding: 30px 24px 44px;
+        /* Header (Original Beloved Style) */
+        .header {
+            padding: 22px 24px 24px;
             text-align: center;
-            position: relative;
-            border-bottom-left-radius: 28px;
-            border-bottom-right-radius: 28px;
-            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.25);
+            background: linear-gradient(180deg, #ffffff 0%, #F8FAFC 100%);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
         }
 
-        .app-logo-badge {
-            display: inline-flex;
+        .logos {
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(8px);
-            padding: 4px 14px;
-            border-radius: 30px;
-            color: #1E293B;
-            font-size: 0.8rem;
-            font-weight: 800;
+            gap: 15px;
             margin-bottom: 16px;
         }
 
-        /* Crown Circle Icon (Exact replica from SubscriptionScreen.jsx) */
-        .crown-container {
-            margin-bottom: 14px;
-            display: flex;
-            justify-content: center;
+        .logos img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
         }
 
-        .crown-circle {
-            width: 90px;
-            height: 90px;
-            border-radius: 45px;
-            background: var(--app-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-            animation: pulse-ring 3s infinite;
-        }
-
-        .crown-circle svg {
-            width: 48px;
-            height: 48px;
-            fill: #fbbf24;
-        }
-
-        .header-title {
+        h1 {
             font-size: 1.75rem;
-            font-weight: 900;
-            color: #FFFFFF;
-            margin-bottom: 6px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
-        .header-subtitle {
-            font-size: 0.98rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.95);
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
             max-width: 90%;
             margin: 0 auto;
-            line-height: 1.5;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 14px;
+            padding: 0 24px;
         }
 
         /* ==========================================================================
-           2. In-App Video Lesson Player (Custom Play/Pause ONLY)
-           Supports local assets/video.mp4 OR YouTube fallback
+           Custom Video Player (Play & Pause ONLY)
            ========================================================================== */
-        .video-card-section {
-            padding: 0 20px;
-            margin-top: -24px;
-            position: relative;
-            z-index: 20;
-            margin-bottom: 24px;
+        .video-box-container {
+            padding: 0 24px;
+            margin: 18px 0 24px;
         }
 
-        .app-video-wrapper {
+        .video-player-card {
             background: #000000;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-            border: 3px solid var(--app-white);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border: 3px solid var(--white);
             position: relative;
         }
 
-        .video-inner-ratio {
+        .video-ratio {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 */
-            background: #0b1120;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            background: #0f172a;
         }
 
-        /* HTML5 Native Video */
+        /* Native HTML5 Video element (plays video.mp4 when present) */
         #local-mp4-video {
             position: absolute;
             top: 0;
@@ -217,7 +175,7 @@
             z-index: 5;
         }
 
-        /* YouTube IFrame container */
+        /* YouTube Fallback */
         #custom-yt-player {
             position: absolute;
             top: -60px;
@@ -228,8 +186,8 @@
             z-index: 4;
         }
 
-        /* Click catcher for seamless 100% play/pause */
-        .video-scrim-catcher {
+        /* Scrim catching all clicks for 100% play/pause */
+        .video-touch-scrim {
             position: absolute;
             top: 0;
             left: 0;
@@ -240,8 +198,8 @@
             background: transparent;
         }
 
-        /* Center Play Button Overlay */
-        .center-play-badge {
+        /* Big Center Play Overlay */
+        .center-play-overlay {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -251,51 +209,50 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             transition: all 0.3s ease;
         }
 
         .center-play-circle {
-            width: 68px;
-            height: 68px;
-            border-radius: 34px;
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
             background: var(--app-yellow);
-            color: #1E293B;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         .center-play-circle svg {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             fill: #1E293B;
             margin-right: -3px;
         }
 
-        .center-play-tag {
+        .center-play-text {
             background: rgba(0, 0, 0, 0.75);
-            color: #FFFFFF;
-            font-size: 0.8rem;
+            color: white;
+            font-size: 0.78rem;
             font-weight: 700;
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 20px;
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(4px);
         }
 
-        .app-video-wrapper.is-playing .center-play-badge {
+        .video-player-card.is-playing .center-play-overlay {
             opacity: 0;
             transform: translate(-50%, -50%) scale(0.8);
         }
 
-        /* Video Controls Bar: ONLY Play/Pause & Sound */
-        .app-video-controls {
+        /* Minimal Bottom Controls (Strictly Play/Pause & Mute) */
+        .video-minimal-controls {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            padding: 10px 16px;
+            padding: 8px 14px;
             background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.85) 100%);
             z-index: 20;
             display: flex;
@@ -304,231 +261,100 @@
             direction: ltr;
         }
 
-        .btn-vid-toggle {
+        .btn-play-pause {
             background: var(--app-yellow);
             border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
-            color: #1E293B;
+            width: 38px;
+            height: 38px;
+            border-radius: 19px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-            transition: transform 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: transform 0.15s;
         }
 
-        .btn-vid-toggle:active {
+        .btn-play-pause:active {
             transform: scale(0.92);
         }
 
-        .btn-vid-toggle svg {
+        .btn-play-pause svg {
             width: 18px;
             height: 18px;
             fill: #1E293B;
         }
 
-        .vid-status-pill {
-            background: rgba(255, 255, 255, 0.2);
-            color: #FFFFFF;
+        .video-status-text {
+            color: white;
             font-size: 0.78rem;
             font-weight: 700;
-            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
             border-radius: 20px;
             direction: rtl;
         }
 
-        .btn-sound-pill {
+        .btn-mute-sound {
             background: rgba(255, 255, 255, 0.2);
             border: none;
-            color: #FFFFFF;
-            padding: 6px 12px;
+            color: white;
+            padding: 5px 10px;
             border-radius: 20px;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
-        /* Video End Callout */
-        .video-end-card {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(30, 41, 59, 0.95);
-            z-index: 30;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            text-align: center;
-        }
-
-        .video-end-card.show {
-            display: flex;
-        }
-
-        .video-end-card h4 {
-            color: var(--app-yellow);
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .video-end-card p {
-            color: #FFFFFF;
-            font-size: 0.88rem;
-            margin-bottom: 14px;
-        }
-
-        .video-caption-note {
+        .video-caption {
             text-align: center;
             font-size: 0.82rem;
-            color: var(--app-text-muted);
-            margin-top: 8px;
+            color: var(--text-muted);
+            margin-top: 6px;
             font-weight: 600;
         }
 
-        /* ==========================================================================
-           3. RevizyApp Benefits Section
-           Exact matches to SubscriptionScreen.jsx (benefitItem, benefitIconContainer, checkContainer)
-           ========================================================================== */
-        .section-container {
-            padding: 0 20px;
-            margin-bottom: 26px;
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--app-text-main);
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .benefits-list {
+        /* Subscription Cards (Original App Style) */
+        .plans {
+            padding: 0 24px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            background: var(--app-white);
-            padding: 14px 16px;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            border: 1px solid rgba(226, 232, 240, 0.6);
-            transition: transform 0.2s ease;
-        }
-
-        .benefit-item:active {
-            transform: scale(0.99);
-        }
-
-        .benefit-icon-box {
-            width: 46px;
-            height: 46px;
-            border-radius: 23px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 14px;
-            flex-shrink: 0;
-            font-size: 1.25rem;
-        }
-
-        .benefit-text {
-            flex: 1;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--app-text-sub);
-        }
-
-        .check-container {
-            width: 26px;
-            height: 26px;
-            border-radius: 13px;
-            background: var(--app-green-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 8px;
-            flex-shrink: 0;
-        }
-
-        .check-container svg {
-            width: 16px;
-            height: 16px;
-            color: var(--app-green);
-        }
-
-        /* ==========================================================================
-           4. RevizyApp Subscription Plans Section
-           Matches: planCard, planCardSelected, planBadge, radioOuter, radioInner
-           ========================================================================== */
-        .plans-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 24px;
+            gap: 16px;
+            margin-bottom: 25px;
         }
 
         .plan-card {
             display: flex;
             align-items: center;
-            background: var(--app-white);
-            padding: 18px 20px;
-            border-radius: var(--app-radius-card);
-            border: 2px solid var(--app-border);
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
         .plan-card.active {
             border-color: var(--app-yellow);
             background: var(--app-yellow-light);
-            box-shadow: 0 4px 14px rgba(251, 191, 36, 0.2);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.15);
         }
 
-        .plan-badge {
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: var(--app-green);
-            color: var(--app-white);
-            font-size: 0.75rem;
-            font-weight: 800;
-            padding: 3px 12px;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
-        }
-
-        .radio-box {
-            margin-left: 14px;
-            flex-shrink: 0;
+        .radio-container {
+            margin-left: 16px;
         }
 
         .radio-outer {
             width: 24px;
             height: 24px;
             border-radius: 12px;
-            border: 2px solid var(--app-border-radio);
+            border: 2px solid #CBD5E1;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: border-color 0.2s;
+            transition: all 0.2s;
         }
 
         .plan-card.active .radio-outer {
@@ -541,8 +367,8 @@
             border-radius: 6px;
             background: var(--app-yellow);
             opacity: 0;
-            transform: scale(0.4);
-            transition: all 0.2s ease;
+            transform: scale(0.5);
+            transition: all 0.2s;
         }
 
         .plan-card.active .radio-inner {
@@ -550,51 +376,346 @@
             transform: scale(1);
         }
 
-        .plan-info {
+        .plan-details {
             flex: 1;
         }
 
         .plan-title {
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: var(--app-text-main);
-            margin-bottom: 2px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
         }
 
         .plan-savings {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--app-green);
-        }
-
-        .plan-price-group {
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-        }
-
-        .plan-price {
-            font-size: 1.7rem;
-            font-weight: 900;
-            color: var(--app-yellow-shadow);
-        }
-
-        .plan-card.active .plan-price {
-            color: #d97706;
-        }
-
-        .plan-currency {
             font-size: 0.85rem;
             font-weight: 600;
-            color: var(--app-text-muted);
+            color: #10B981;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .price {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--app-yellow-dark);
+        }
+
+        .currency {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-right: 4px;
+        }
+
+        .badge {
+            background: #10B981;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 12px;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+        }
+
+        /* Features (Original App Style) */
+        .features {
+            padding: 0 24px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 16px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+
+        .feature-icon-container {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 12px;
+            flex-shrink: 0;
+            font-size: 1.25rem;
+        }
+
+        .feature-text {
+            flex: 1;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .check-container {
+            width: 28px;
+            height: 28px;
+            border-radius: 14px;
+            background: #D1FAE5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .check-container svg {
+            color: #10B981;
         }
 
         /* ==========================================================================
-           5. RevizyApp Signature 3D Tactile Action Buttons
-           Direct translation of revizyapp/components/ActionButton.jsx:
-           Shadow bevel (top: 4px, bottom: 0), face translates translateY(4px) on press!
+           Customer Order Form (Added over payment.html to make it full landing page)
            ========================================================================== */
-        .action-button-wrapper {
+        .order-form-container {
+            padding: 0 24px;
+            margin-bottom: 25px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 22px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .form-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 14px;
+            text-align: right;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .text-input, .select-input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            background: #F8FAFC;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .text-input:focus, .select-input:focus {
+            outline: none;
+            border-color: var(--app-yellow);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.15);
+        }
+
+        /* Payment Tabs & Receipts (Beloved payment.html components) */
+        .payment-section {
+            padding: 0 24px 25px;
+        }
+
+        .pay-mode-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .pay-tab {
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            background: #F1F5F9;
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .pay-tab.active {
+            background: white;
+            border-color: var(--app-yellow);
+            color: var(--primary);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .bank-select {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            background: white;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 16px center;
+            background-size: 20px;
+            padding-left: 45px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .bank-select:focus {
+            outline: none;
+            border-color: var(--app-yellow);
+        }
+
+        /* Receipt Style Details (Original) */
+        .receipt-container {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            position: relative;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            direction: ltr;
+        }
+
+        .receipt-container.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .info-row {
+            padding: 12px 0;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .label-fr {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+        }
+
+        .label-ar {
+            font-family: 'Noto Naskh Arabic', 'Rubik', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #111827;
+            word-break: break-all;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .beneficiary {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .copy-btn {
+            background: #F1F5F9;
+            border: none;
+            padding: 6px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--border);
+            color: var(--primary);
+        }
+
+        /* Checkbox Style */
+        .confirmation-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 14px 18px;
+            background: #F1F5F9;
+            border-radius: 12px;
+        }
+
+        .confirmation-container input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #10B981;
+        }
+
+        .confirmation-text {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #475569;
+            user-select: none;
+        }
+
+        /* 3D Tactile Action Button */
+        .action-button-3d {
             width: 100%;
             position: relative;
             padding-bottom: 4px;
@@ -603,776 +724,473 @@
             cursor: pointer;
             border: none;
             background: transparent;
-            user-select: none;
+            margin-bottom: 14px;
         }
 
-        .action-button-shadow {
+        .action-shadow {
             position: absolute;
             top: 4px;
             bottom: 0;
             left: 0;
             right: 0;
-            border-radius: var(--app-radius-btn);
-            background: var(--app-yellow-shadow);
+            border-radius: 24px;
+            background: #054e45;
             transition: background 0.15s;
         }
 
-        .action-button-face {
+        .action-face {
             position: relative;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            background: var(--app-yellow);
-            color: #1E293B;
-            border-radius: var(--app-radius-btn);
-            padding: 14px 20px;
+            gap: 10px;
+            background: #075e54;
+            color: white;
+            border-radius: 24px;
+            padding: 16px 20px;
             font-family: inherit;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 800;
-            transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.1s;
         }
 
-        .action-button-wrapper:active .action-button-face {
+        .action-face img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .action-button-3d:active .action-face {
             transform: translateY(4px);
         }
 
-        /* ActionButton Variants */
-        .action-button-wrapper.primary .action-button-shadow {
-            background: var(--app-primary-shadow);
-        }
-        .action-button-wrapper.primary .action-button-face {
-            background: var(--app-primary);
-            color: #FFFFFF;
+        .action-button-3d:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
         }
 
-        .action-button-wrapper.green .action-button-shadow {
-            background: var(--app-green-shadow);
+        .action-button-3d.yellow .action-shadow {
+            background: #d97706;
         }
-        .action-button-wrapper.green .action-button-face {
-            background: var(--app-green-dark);
-            color: #FFFFFF;
-        }
-
-        /* ==========================================================================
-           6. App-Style Interactive Order & Moroccan Activation Card
-           ========================================================================== */
-        .order-card {
-            background: var(--app-white);
-            border-radius: var(--app-radius-card);
-            padding: 24px 20px;
-            border: 2px solid var(--app-border);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            margin-bottom: 24px;
+        .action-button-3d.yellow .action-face {
+            background: #fbbf24;
+            color: #1E293B;
         }
 
-        .order-card-header {
+        /* Trust & Guarantees */
+        .trust-banner {
+            padding: 0 24px;
+            margin-bottom: 25px;
             text-align: center;
-            margin-bottom: 20px;
         }
 
-        .order-card-header h3 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--app-primary);
-            margin-bottom: 4px;
-        }
-
-        .order-card-header p {
-            font-size: 0.85rem;
-            color: var(--app-text-muted);
-        }
-
-        .app-form-group {
-            margin-bottom: 14px;
-        }
-
-        .app-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--app-primary);
-            margin-bottom: 6px;
-        }
-
-        .app-input, .app-select {
-            width: 100%;
-            padding: 12px 14px;
-            border-radius: 12px;
-            border: 2px solid var(--app-border);
-            background: #F8FAFC;
-            font-size: 0.95rem;
-            font-family: inherit;
-            color: var(--app-text-main);
-            transition: all 0.2s;
-        }
-
-        .app-input:focus, .app-select:focus {
-            outline: none;
-            border-color: var(--app-yellow);
-            background: var(--app-white);
-        }
-
-        /* Moroccan Payment Tabs */
-        .method-tabs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .method-tab-btn {
+        .trust-box {
             background: #F1F5F9;
-            border: 2px solid var(--app-border);
-            padding: 10px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--app-text-muted);
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
-        }
-
-        .method-tab-btn.active {
-            background: var(--app-white);
-            border-color: var(--app-yellow);
-            color: var(--app-primary);
-        }
-
-        /* Bank Account Receipt (from payment.html & SubscriptionScreen) */
-        .receipt-card {
-            display: none;
-            background: #F8FAFC;
-            border: 1px dashed #CBD5E1;
             border-radius: 14px;
             padding: 14px;
-            margin-bottom: 16px;
-            direction: ltr;
-        }
-
-        .receipt-card.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .receipt-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px dashed #E2E8F0;
-        }
-
-        .receipt-row:last-child {
-            border-bottom: none;
-        }
-
-        .receipt-lbl {
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--app-text-muted);
-            text-transform: uppercase;
-        }
-
-        .receipt-val {
-            font-size: 0.95rem;
-            font-weight: 800;
-            color: var(--app-text-main);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-family: monospace;
-        }
-
-        .copy-pill {
-            background: var(--app-white);
-            border: 1px solid var(--app-border);
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        /* ==========================================================================
-           7. App Screenshots Grid (Real in-app activities)
-           ========================================================================== */
-        .app-preview-cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .preview-box {
-            background: var(--app-white);
-            border-radius: 14px;
-            padding: 8px;
-            border: 1px solid var(--app-border);
-            text-align: center;
-        }
-
-        .preview-box img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 6px;
-        }
-
-        .preview-box h5 {
             font-size: 0.85rem;
-            font-weight: 800;
-            color: var(--app-primary);
-        }
-
-        /* ==========================================================================
-           8. Trust Indicators (Exact from SubscriptionScreen.jsx)
-           ========================================================================== */
-        .trust-section {
-            padding: 16px 20px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .trust-text {
-            font-size: 0.82rem;
-            color: var(--app-text-muted);
+            color: var(--text-muted);
             font-weight: 600;
             line-height: 1.6;
         }
 
-        /* Testimonials Section */
-        .reviews-slider {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .review-bubble {
-            background: var(--app-white);
-            border-radius: 16px;
-            padding: 14px 16px;
-            border: 1px solid var(--app-border);
-            border-right: 4px solid var(--app-yellow);
-        }
-
-        .review-bubble h5 {
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: var(--app-primary);
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .review-bubble p {
+        .footer-note {
+            text-align: center;
             font-size: 0.85rem;
-            color: var(--app-text-sub);
-            line-height: 1.5;
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding: 0 10px;
         }
 
-        /* ==========================================================================
-           9. Fixed Bottom CTA
-           Exact structure from SubscriptionScreen.jsx:
-           styles.bottomCTA, styles.ctaContent, styles.ctaPrice, ActionButton
-           ========================================================================== */
-        .bottom-cta-bar {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 500px;
-            background: var(--app-white);
-            border-top: 1px solid var(--app-border);
-            padding: 12px 20px 20px;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .cta-price-group {
-            display: flex;
-            flex-direction: column;
-            direction: rtl;
-        }
-
-        .cta-period {
-            font-size: 0.72rem;
-            color: var(--app-text-muted);
-            font-weight: 600;
-        }
-
-        .cta-price {
-            font-size: 1.35rem;
-            font-weight: 900;
-            color: var(--app-text-main);
-            line-height: 1.1;
-        }
-
-        .cta-btn-container {
-            flex: 1;
-        }
-
-        /* Floating WhatsApp Help */
-        .float-wa {
-            position: fixed;
-            bottom: 90px;
-            left: 20px;
-            background: #25d366;
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            z-index: 95;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.2s;
-        }
-
-        .float-wa:active {
-            transform: scale(0.92);
-        }
-
-        .float-wa svg {
-            width: 26px;
-            height: 26px;
-            fill: #FFFFFF;
+        .footer-note strong {
+            color: var(--primary);
         }
 
         /* Toast Feedback */
-        #app-toast {
+        #toast {
             position: fixed;
-            top: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: #1E293B;
+            background: #334155;
             color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            z-index: 1000;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
             opacity: 0;
-            pointer-events: none;
             transition: opacity 0.3s;
-        }
-        #app-toast.show {
-            opacity: 1;
-        }
-
-        @keyframes pulse-ring {
-            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.5); }
-            70% { box-shadow: 0 0 0 12px rgba(251, 191, 36, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+            z-index: 1000;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="app-shell">
+    <div class="container">
 
-        <!-- Top Urgency Strip (Moroccan Sales Trigger) -->
-        <div class="top-urgency-banner">
-            <span class="urgency-badge">⚡ عرض محدود</span>
-            <span>خصم 50% على اشتراك ريفيزي بريميوم</span>
-            <span class="countdown-time" id="countdown-val">02:44:59</span>
+        <!-- Top Moroccan Urgency Strip -->
+        <div class="promo-top-bar">
+            <span class="promo-tag">⚡ عرض حصري</span>
+            <span>خصم 50% على اشتراك ريفيزي السنوي</span>
+            <span class="promo-timer" id="timer-text">02:44:59</span>
         </div>
 
-        <!-- 1. RevizyApp Signature Golden Gradient Header -->
-        <header class="app-header">
-            <div class="app-logo-badge">
-                <span>تطبيق ريفيزي التعليمي</span>
-                <span>🇲🇦</span>
+        <!-- Header (Original Design) -->
+        <header class="header">
+            <div class="logos">
+                <img src="utils/attijari/revizy.png" alt="Revizy Logo" onerror="this.src='RevizyAppWebsite/assets/revizy-logo.png'">
             </div>
-
-            <!-- Crown Circle from SubscriptionScreen.jsx -->
-            <div class="crown-container">
-                <div class="crown-circle">
-                    <!-- FontAwesome Crown SVG -->
-                    <svg viewBox="0 0 640 512">
-                        <path d="M528 448H112c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm64-320c-26.5 0-48 21.5-48 48 0 7.1 1.6 13.7 4.4 19.8L476 239.2l-123.7-142c8.3-7.5 13.7-18.2 13.7-30.2 0-23.2-18.8-42-42-42s-42 18.8-42 42c0 12 5.4 22.7 13.7 30.2L172 239.2 101.6 195.8c2.8-6.1 4.4-12.7 4.4-19.8 0-26.5-21.5-48-48-48s-48 21.5-48 48c0 23.6 17.1 43.1 39.6 47.1L96 400h448l46.4-176.9c22.5-4 39.6-23.5 39.6-47.1 0-26.5-21.5-48-48-48z"/>
-                    </svg>
-                </div>
-            </div>
-
-            <h1 class="header-title">انضم إلى بريميوم</h1>
-            <p class="header-subtitle">استمتع بتجربة تعليمية متكاملة بدون حدود وساعد طفلك على التفوق</p>
+            <h1>الاشتراك المميز</h1>
+            <p class="subtitle">استمتع بتجربة تعليمية متكاملة بدون حدود وساعد طفلك على التفوق.</p>
         </header>
 
-        <!-- 2. Video Lesson Card (Play/Pause ONLY - MP4 + YouTube Fallback) -->
-        <div class="video-card-section">
-            <div class="app-video-wrapper" id="video-wrapper">
-                <div class="video-inner-ratio">
-                    <!-- Native HTML5 Video for assets/video.mp4 -->
+        <!-- Custom Video Player (Play & Pause ONLY) -->
+        <div class="video-box-container">
+            <div class="video-player-card" id="video-card">
+                <div class="video-ratio">
+                    <!-- Native HTML5 Video (plays video.mp4 when present) -->
                     <video id="local-mp4-video" playsinline preload="metadata">
                         <source src="assets/video.mp4" type="video/mp4">
                         <source src="video.mp4" type="video/mp4">
                     </video>
 
-                    <!-- YouTube Player fallback -->
+                    <!-- YouTube Fallback -->
                     <div id="custom-yt-player"></div>
 
-                    <!-- Direct Click Catcher (Play/Pause trigger) -->
-                    <div class="video-scrim-catcher" onclick="togglePlayPause()" title="اضغط للتشغيل أو الإيقاف"></div>
+                    <!-- Transparent Scrim: Tap anywhere to toggle play/pause -->
+                    <div class="video-touch-scrim" onclick="togglePlayPause()" title="انقر للتشغيل أو الإيقاف"></div>
 
-                    <!-- Center Play Badge -->
-                    <div class="center-play-badge" id="center-play-badge">
+                    <!-- Big Center Play Button -->
+                    <div class="center-play-overlay">
                         <div class="center-play-circle">
                             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
-                        <span class="center-play-tag">شاهد شرح التطبيق (دقيقة)</span>
-                    </div>
-
-                    <!-- Video End Conversion Callout -->
-                    <div class="video-end-card" id="video-end-card">
-                        <h4>عجبك التطبيق وبغيتي تشترك؟ 🚀</h4>
-                        <p>استفد من خصم 50% على الباقة السنوية وسجل الآن</p>
-                        <button type="button" class="action-button-wrapper" onclick="scrollToOrder()" style="max-width: 240px; margin-bottom: 8px;">
-                            <div class="action-button-shadow"></div>
-                            <div class="action-button-face" style="padding: 10px 16px; font-size: 0.95rem;">
-                                <span>طلب الاشتراك الآن ⚡</span>
-                            </div>
-                        </button>
-                        <button type="button" onclick="replayVideo()" style="background:transparent; border:none; color:#cbd5e1; font-size:0.8rem; cursor:pointer;">
-                            إعادة مشاهدة الفيديو ↺
-                        </button>
+                        <span class="center-play-text">شاهد طريقة التعلم (دقيقة)</span>
                     </div>
                 </div>
 
                 <!-- Minimal Controls Bar: ONLY Play/Pause and Mute -->
-                <div class="app-video-controls">
-                    <button class="btn-vid-toggle" id="btn-vid-toggle" onclick="togglePlayPause()" aria-label="تشغيل/إيقاف">
+                <div class="video-minimal-controls">
+                    <button class="btn-play-pause" id="btn-play-pause" onclick="togglePlayPause()" aria-label="تشغيل/إيقاف">
                         <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <svg id="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                     </button>
-                    <span class="vid-status-pill" id="vid-status-pill">اضغط للتشغيل ▶</span>
-                    <button class="btn-sound-pill" id="btn-sound-pill" onclick="toggleMute()">
+                    <span class="video-status-text" id="video-status-text">اضغط للتشغيل ▶</span>
+                    <button class="btn-mute-sound" id="btn-mute-sound" onclick="toggleMute()">
                         <span id="sound-icon">🔊</span>
                         <span id="sound-text">الصوت</span>
                     </button>
                 </div>
             </div>
-            <p class="video-caption-note">✨ متطابق 100% مع منهاج وزارة التربية الوطنية المغربية</p>
+            <p class="video-caption">✨ متوافق 100% مع منهاج وزارة التربية الوطنية المغربية</p>
         </div>
 
-        <!-- 3. RevizyApp Benefits Section (Exact items from SubscriptionScreen.jsx) -->
-        <section class="section-container">
-            <h2 class="section-title">مميزات الاشتراك</h2>
-
-            <div class="benefits-list">
-                <!-- 1. All Units -->
-                <div class="benefit-item">
-                    <div class="benefit-icon-box" style="background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
-                        📖
-                    </div>
-                    <span class="benefit-text">الوصول الكامل لجميع الوحدات</span>
-                    <div class="check-container">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <!-- Plans (Original Beloved Style) -->
+        <p class="section-title">اختر خطتك</p>
+        <div class="plans">
+            <div class="plan-card" onclick="selectPlan(this, 'monthly')">
+                <div class="radio-container">
+                    <div class="radio-outer">
+                        <div class="radio-inner"></div>
                     </div>
                 </div>
-
-                <!-- 2. Flashcards -->
-                <div class="benefit-item">
-                    <div class="benefit-icon-box" style="background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
-                        ⭐
-                    </div>
-                    <span class="benefit-text">الوصول الكامل لجميع البطاقات التعليمية</span>
-                    <div class="check-container">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    </div>
+                <div class="plan-details">
+                    <div class="plan-title">اشتراك شهري</div>
                 </div>
-
-                <!-- 3. Dialogues -->
-                <div class="benefit-item">
-                    <div class="benefit-icon-box" style="background-color: rgba(236, 72, 153, 0.1); color: #ec4899;">
-                        💬
-                    </div>
-                    <span class="benefit-text">الوصول الكامل لجميع الحوارات</span>
-                    <div class="check-container">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    </div>
-                </div>
-
-                <!-- 4. Energy -->
-                <div class="benefit-item">
-                    <div class="benefit-icon-box" style="background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
-                        ⚡
-                    </div>
-                    <span class="benefit-text">100 وحدة طاقة يومية</span>
-                    <div class="check-container">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    </div>
-                </div>
-
-                <!-- 5. No Ads -->
-                <div class="benefit-item">
-                    <div class="benefit-icon-box" style="background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
-                        🏆
-                    </div>
-                    <span class="benefit-text">حذف الإعلانات نهائياً</span>
-                    <div class="check-container">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    </div>
+                <div class="price-container">
+                    <div class="price">29</div>
+                    <div class="currency">درهم</div>
                 </div>
             </div>
-        </section>
 
-        <!-- 4. Plans Section (Exact Cards from SubscriptionScreen.jsx) -->
-        <section class="section-container" id="plans-section">
-            <h2 class="section-title">اختر خطتك</h2>
-
-            <div class="plans-list">
-                <!-- Monthly Plan -->
-                <div class="plan-card" id="plan-card-monthly" onclick="selectPlan('monthly')">
-                    <div class="radio-box">
-                        <div class="radio-outer">
-                            <div class="radio-inner"></div>
-                        </div>
-                    </div>
-                    <div class="plan-info">
-                        <div class="plan-title">اشتراك شهري</div>
-                        <div class="plan-savings" style="color:var(--app-text-muted);">تجديد شهري مرن</div>
-                    </div>
-                    <div class="plan-price-group">
-                        <span class="plan-currency">درهم</span>
-                        <span class="plan-price">29</span>
+            <div class="plan-card active" onclick="selectPlan(this, 'yearly')">
+                <span class="badge">وفر 50%</span>
+                <div class="radio-container">
+                    <div class="radio-outer">
+                        <div class="radio-inner"></div>
                     </div>
                 </div>
-
-                <!-- Yearly Plan (Active Featured) -->
-                <div class="plan-card active" id="plan-card-yearly" onclick="selectPlan('yearly')">
-                    <div class="plan-badge">وفر 50%</div>
-                    <div class="radio-box">
-                        <div class="radio-outer">
-                            <div class="radio-inner"></div>
-                        </div>
-                    </div>
-                    <div class="plan-info">
-                        <div class="plan-title">اشتراك سنوي</div>
-                        <div class="plan-savings">وفر 250 درهم</div>
-                    </div>
-                    <div class="plan-price-group">
-                        <span class="plan-currency">درهم</span>
-                        <span class="plan-price">249</span>
-                    </div>
+                <div class="plan-details">
+                    <div class="plan-title">اشتراك سنوي</div>
+                    <div class="plan-savings">وفر 250 درهم</div>
+                </div>
+                <div class="price-container">
+                    <div class="price">249</div>
+                    <div class="currency">درهم</div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- 5. Fast Activation / Order Card (Moroccan Converting Form) -->
-        <section class="section-container" id="order-section">
-            <div class="order-card">
-                <div class="order-card-header">
-                    <h3>تأكيد الطلب والتفعيل المباشر</h3>
-                    <p>أدخل المعلومات البسيطة لتفعيل حساب طفلك فوراً</p>
+        <!-- Features (Original Beloved Style) -->
+        <p class="section-title">مميزات الاشتراك</p>
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(59, 130, 246, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 </div>
-
-                <form id="revizy-order-form" onsubmit="handleOrderSubmit(event)">
-                    <!-- Name -->
-                    <div class="app-form-group">
-                        <label class="app-label">الاسم الكامل لولي الأمر أو التلميذ *</label>
-                        <input type="text" id="cust-name" class="app-input" placeholder="مثال: يوسف الإدريسي" required>
-                    </div>
-
-                    <!-- Phone / WhatsApp -->
-                    <div class="app-form-group">
-                        <label class="app-label">رقم الواتساب (للتفعيل الفوري) *</label>
-                        <input type="tel" id="cust-phone" class="app-input" placeholder="06XXXXXXXX" dir="ltr" style="text-align: right;" required>
-                    </div>
-
-                    <!-- City -->
-                    <div class="app-form-group">
-                        <label class="app-label">المدينة بالمغرب *</label>
-                        <select id="cust-city" class="app-select" required>
-                            <option value="" disabled selected>اختر المدينة...</option>
-                            <option value="الدار البيضاء">الدار البيضاء</option>
-                            <option value="الرباط">الرباط</option>
-                            <option value="طنجة">طنجة</option>
-                            <option value="مراكش">مراكش</option>
-                            <option value="فاس">فاس</option>
-                            <option value="أكادير">أكادير</option>
-                            <option value="مكناس">مكناس</option>
-                            <option value="وجدة">وجدة</option>
-                            <option value="القنيطرة">القنيطرة</option>
-                            <option value="تطوان">تطوان</option>
-                            <option value="مدينة أخرى">مدينة أخرى بالمغرب</option>
-                        </select>
-                    </div>
-
-                    <!-- Grade -->
-                    <div class="app-form-group">
-                        <label class="app-label">المستوى الدراسي *</label>
-                        <select id="cust-grade" class="app-select" required>
-                            <option value="" disabled selected>اختر المستوى...</option>
-                            <option value="المستوى الأول ابتدائي">المستوى الأول ابتدائي</option>
-                            <option value="المستوى الثاني ابتدائي">المستوى الثاني ابتدائي</option>
-                            <option value="المستوى الثالث ابتدائي">المستوى الثالث ابتدائي</option>
-                            <option value="المستوى الرابع ابتدائي">المستوى الرابع ابتدائي</option>
-                            <option value="المستوى الخامس ابتدائي">المستوى الخامس ابتدائي</option>
-                            <option value="المستوى السادس ابتدائي (الموحد)">المستوى السادس ابتدائي (الموحد)</option>
-                            <option value="التعليم الإعدادي">التعليم الإعدادي</option>
-                        </select>
-                    </div>
-
-                    <!-- Payment Mode -->
-                    <div class="app-form-group">
-                        <label class="app-label">طريقة التفعيل *</label>
-                        <div class="method-tabs">
-                            <div class="method-tab-btn active" id="tab-wa" onclick="setMethod('whatsapp')">
-                                💬 عبر الواتساب (سريع)
-                            </div>
-                            <div class="method-tab-btn" id="tab-bank" onclick="setMethod('bank')">
-                                🏦 تحويل بنكي (CIH / التجاري)
-                            </div>
-                        </div>
-
-                        <!-- Bank Receipt Details -->
-                        <div class="receipt-card" id="receipt-box">
-                            <div class="receipt-row">
-                                <span class="receipt-lbl">CIH BANK</span>
-                                <div class="receipt-val">
-                                    <span>42256665211022000</span>
-                                    <button type="button" class="copy-pill" onclick="copyNum('42256665211022000')">نسخ</button>
-                                </div>
-                            </div>
-                            <div class="receipt-row">
-                                <span class="receipt-lbl">ATTIJARIWAFA</span>
-                                <div class="receipt-val">
-                                    <span style="font-size:0.85rem;">007095000405530040000532</span>
-                                    <button type="button" class="copy-pill" onclick="copyNum('007095000405530040000532')">نسخ</button>
-                                </div>
-                            </div>
-                            <div class="receipt-row">
-                                <span class="receipt-lbl">BÉNÉFICIAIRE</span>
-                                <div class="receipt-val" style="font-size:0.85rem;">
-                                    <span>M. RIDA ANIZOU</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3D Tactile ActionButton (Revizy Signature Component) -->
-                    <button type="submit" class="action-button-wrapper green" style="margin-top: 10px;">
-                        <div class="action-button-shadow"></div>
-                        <div class="action-button-face">
-                            <span>تأكيد الاشتراك وتفعيل الحساب الآن</span>
-                            <span>⚡</span>
-                        </div>
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- 6. In-App Screenshots Preview -->
-        <section class="section-container">
-            <h2 class="section-title">من داخل تطبيق ريفيزي</h2>
-            <div class="app-preview-cards">
-                <div class="preview-box">
-                    <img src="assets/image-to-add-1-cfRdVnb3.png" alt="كويزات">
-                    <h5>كويزات تفاعلية</h5>
-                </div>
-                <div class="preview-box">
-                    <img src="assets/image-to-add-2-D3-oHljj.png" alt="بطاقات الذاكرة">
-                    <h5>بطاقات الذاكرة</h5>
-                </div>
-                <div class="preview-box">
-                    <img src="assets/image-to-add-3-DYWDqb8f.png" alt="حوارات نطق">
-                    <h5>حوارات الفرنسية</h5>
-                </div>
-                <div class="preview-box">
-                    <img src="assets/image-to-add-4-DD27lpSo.png" alt="نقاط ومكافآت">
-                    <h5>أوسمة ونقاط تحفيزية</h5>
+                <div class="feature-text">الوصول الكامل لجميع الوحدات</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
             </div>
-        </section>
 
-        <!-- 7. Real Reviews from Moroccan Parents -->
-        <section class="section-container">
-            <h2 class="section-title">آراء أولياء الأمور بالمغرب ⭐</h2>
-            <div class="reviews-slider">
-                <div class="review-bubble">
-                    <h5>
-                        <span>فاطمة الزهراء (أم إلياس)</span>
-                        <span style="color:#f59e0b; font-size:0.8rem;">★★★★★</span>
-                    </h5>
-                    <p>"بنتي تحسن مستواها بزاف فالفرنسية وولات هي كتدخل تراجع التمارين كل نهار بوحدها!"</p>
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(139, 92, 246, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </div>
-                <div class="review-bubble">
-                    <h5>
-                        <span>سي حسن (أب لأمين ومروى)</span>
-                        <span style="color:#f59e0b; font-size:0.8rem;">★★★★★</span>
-                    </h5>
-                    <p>"أحسن تطبيق تعليمي مغربي.. خلى التيليفون مفيد وحمانا من تضييع الوقت فاليوتيوب."</p>
+                <div class="feature-text">الوصول الكامل لجميع البطاقات التعليمية</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
             </div>
-        </section>
 
-        <!-- 8. Trust Section (Exact text from SubscriptionScreen.jsx) -->
-        <div class="trust-section">
-            <p class="trust-text">
-                إلغاء في أي وقت • دفع آمن ومشفر • دعم فني مغربي 7/7 عبر الواتساب • ضمان استرجاع الأموال 14 يوماً
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(236, 72, 153, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <div class="feature-text">الوصول الكامل لجميع الحوارات</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(245, 158, 11, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <div class="feature-text">100 وحدة طاقة يومية</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-container" style="background-color: rgba(16, 185, 129, 0.1);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                </div>
+                <div class="feature-text">حذف الإعلانات</div>
+                <div class="check-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Order Form (The Missing Moroccan Selling Funnel Piece) -->
+        <div class="order-form-container">
+            <div class="form-card">
+                <h3 class="form-title">معلومات التفعيل الفوري</h3>
+                <p class="form-subtitle">أدخل المعلومات أسفله وسيتم تفعيل حساب طفلك في دقائق</p>
+
+                <div class="input-group">
+                    <label class="input-label">الاسم الكامل لولي الأمر أو التلميذ *</label>
+                    <input type="text" id="cust-name" class="text-input" placeholder="مثال: يوسف الإدريسي" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">رقم الهاتف / الواتساب للتفعيل *</label>
+                    <input type="tel" id="cust-phone" class="text-input" placeholder="06XXXXXXXX" dir="ltr" style="text-align: right;" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">المدينة المغربية *</label>
+                    <select id="cust-city" class="select-input" required>
+                        <option value="" disabled selected>اختر مدينتك...</option>
+                        <option value="الدار البيضاء">الدار البيضاء</option>
+                        <option value="الرباط">الرباط</option>
+                        <option value="طنجة">طنجة</option>
+                        <option value="مراكش">مراكش</option>
+                        <option value="فاس">فاس</option>
+                        <option value="أكادير">أكادير</option>
+                        <option value="مكناس">مكناس</option>
+                        <option value="وجدة">وجدة</option>
+                        <option value="القنيطرة">القنيطرة</option>
+                        <option value="تطوان">تطوان</option>
+                        <option value="مدينة أخرى">مدينة أخرى بالمغرب</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">المستوى الدراسي للطفل *</label>
+                    <select id="cust-grade" class="select-input" required>
+                        <option value="" disabled selected>اختر المستوى...</option>
+                        <option value="المستوى الأول ابتدائي">المستوى الأول ابتدائي</option>
+                        <option value="المستوى الثاني ابتدائي">المستوى الثاني ابتدائي</option>
+                        <option value="المستوى الثالث ابتدائي">المستوى الثالث ابتدائي</option>
+                        <option value="المستوى الرابع ابتدائي">المستوى الرابع ابتدائي</option>
+                        <option value="المستوى الخامس ابتدائي">المستوى الخامس ابتدائي</option>
+                        <option value="المستوى السادس ابتدائي (الموحد)">المستوى السادس ابتدائي (الموحد)</option>
+                        <option value="التعليم الإعدادي">التعليم الإعدادي</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment & Activation Section (Original Beloved Style + Fast WhatsApp Mode) -->
+        <div class="payment-section">
+            <p class="section-title" style="padding: 0;">طريقة التأكيد والدفع</p>
+
+            <div class="pay-mode-selector">
+                <div class="pay-tab active" id="tab-whatsapp" onclick="switchPayMode('whatsapp')">
+                    💬 تفعيل عبر الواتساب
+                </div>
+                <div class="pay-tab" id="tab-bank" onclick="switchPayMode('bank')">
+                    🏦 تحويل بنكي (CIH / التجاري)
+                </div>
+            </div>
+
+            <!-- Bank Transfer View -->
+            <div id="bank-payment-view" style="display: none;">
+                <select class="bank-select" onchange="selectBank(this.value)">
+                    <option value="" selected disabled>اختر البنك...</option>
+                    <option value="attijari">Attijariwafa Bank</option>
+                    <option value="cih">CIH Bank</option>
+                </select>
+
+                <div id="details-attijari" class="receipt-container">
+                    <div class="info-row">
+                        <div class="labels">
+                            <span class="label-fr">Banque</span>
+                            <span class="label-ar">البنك</span>
+                        </div>
+                        <div class="value">
+                            <span>Attijariwafa Bank</span>
+                            <button class="copy-btn" onclick="copyToClipboard('Attijariwafa Bank')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="labels">
+                            <span class="label-fr">Numéro de compte</span>
+                            <span class="label-ar">رقم الحساب</span>
+                        </div>
+                        <div class="value">
+                            <span>007095000405530040000532</span>
+                            <button class="copy-btn" onclick="copyToClipboard('007095000405530040000532')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="labels">
+                            <span class="label-fr">Bénéficiaire</span>
+                            <span class="label-ar">المستفيد</span>
+                        </div>
+                        <div class="beneficiary">
+                            <span>Monsieur RIDA ANIZOU</span>
+                            <button class="copy-btn" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="labels">
+                            <span class="label-fr">Montant</span>
+                            <span class="label-ar">المبلغ</span>
+                        </div>
+                        <div class="value" style="display: block; text-align: right;">
+                            <span class="receipt-amount">249</span>
+                            <span style="font-size: 0.9rem; margin-left: 6px;">درهم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="details-cih" class="receipt-container">
+                    <div class="info-row">
+                        <div class="labels">
+                            <span class="label-fr">Banque</span>
+                            <span class="label-ar">البنك</span>
+                        </div>
+                        <div class="value">
+                            <span>CIH Bank</span>
+                            <button class="copy-btn" onclick="copyToClipboard('CIH Bank')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="labels">
+                            <span class="label-fr">Numéro de compte</span>
+                            <span class="label-ar">رقم الحساب</span>
+                        </div>
+                        <div class="value">
+                            <span>42256665211022000</span>
+                            <button class="copy-btn" onclick="copyToClipboard('42256665211022000')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="labels">
+                            <span class="label-fr">Bénéficiaire</span>
+                            <span class="label-ar">المستفيد</span>
+                        </div>
+                        <div class="beneficiary">
+                            <span>Monsieur RIDA ANIZOU</span>
+                            <button class="copy-btn" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="labels">
+                            <span class="label-fr">Montant</span>
+                            <span class="label-ar">المبلغ</span>
+                        </div>
+                        <div class="value" style="display: block; text-align: right;">
+                            <span class="receipt-amount">249</span>
+                            <span style="font-size: 0.9rem; margin-left: 6px;">درهم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="confirmation-container">
+                    <input type="checkbox" id="confirm-payment" onchange="toggleWhatsAppButton()" disabled>
+                    <span class="confirmation-text">لقد قمت بتحويل المبلغ وسأرسل الوصل</span>
+                </label>
+            </div>
+
+            <!-- 3D Tactile WhatsApp Submit Button -->
+            <button id="whatsapp-btn" class="action-button-3d" onclick="sendWhatsAppOrder()">
+                <div class="action-shadow"></div>
+                <div class="action-face">
+                    <img src="utils/whatsapp.png" alt="WhatsApp" onerror="this.src='RevizyAppWebsite/assets/whatsapp.png'">
+                    <span id="btn-text">تأكيد الطلب وتفعيل الحساب الآن</span>
+                </div>
+            </button>
+
+            <!-- Trust Guarantee -->
+            <div class="trust-banner">
+                <div class="trust-box">
+                    🛡️ ضمان استرجاع 14 يوماً • دفع آمن • دعم مغربي 7/7 عبر الواتساب
+                </div>
+            </div>
+
+            <div id="toast">تم النسخ بنجاح!</div>
+            
+            <p class="footer-note">
+                فريق ريفيزي معكم عبر رقم الواتساب <strong>+212 624-853412</strong> للمساعدة الفورية خطوة بخطوة.
             </p>
         </div>
-
-        <!-- 9. Fixed Bottom CTA Bar (Exact replica of SubscriptionScreen.jsx bottomCTA) -->
-        <div class="bottom-cta-bar">
-            <div class="cta-price-group">
-                <span class="cta-period" id="bar-period">/ سنة</span>
-                <span class="cta-price" id="bar-price">249 درهم</span>
-            </div>
-
-            <div class="cta-btn-container">
-                <button type="button" class="action-button-wrapper" onclick="scrollToOrder()">
-                    <div class="action-button-shadow"></div>
-                    <div class="action-button-face" style="padding: 12px 18px;">
-                        <span>اشترك الآن</span>
-                        <span>⚡</span>
-                    </div>
-                </button>
-            </div>
-        </div>
-
-        <!-- Floating WhatsApp Quick Chat -->
-        <a href="https://wa.me/212624853412?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D8%B1%D9%8A%D9%81%D9%8A%D8%B2%D9%8A%20%D8%A8%D8%B1%D9%8A%D9%85%D9%8A%D9%88%D9%85" 
-           target="_blank" class="float-wa" title="الدعم عبر الواتساب">
-            <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.92-9.91-9.92zm5.8 14.07c-.24.68-1.41 1.29-1.94 1.37-.51.08-1.17.11-3.38-.8-2.82-1.16-4.63-4.04-4.77-4.23-.14-.19-1.14-1.52-1.14-2.9 0-1.38.72-2.06.98-2.35.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.66.5.24.58.83 2.02.9 2.17.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.32.39-.46.52-.15.15-.31.31-.13.62.18.31.79 1.3 1.7 2.11 1.17 1.04 2.15 1.37 2.46 1.52.31.15.49.13.67-.08.19-.21.79-.92 1-1.24.21-.31.42-.26.71-.15.29.11 1.84.87 2.16 1.03.31.15.52.23.6.36.08.14.08.79-.16 1.47z"/></svg>
-        </a>
-
-        <!-- Toast Feedback -->
-        <div id="app-toast">تم النسخ بنجاح!</div>
     </div>
 
-    <!-- Scripts -->
+    <!-- YouTube IFrame API -->
     <script>
-        // Countdown
-        let remaining = 2 * 3600 + 44 * 60 + 59;
+        // Urgency countdown
+        let sec = 2 * 3600 + 44 * 60 + 59;
         setInterval(() => {
-            if (remaining <= 0) remaining = 3 * 3600;
-            remaining--;
-            const h = String(Math.floor(remaining / 3600)).padStart(2, '0');
-            const m = String(Math.floor((remaining % 3600) / 60)).padStart(2, '0');
-            const s = String(remaining % 60).padStart(2, '0');
-            const el = document.getElementById('countdown-val');
+            if (sec <= 0) sec = 3 * 3600;
+            sec--;
+            const h = String(Math.floor(sec / 3600)).padStart(2, '0');
+            const m = String(Math.floor((sec % 3600) / 60)).padStart(2, '0');
+            const s = String(sec % 60).padStart(2, '0');
+            const el = document.getElementById('timer-text');
             if (el) el.innerText = `${h}:${m}:${s}`;
         }, 1000);
 
-        // --- Custom Video Player (Strictly ONLY Play and Pause) ---
+        // --- Video Player (Only Play and Pause) ---
         const localVideo = document.getElementById('local-mp4-video');
         const ytDiv = document.getElementById('custom-yt-player');
         let isLocalMp4 = false;
@@ -1387,21 +1205,15 @@
             ytDiv.style.display = 'none';
         });
 
-        localVideo.addEventListener('play', () => syncUI(true));
-        localVideo.addEventListener('pause', () => syncUI(false));
-        localVideo.addEventListener('ended', () => {
-            syncUI(false);
-            const endCard = document.getElementById('video-end-card');
-            if (endCard) endCard.classList.add('show');
-        });
-
+        localVideo.addEventListener('play', () => syncVideoUI(true));
+        localVideo.addEventListener('pause', () => syncVideoUI(false));
+        localVideo.addEventListener('ended', () => syncVideoUI(false));
         localVideo.addEventListener('error', () => {
             isLocalMp4 = false;
             localVideo.style.display = 'none';
             ytDiv.style.display = 'block';
             loadYT();
         });
-
         localVideo.load();
 
         function loadYT() {
@@ -1433,35 +1245,27 @@
         };
 
         function onYTState(e) {
-            const endCard = document.getElementById('video-end-card');
-            if (e.data === YT.PlayerState.PLAYING) {
-                syncUI(true);
-                if (endCard) endCard.classList.remove('show');
-            } else if (e.data === YT.PlayerState.PAUSED) {
-                syncUI(false);
-            } else if (e.data === YT.PlayerState.ENDED) {
-                syncUI(false);
-                if (endCard) endCard.classList.add('show');
-            }
+            if (e.data === YT.PlayerState.PLAYING) syncVideoUI(true);
+            else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) syncVideoUI(false);
         }
 
-        function syncUI(playing) {
+        function syncVideoUI(playing) {
             isPlaying = playing;
-            const wrapper = document.getElementById('video-wrapper');
+            const card = document.getElementById('video-card');
             const playIcon = document.getElementById('icon-play');
             const pauseIcon = document.getElementById('icon-pause');
-            const statusPill = document.getElementById('vid-status-pill');
+            const statusText = document.getElementById('video-status-text');
 
             if (playing) {
-                wrapper.classList.add('is-playing');
+                card.classList.add('is-playing');
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
-                statusPill.innerText = 'جاري المشاهدة ⏸';
+                statusText.innerText = 'جاري المشاهدة ⏸';
             } else {
-                wrapper.classList.remove('is-playing');
+                card.classList.remove('is-playing');
                 playIcon.style.display = 'block';
                 pauseIcon.style.display = 'none';
-                statusPill.innerText = 'متوقف مؤقتاً ▶';
+                statusText.innerText = 'متوقف مؤقتاً ▶';
             }
         }
 
@@ -1503,97 +1307,112 @@
             }
         }
 
-        function replayVideo() {
-            const endCard = document.getElementById('video-end-card');
-            if (endCard) endCard.classList.remove('show');
-            if (isLocalMp4) {
-                localVideo.currentTime = 0;
-                localVideo.play();
-            } else if (ytPlayer && ytReady) {
-                ytPlayer.seekTo(0);
-                ytPlayer.playVideo();
-            }
-        }
+        // --- Plans & Payment Selection ---
+        let currentPlanType = 'yearly';
+        let currentPaymentMode = 'whatsapp';
 
-        // --- Plans Selection (revizyapp logic) ---
-        let currentPlan = 'yearly';
-        let currentMethod = 'whatsapp';
-
-        function selectPlan(plan) {
-            currentPlan = plan;
-            const monthlyCard = document.getElementById('plan-card-monthly');
-            const yearlyCard = document.getElementById('plan-card-yearly');
-            const barPrice = document.getElementById('bar-price');
-            const barPeriod = document.getElementById('bar-period');
-
-            if (plan === 'yearly') {
-                yearlyCard.classList.add('active');
-                monthlyCard.classList.remove('active');
-                barPrice.innerText = '249 درهم';
-                barPeriod.innerText = '/ سنة';
-            } else {
-                monthlyCard.classList.add('active');
-                yearlyCard.classList.remove('active');
-                barPrice.innerText = '29 درهم';
-                barPeriod.innerText = '/ شهر';
-            }
-        }
-
-        function setMethod(method) {
-            currentMethod = method;
-            const tabWa = document.getElementById('tab-wa');
-            const tabBank = document.getElementById('tab-bank');
-            const receipt = document.getElementById('receipt-box');
-
-            if (method === 'whatsapp') {
-                tabWa.classList.add('active');
-                tabBank.classList.remove('active');
-                receipt.classList.remove('active');
-            } else {
-                tabBank.classList.add('active');
-                tabWa.classList.remove('active');
-                receipt.classList.add('active');
-            }
-        }
-
-        function copyNum(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('تم نسخ رقم الحساب: ' + text);
-            }).catch(() => {
-                showToast('تم النسخ');
+        function selectPlan(element, type) {
+            document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            currentPlanType = type;
+            
+            const price = element.querySelector('.price').innerText;
+            document.querySelectorAll('.receipt-amount').forEach(el => {
+                el.innerText = price;
             });
         }
 
-        function showToast(msg) {
-            const t = document.getElementById('app-toast');
-            t.innerText = msg;
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 2500);
+        function switchPayMode(mode) {
+            currentPaymentMode = mode;
+            const tabWa = document.getElementById('tab-whatsapp');
+            const tabBank = document.getElementById('tab-bank');
+            const bankView = document.getElementById('bank-payment-view');
+            const btnText = document.getElementById('btn-text');
+            const btn = document.getElementById('whatsapp-btn');
+
+            if (mode === 'whatsapp') {
+                tabWa.classList.add('active');
+                tabBank.classList.remove('active');
+                bankView.style.display = 'none';
+                btnText.innerText = 'تأكيد الطلب والتفعيل المباشر الآن';
+                btn.disabled = false;
+            } else {
+                tabBank.classList.add('active');
+                tabWa.classList.remove('active');
+                bankView.style.display = 'block';
+                btnText.innerText = 'إرسال وصل التحويل لتفعيل الحساب';
+                btn.disabled = !document.getElementById('confirm-payment').checked;
+            }
         }
 
-        function scrollToOrder() {
-            const el = document.getElementById('order-section');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        function selectBank(bank) {
+            const detailContainers = document.querySelectorAll('.receipt-container');
+            const checkbox = document.getElementById('confirm-payment');
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            
+            detailContainers.forEach(detail => detail.classList.remove('active'));
+            
+            if (bank) {
+                document.getElementById('details-' + bank).classList.add('active');
+                checkbox.disabled = false;
+            } else {
+                checkbox.disabled = true;
+            }
+            
+            checkbox.checked = false;
+            whatsappBtn.disabled = true;
         }
 
-        function handleOrderSubmit(e) {
-            e.preventDefault();
+        function toggleWhatsAppButton() {
+            const bankSelect = document.querySelector('.bank-select');
+            const checkbox = document.getElementById('confirm-payment');
+            const button = document.getElementById('whatsapp-btn');
+            
+            if (!bankSelect.value) {
+                checkbox.checked = false;
+                button.disabled = true;
+                return;
+            }
+            
+            button.disabled = !checkbox.checked;
+        }
+
+        // WhatsApp Order Dispatch with full form details
+        function sendWhatsAppOrder() {
             const name = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
             const city = document.getElementById('cust-city').value;
             const grade = document.getElementById('cust-grade').value;
 
             if (!name || !phone || !city || !grade) {
-                alert('يرجى ملء جميع الحقول لتفعيل الاشتراك.');
+                alert('يرجى إدخال اسم ولي الأمر، رقم الهاتف، المدينة والمستوى الدراسي قبل المتابعة.');
+                document.getElementById('cust-name').focus();
                 return;
             }
 
-            const planText = (currentPlan === 'yearly') ? 'السنوي (249 درهم)' : 'الشهري (29 درهم)';
-            const methodText = (currentMethod === 'bank') ? 'تحويل بنكي' : 'واتساب مباشر';
+            const planName = (currentPlanType === 'yearly') ? 'اشتراك سنوي (249 درهم)' : 'اشتراك شهري (29 درهم)';
+            let payDetail = 'طلب وتفعيل مباشر عبر الواتساب';
 
-            const message = `السلام عليكم ورحمة الله،%0A%0Aأود تفعيل اشتراك ريفيزي بريميوم 🇲🇦:%0A👤 *الاسم:* ${encodeURIComponent(name)}%0A📱 *الهاتف:* ${encodeURIComponent(phone)}%0A📍 *المدينة:* ${encodeURIComponent(city)}%0A🎓 *المستوى:* ${encodeURIComponent(grade)}%0A⭐ *الخطة:* ${encodeURIComponent(planText)}%0A💳 *طريقة الدفع:* ${encodeURIComponent(methodText)}%0A%0Aيرجى تزويدي برابط التحميل وكود التفعيل وشكراً.`;
+            if (currentPaymentMode === 'bank') {
+                const bank = document.querySelector('.bank-select').value;
+                const bankName = bank === 'attijari' ? 'Attijariwafa Bank' : 'CIH Bank';
+                payDetail = `تحويل بنكي عبر ${bankName} (سأرسل الوصل أسفله)`;
+            }
 
-            window.open(`https://wa.me/212624853412?text=${message}`, '_blank');
+            const message = `السلام عليكم ورحمة الله،%0A%0Aأرغب في تأكيد اشتراك طفلي في تطبيق ريفيزي التعليمي 🇲🇦:%0A👤 *اسم ولي الأمر:* ${encodeURIComponent(name)}%0A📱 *رقم الهاتف:* ${encodeURIComponent(phone)}%0A📍 *المدينة:* ${encodeURIComponent(city)}%0A🎓 *المستوى الدراسي:* ${encodeURIComponent(grade)}%0A⭐ *الباقة المختارة:* ${encodeURIComponent(planName)}%0A💳 *طريقة الدفع:* ${encodeURIComponent(payDetail)}%0A%0Aيرجى تزويدي برابط التحميل ومعلومات التفعيل وشكراً.`;
+
+            const whatsappUrl = `https://wa.me/212624853412?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.opacity = '1';
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                }, 2000);
+            });
         }
     </script>
 </body>
