@@ -279,6 +279,7 @@
         }
 
         .video-player {
+            position: relative;
             aspect-ratio: 9 / 16;
             margin: -15px -30px;
             background: white;
@@ -292,25 +293,31 @@
             object-fit: contain;
         }
 
-        .video-controls {
-            display: flex;
-            justify-content: center;
-            margin-top: 16px;
-        }
-
         .video-toggle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            background: transparent;
-            color: var(--primary);
+            justify-content: center;
+            flex-direction: column;
+            gap: 6px;
+            width: 148px;
+            height: 148px;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            background: rgba(36, 56, 87, 0.92);
+            color: white;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 700;
+            line-height: 1.35;
+            text-align: center;
             cursor: pointer;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.28);
+            transition: transform 0.2s;
         }
 
         .video-toggle-icon {
@@ -324,6 +331,11 @@
         .video-toggle:hover .video-toggle-icon,
         .video-toggle:focus-visible .video-toggle-icon {
             transform: scale(1.1);
+        }
+
+        .video-toggle:hover,
+        .video-toggle:focus-visible {
+            transform: translate(-50%, -50%) scale(1.04);
         }
 
         /* Payment Section */
@@ -598,9 +610,6 @@
                     <source src="explication-application-revizy.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
-            </div>
-            <div class="video-divider" aria-hidden="true"></div>
-            <div class="video-controls">
                 <button class="video-toggle" id="video-toggle" type="button" aria-label="تشغيل الفيديو" aria-pressed="false">
                     <span class="video-toggle-icon" aria-hidden="true">
                         <svg class="video-play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
@@ -608,6 +617,7 @@
                     <span id="video-toggle-label">شغّل الفيديو</span>
                 </button>
             </div>
+            <div class="video-divider" aria-hidden="true"></div>
         </section>
 
         <p class="section-title">اختر خطتك</p>

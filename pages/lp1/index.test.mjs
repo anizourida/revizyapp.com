@@ -11,8 +11,9 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
   assert.match(page, /aria-label="تشغيل الفيديو"/);
   assert.match(page, /function toggleVideo\(\)/);
   assert.match(page, /class="video-divider"/);
-  assert.match(page, /class="video-controls"/);
-  assert.doesNotMatch(page, /\.video-toggle\s*\{\s*position:\s*absolute/);
+  assert.match(page, /<span id="video-toggle-label">شغّل الفيديو<\/span>/);
+  assert.match(page, /وقف الفيديو/);
+  assert.match(page, /\.video-toggle\s*\{\s*position:\s*absolute/);
 });
 
 test('LP1 preserves the original payment design and flow around the video', () => {
