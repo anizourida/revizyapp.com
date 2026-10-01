@@ -57,6 +57,36 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .offer-ticker {
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: var(--primary);
+            color: var(--app-yellow);
+            direction: ltr;
+        }
+
+        .offer-ticker-track {
+            display: flex;
+            width: max-content;
+            animation: offerTicker 18s linear infinite;
+        }
+
+        .offer-ticker-track span {
+            flex: 0 0 auto;
+            padding: 0 30px;
+            direction: rtl;
+            white-space: nowrap;
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        @keyframes offerTicker {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
         .header {
             padding: 20px 30px 30px;
             text-align: center;
@@ -598,11 +628,23 @@
                 overflow: hidden;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .offer-ticker-track {
+                animation: none;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <div class="offer-ticker" aria-label="عرض خاص: الاشتراك السنوي بـ 249 درهم، وفر 99 درهم">
+            <div class="offer-ticker-track" aria-hidden="true">
+                <span>عرض خاص ✦ الاشتراك السنوي بـ 249 درهم ✦ وفّر 99 درهم</span>
+                <span>عرض خاص ✦ الاشتراك السنوي بـ 249 درهم ✦ وفّر 99 درهم</span>
+            </div>
+        </div>
         <header class="header">
             <div class="logos">
                 <img src="revizy-logo.png" alt="Revizy Logo">

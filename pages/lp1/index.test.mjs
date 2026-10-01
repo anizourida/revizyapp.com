@@ -30,3 +30,11 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /function selectPlan\(element\)/);
   assert.match(page, /function selectBank\(bank\)/);
 });
+
+test('LP1 has a moving annual-plan offer ticker above the header', () => {
+  assert.match(page, /class="offer-ticker"/);
+  assert.match(page, /class="offer-ticker-track"/);
+  assert.match(page, /الاشتراك السنوي بـ 249 درهم/);
+  assert.match(page, /وفر 99 درهم/);
+  assert.match(page, /@keyframes offerTicker/);
+});
