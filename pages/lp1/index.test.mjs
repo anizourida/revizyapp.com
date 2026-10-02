@@ -79,6 +79,15 @@ test('LP1 screenshot swiper prevents native image dragging so desktop swipes wor
   assert.match(page, /learningSwiper\.setPointerCapture\(event\.pointerId\)/);
 });
 
+test('LP1 screenshot swiper loops seamlessly without sliding back to the first image', () => {
+  assert.equal((page.match(/data-learning-clone/g) || []).length, 2);
+  assert.match(page, /const learningSlideCount = learningDots\.length/);
+  assert.match(page, /function resetLearningTrackToRealSlide\(index\)/);
+  assert.match(page, /learningTrack\.addEventListener\('transitionend', resetAfterLoop, \{ once: true \}\)/);
+  assert.match(page, /learningPrev\.hidden = false/);
+  assert.match(page, /learningNext\.hidden = false/);
+});
+
 test('LP1 has an audio-testimonials section with three placeholder voice cards', () => {
   assert.match(page, /class="testimonials-section is-hidden"/);
   assert.match(page, /آراء أولياء الأمور/);

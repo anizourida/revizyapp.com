@@ -964,11 +964,17 @@
 
         <section class="learning-screens-swiper" id="learning-screens-swiper" aria-roledescription="carousel" aria-label="لقطات من تطبيق ريفيزي">
             <div class="learning-screens-track" id="learning-screens-track">
+                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true">
+                    <img src="images/girl-screenshots.png" alt="" draggable="false">
+                </figure>
                 <figure class="learning-screen-slide">
                     <img src="images/boy-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذ" draggable="false">
                 </figure>
                 <figure class="learning-screen-slide">
                     <img src="images/girl-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذة" draggable="false">
+                </figure>
+                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true">
+                    <img src="images/boy-screenshots.png" alt="" draggable="false">
                 </figure>
             </div>
             <button class="learning-swiper-nav learning-swiper-prev" id="learning-prev" type="button" aria-label="الصورة السابقة" hidden>
@@ -1309,22 +1315,66 @@
         const learningPrev = document.getElementById('learning-prev');
         const learningNext = document.getElementById('learning-next');
         const reduceLearningMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const learningSlideCount = learningDots.length;
         let learningSlideIndex = 0;
+        let learningTrackIndex = 1;
         let learningAutoSwipe;
         let learningStartX;
+        let learningIsLooping = false;
 
         function showLearningSlide(index) {
-            learningSlideIndex = (index + learningDots.length) % learningDots.length;
-            learningTrack.style.transform = `translateX(-${learningSlideIndex * 100}%)`;
+            if (learningIsLooping) return;
+
+            const nextIndex = (index + learningSlideCount) % learningSlideCount;
+            const isForwardLoop = learningSlideIndex === learningSlideCount - 1 && nextIndex === 0;
+            const isBackwardLoop = learningSlideIndex === 0 && nextIndex === learningSlideCount - 1;
+
+            learningSlideIndex = nextIndex;
+            learningTrackIndex = isForwardLoop
+                ? learningSlideCount + 1
+                : isBackwardLoop
+                    ? 0
+                    : learningSlideIndex + 1;
+            setLearningTrackPosition(learningTrackIndex);
             learningDots.forEach((dot, dotIndex) => {
                 dot.setAttribute('aria-current', String(dotIndex === learningSlideIndex));
             });
             updateLearningNavigation();
+
+            if (isForwardLoop || isBackwardLoop) {
+                const resetAfterLoop = () => {
+                    resetLearningTrackToRealSlide(learningSlideIndex);
+                    learningIsLooping = false;
+                };
+
+                learningIsLooping = true;
+                if (reduceLearningMotion) {
+                    resetAfterLoop();
+                } else {
+                    learningTrack.addEventListener('transitionend', resetAfterLoop, { once: true });
+                }
+            }
+        }
+
+        function setLearningTrackPosition(index, animate = true) {
+            if (!animate) {
+                learningTrack.style.transition = 'none';
+            }
+            learningTrack.style.transform = `translateX(-${index * 100}%)`;
+            if (!animate) {
+                void learningTrack.offsetWidth;
+                learningTrack.style.transition = '';
+            }
+        }
+
+        function resetLearningTrackToRealSlide(index) {
+            learningTrackIndex = index + 1;
+            setLearningTrackPosition(learningTrackIndex, false);
         }
 
         function updateLearningNavigation() {
-            learningPrev.hidden = learningSlideIndex === 0;
-            learningNext.hidden = learningSlideIndex === learningDots.length - 1;
+            learningPrev.hidden = false;
+            learningNext.hidden = false;
         }
 
         function stopLearningAutoSwipe() {
@@ -1384,6 +1434,7 @@
         learningSwiper.addEventListener('dragstart', (event) => event.preventDefault());
         learningSwiper.addEventListener('mouseenter', stopLearningAutoSwipe);
         learningSwiper.addEventListener('mouseleave', startLearningAutoSwipe);
+        resetLearningTrackToRealSlide(learningSlideIndex);
         updateLearningNavigation();
         startLearningAutoSwipe();
 
