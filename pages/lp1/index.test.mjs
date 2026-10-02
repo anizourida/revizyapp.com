@@ -57,6 +57,9 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /<span class="header-curriculum">جميع مواد المنهاج<\/span>/);
   assert.match(page, /ريفيزي كيتضمن جميع المواد اللي كيقراها ولدك أو بنتك فالمدرسة الرائدة/);
   assert.match(page, /\.header-learning \.header-curriculum-description\s*\{/);
+  const headerMarkup = page.slice(page.indexOf('<header class="header">'), page.indexOf('</header>'));
+  assert.doesNotMatch(headerMarkup, /ريفيزي كيعطي لولدك طريق واضح باش يراجع دروسو/);
+  assert.doesNotMatch(headerMarkup, /محتوى منظم فالعربية والفرنسية والرياضيات/);
   assert.match(page, /<span class="header-curriculum">ميزات ريفيزي<\/span>/);
   assert.match(page, /أنشطة تفاعلية متنوعة كتساعد ولدك أو بنتك يفهم، يتدرّب، ويتقدّم خطوة بخطوة/);
   assert.match(page, /class="header-features"/);
