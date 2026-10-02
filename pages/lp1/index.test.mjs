@@ -46,6 +46,13 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /\.header-prompt-tags span:nth-child\(3n \+ 2\)\s*\{[\s\S]*?background:\s*#FFF3D8/);
   assert.match(page, /\.header-highlight\s*\{[\s\S]*?background:\s*#FFE0A3/);
   assert.match(page, /باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟/);
+  assert.match(page, /<span class="header-curriculum">ميزات ريفيزي<\/span>/);
+  assert.match(page, /class="header-features"/);
+  for (let index = 1; index <= 8; index += 1) {
+    assert.match(page, new RegExp(`features/feat-${index}\\.png`));
+  }
+  assert.match(page, /class="header-feature-more"><img src="features\/feat-0\.png"[\s\S]*?>والمزيد/);
+  assert.match(page, /\.header-features\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(page, /class="plans"/);
   assert.match(page, /class="payment-section"/);
   assert.match(page, /function selectPlan\(element\)/);
