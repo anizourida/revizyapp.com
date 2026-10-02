@@ -16,6 +16,8 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
   assert.match(page, /\.header\s*\{[\s\S]*?padding:\s*0/);
   assert.match(page, /\.video-section\s*\{[\s\S]*?padding:\s*0/);
   assert.match(page, /\.video-player\s*\{[\s\S]*?margin:\s*-15px 0/);
+  const videoPlayerStyle = page.match(/\.video-player\s*\{([\s\S]*?)^\s*\}/m)?.[1] ?? '';
+  assert.doesNotMatch(videoPlayerStyle, /padding:/);
   assert.match(page, /<span id="video-toggle-label">تشغيل<\/span>/);
   assert.match(page, /إيقاف/);
   assert.match(page, /\.video-toggle\s*\{\s*position:\s*absolute/);
