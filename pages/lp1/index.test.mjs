@@ -48,8 +48,9 @@ test('LP1 explains Revizy learning support with original Darija copy', () => {
 
 test('LP1 shows the full-width screenshot swiper directly below the header', () => {
   assert.match(page, /class="learning-screens-swiper"/);
-  assert.match(page, /images\/boy-screenshots\.png/);
-  assert.match(page, /images\/girl-screenshots\.png/);
+  for (let index = 1; index <= 12; index += 1) {
+    assert.match(page, new RegExp(`scrs/scr-${index}\\.png`));
+  }
   assert.match(page, /function showLearningSlide\(index\)/);
   assert.match(page, /setInterval\([^;]+, 4000\)/);
   assert.match(page, /data-learning-slide/);
@@ -72,10 +73,10 @@ test('LP1 screenshot swiper has Instagram-style previous and next controls', () 
   assert.match(page, /function updateLearningNavigation\(\)/);
 });
 
-test('LP1 keeps carousel navigation logic but hides its visible arrows', () => {
-  assert.match(page, /class="learning-swiper-nav learning-swiper-prev is-disabled"/);
-  assert.match(page, /class="learning-swiper-nav learning-swiper-next is-disabled"/);
-  assert.match(page, /\.learning-swiper-nav\.is-disabled\s*\{\s*display:\s*none/);
+test('LP1 shows compact carousel arrows while keeping its navigation logic reusable', () => {
+  assert.doesNotMatch(page, /learning-swiper-nav learning-swiper-prev is-disabled/);
+  assert.doesNotMatch(page, /learning-swiper-nav learning-swiper-next is-disabled/);
+  assert.match(page, /\.learning-swiper-nav\s*\{[\s\S]*?width:\s*34px[\s\S]*?height:\s*34px/);
   assert.match(page, /learningPrev\.addEventListener\('click'/);
   assert.match(page, /learningNext\.addEventListener\('click'/);
 });
