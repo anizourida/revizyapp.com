@@ -40,7 +40,9 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /'كايشد التيليفون بلا فائدة؟'/);
   assert.match(page, /<div class="header-prompt-tags"[\s\S]*?<span class="header-highlight">باغي تراجع معاه؟<\/span>/);
   assert.match(page, /tag\.className = 'header-highlight'/);
-  assert.match(page, /\.header-prompt-tags span\s*\{[\s\S]*?border-radius:\s*7px[\s\S]*?background:\s*#FFE0A3[\s\S]*?animation:\s*promptFloat/);
+  assert.match(page, /\.header-prompt-tags\s*\{[\s\S]*?gap:\s*10px[\s\S]*?margin:\s*14px auto 22px/);
+  assert.match(page, /\.header-prompt-tags span\s*\{[\s\S]*?border-radius:\s*7px[\s\S]*?background:\s*#FFE0A3[\s\S]*?font-size:\s*0\.78rem[\s\S]*?animation:\s*promptFloat/);
+  assert.match(page, /\.header-prompt-tags span:nth-child\(3n \+ 2\)\s*\{[\s\S]*?background:\s*#FFF3D8/);
   assert.match(page, /\.header-highlight\s*\{[\s\S]*?background:\s*#FFE0A3/);
   assert.match(page, /باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟/);
   assert.match(page, /class="plans"/);
