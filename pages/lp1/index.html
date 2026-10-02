@@ -121,7 +121,6 @@
             background: #FFF7EC;
         }
 
-        .header .logos,
         .header h1,
         .header .subtitle,
         .header-spark,
@@ -129,37 +128,12 @@
             z-index: 1;
         }
 
-        .logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            position: relative;
-            margin-bottom: 19px;
-        }
-
-        .logos::after {
-            content: '';
-            position: absolute;
-            bottom: -11px;
-            width: 32px;
-            height: 4px;
-            border-radius: 999px;
-            background: #FF9800;
-        }
-
-        .logos img {
-            height: 44px;
-            width: auto;
-            object-fit: contain;
-        }
-
         h1 {
             position: relative;
             font-size: 1.75rem;
             font-weight: 800;
             color: var(--primary);
-            line-height: 1.55;
+            line-height: 2;
             margin: 0 0 8px;
             letter-spacing: -0.6px;
         }
@@ -1162,9 +1136,6 @@
         <header class="header">
             <span class="header-spark" aria-hidden="true"></span>
             <span class="header-mark" aria-hidden="true">•</span>
-            <div class="logos">
-                <img src="revizy-logo-primary-as-text.png" alt="Revizy">
-            </div>
             <h1>ولدك او بنتك <span class="header-highlight">فالمدرسة الرائدة؟</span></h1>
             <p class="subtitle">باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟ ريفيزي معاكم خطوة بخطوة.</p>
             <div class="header-learning">
