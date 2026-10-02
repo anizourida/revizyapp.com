@@ -78,16 +78,22 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.doesNotMatch(page, /المزيد قريبًا/);
   assert.match(page, /\.header-features\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(page, /class="plans"/);
+  assert.equal((page.match(/class="plan-card/g) || []).length, 3);
+  assert.match(page, /تلميذ واحد[\s\S]*?350 درهم[\s\S]*?249/);
+  assert.match(page, /تلميذان[\s\S]*?500 درهم[\s\S]*?399/);
+  assert.match(page, /3 إخوة وأخوات[\s\S]*?600 درهم[\s\S]*?449/);
+  assert.doesNotMatch(page, /اشتراك شهري/);
   assert.match(page, /class="payment-section"/);
   assert.match(page, /function selectPlan\(element\)/);
+  assert.match(page, /const price = element\.dataset\.price/);
   assert.match(page, /function selectBank\(bank\)/);
 });
 
 test('LP1 has a moving annual-plan offer ticker above the header', () => {
   assert.match(page, /class="offer-ticker"/);
   assert.match(page, /class="offer-ticker-track"/);
-  assert.match(page, /الاشتراك السنوي بـ 249 درهم/);
-  assert.match(page, /وفر 99 درهم/);
+  assert.match(page, /اشتراك سنوي ابتداءً من 249 درهم/);
+  assert.match(page, /وفّر حتى 151 درهم/);
   assert.match(page, /@keyframes offerTicker/);
 });
 

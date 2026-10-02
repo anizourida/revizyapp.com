@@ -346,11 +346,14 @@
         .plan-card {
             display: flex;
             align-items: center;
+            width: 100%;
             background: white;
             padding: 20px;
             border-radius: 20px;
             border: 2px solid var(--border);
             cursor: pointer;
+            font-family: inherit;
+            text-align: right;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
@@ -407,13 +410,35 @@
             margin-bottom: 4px;
         }
 
+        .plan-period {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
         .plan-savings {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
             font-size: 0.85rem;
             font-weight: 600;
             color: #10B981;
         }
 
+        .plan-original-price {
+            color: #94A3B8;
+            text-decoration: line-through;
+        }
+
         .price-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
+        }
+
+        .price-row {
             display: flex;
             align-items: baseline;
         }
@@ -1392,8 +1417,8 @@
     <div class="container">
         <div class="offer-ticker" aria-label="عرض خاص: الاشتراك السنوي بـ 249 درهم، وفر 99 درهم">
             <div class="offer-ticker-track" aria-hidden="true">
-                <span>عرض خاص ✦ الاشتراك السنوي بـ 249 درهم ✦ وفّر 99 درهم</span>
-                <span>عرض خاص ✦ الاشتراك السنوي بـ 249 درهم ✦ وفّر 99 درهم</span>
+                <span>عرض خاص ✦ اشتراك سنوي ابتداءً من 249 درهم ✦ وفّر حتى 151 درهم</span>
+                <span>عرض خاص ✦ اشتراك سنوي ابتداءً من 249 درهم ✦ وفّر حتى 151 درهم</span>
             </div>
         </div>
         <header class="header">
@@ -1486,38 +1511,55 @@
         </section>
 
         <p class="section-title">اختر خطتك</p>
-        <div class="plans">
-            <div class="plan-card" onclick="selectPlan(this)">
+        <div class="plans" role="radiogroup" aria-label="اختيار الاشتراك السنوي">
+            <button class="plan-card active" type="button" role="radio" aria-checked="true" data-price="249" onclick="selectPlan(this)">
                 <div class="radio-container">
                     <div class="radio-outer">
                         <div class="radio-inner"></div>
                     </div>
                 </div>
                 <div class="plan-details">
-                    <div class="plan-title">اشتراك شهري</div>
+                    <div class="plan-title">تلميذ واحد</div>
+                    <div class="plan-period">اشتراك سنوي</div>
+                    <div class="plan-savings"><span class="plan-original-price">350 درهم</span><span>وفّر 101 درهم</span></div>
                 </div>
                 <div class="price-container">
-                    <div class="price">29</div>
-                    <div class="currency">درهم</div>
+                    <div class="price-row"><div class="price">249</div><div class="currency">درهم</div></div>
                 </div>
-            </div>
+            </button>
 
-            <div class="plan-card active" onclick="selectPlan(this)">
-                <span class="badge">وفر 15%</span>
+            <button class="plan-card" type="button" role="radio" aria-checked="false" data-price="399" onclick="selectPlan(this)">
                 <div class="radio-container">
                     <div class="radio-outer">
                         <div class="radio-inner"></div>
                     </div>
                 </div>
                 <div class="plan-details">
-                    <div class="plan-title">اشتراك سنوي</div>
-                    <div class="plan-savings">وفر 99 درهم</div>
+                    <div class="plan-title">تلميذان</div>
+                    <div class="plan-period">اشتراك سنوي</div>
+                    <div class="plan-savings"><span class="plan-original-price">500 درهم</span><span>وفّر 101 درهم</span></div>
                 </div>
                 <div class="price-container">
-                    <div class="price">249</div>
-                    <div class="currency">درهم</div>
+                    <div class="price-row"><div class="price">399</div><div class="currency">درهم</div></div>
                 </div>
-            </div>
+            </button>
+
+            <button class="plan-card" type="button" role="radio" aria-checked="false" data-price="449" onclick="selectPlan(this)">
+                <span class="badge">إخوة وأخوات</span>
+                <div class="radio-container">
+                    <div class="radio-outer">
+                        <div class="radio-inner"></div>
+                    </div>
+                </div>
+                <div class="plan-details">
+                    <div class="plan-title">3 إخوة وأخوات</div>
+                    <div class="plan-period">اشتراك سنوي</div>
+                    <div class="plan-savings"><span class="plan-original-price">600 درهم</span><span>وفّر 151 درهم</span></div>
+                </div>
+                <div class="price-container">
+                    <div class="price-row"><div class="price">449</div><div class="currency">درهم</div></div>
+                </div>
+            </button>
         </div>
 
         <p class="section-title">مميزات الاشتراك</p>
@@ -2087,11 +2129,15 @@
         resetScrsTrackToRealSlide(scrsSlideIndex);
 
         function selectPlan(element) {
-            document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.classList.remove('active');
+                card.setAttribute('aria-checked', 'false');
+            });
             element.classList.add('active');
+            element.setAttribute('aria-checked', 'true');
 
             // Update receipt amounts
-            const price = element.querySelector('.price').innerText;
+            const price = element.dataset.price;
             document.querySelectorAll('.receipt-amount').forEach(el => {
                 el.innerText = price;
             });
