@@ -91,7 +91,7 @@
             position: relative;
             isolation: isolate;
             overflow: hidden;
-            padding: 36px 24px 64px;
+            padding: 0;
             text-align: center;
             background: #FFFEFC;
         }
@@ -100,9 +100,9 @@
             position: relative;
             z-index: 1;
             display: block;
-            width: calc(100% + 48px);
+            width: 100%;
             height: auto;
-            margin: -36px -24px 12px;
+            margin: 0 0 12px;
             pointer-events: none;
             user-select: none;
         }
@@ -142,6 +142,7 @@
 
         h1 {
             position: relative;
+            padding: 0 24px;
             font-size: 2.2rem;
             font-weight: 800;
             color: var(--primary);
@@ -167,6 +168,7 @@
             flex-wrap: wrap;
             gap: 10px;
             max-width: 370px;
+            padding: 0 24px;
             margin: 14px auto 22px;
         }
 
@@ -201,6 +203,7 @@
 
         .subtitle {
             position: relative;
+            padding: 0 24px;
             font-size: 0.95rem;
             color: #435574;
             font-weight: 500;
@@ -236,7 +239,7 @@
             position: relative;
             z-index: 1;
             margin-top: 26px;
-            padding-top: 22px;
+            padding: 22px 24px 64px;
             border-top: 1px solid #F1E4D1;
         }
 
@@ -501,24 +504,24 @@
 
         /* App explanation video — kept completely clear of visual layers. */
         .video-section {
-            padding: 0 24px;
+            padding: 0;
             margin-bottom: 30px;
         }
 
         .video-section .section-title {
-            padding: 0;
+            padding: 0 24px;
         }
 
         .video-divider {
             height: 1px;
             background: var(--border);
-            margin: 16px -30px;
+            margin: 16px 0;
         }
 
         .video-player {
             position: relative;
             aspect-ratio: 9 / 16;
-            margin: -15px -30px;
+            margin: -15px 0;
             background: white;
             padding: 10px;
         }

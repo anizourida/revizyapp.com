@@ -11,6 +11,9 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
   assert.match(page, /aria-label="تشغيل"/);
   assert.match(page, /function toggleVideo\(\)/);
   assert.match(page, /class="video-divider"/);
+  assert.match(page, /\.header\s*\{[\s\S]*?padding:\s*0/);
+  assert.match(page, /\.video-section\s*\{[\s\S]*?padding:\s*0/);
+  assert.match(page, /\.video-player\s*\{[\s\S]*?margin:\s*-15px 0/);
   assert.match(page, /<span id="video-toggle-label">تشغيل<\/span>/);
   assert.match(page, /إيقاف/);
   assert.match(page, /\.video-toggle\s*\{\s*position:\s*absolute/);
@@ -32,7 +35,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /\.header-spark\s*\{[\s\S]*?top:\s*140px[\s\S]*?transform:\s*rotate\(282deg\)\s*skew\(8deg\)/);
   assert.match(page, /class="header-mark"/);
   assert.match(page, /<header class="header">[\s\S]*?<img class="header-children" src="parts\/par-1\.png"/);
-  assert.match(page, /\.header-children\s*\{[\s\S]*?width:\s*calc\(100% \+ 48px\)/);
+  assert.match(page, /\.header-children\s*\{[\s\S]*?width:\s*100%/);
   assert.match(page, /id="header-prompt-tags"/);
   assert.ok(page.indexOf('class="subtitle"') < page.indexOf('id="header-prompt-tags"'));
   assert.match(page, /id="header-prompt-tags"[\s\S]*?<\/div>\s*<section class="video-section"[\s\S]*?<div class="header-learning">/);
