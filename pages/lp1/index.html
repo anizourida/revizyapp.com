@@ -206,6 +206,19 @@
             transform: rotate(18deg);
         }
 
+        .header-children {
+            position: relative;
+            z-index: 1;
+            display: block;
+            width: calc(100% + 48px);
+            height: 158px;
+            margin: 18px -24px -46px;
+            object-fit: cover;
+            object-position: center 72%;
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 24%);
+            mask-image: linear-gradient(to bottom, transparent, black 24%);
+        }
+
         .section-title {
             font-size: 1.25rem;
             font-weight: 700;
@@ -1108,6 +1121,7 @@
             </div>
             <h1>ولدك او بنتك <span class="header-highlight">فالمدرسة الرائدة؟</span></h1>
             <p class="subtitle">باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟ ريفيزي معاكم خطوة بخطوة.</p>
+            <img class="header-children" src="parts/par-1.png" alt="طفلان يراجعان مع ريفيزي">
         </header>
 
         <section class="learning-screens-swiper" id="learning-screens-swiper" aria-roledescription="carousel" aria-label="لقطات من تطبيق ريفيزي">
