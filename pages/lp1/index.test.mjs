@@ -25,7 +25,12 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
 test('LP1 preserves the original payment design and flow around the video', () => {
   assert.match(page, /src="revizy-logo-primary-as-text\.png"/);
   assert.match(page, /\.logos img\s*\{[\s\S]*?height:\s*44px/);
-  assert.match(page, /<h1>ولدك او بنتك فالمدرسة الرائدة؟<\/h1>/);
+  assert.match(page, /class="header-highlight"/);
+  assert.match(page, /ولدك او بنتك/);
+  assert.match(page, /فالمدرسة الرائدة؟/);
+  assert.match(page, /class="header-spark"/);
+  assert.match(page, /class="header-mark"/);
+  assert.match(page, /\.header-highlight\s*\{[\s\S]*?background:\s*#FFE0A3/);
   assert.match(page, /باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟/);
   assert.match(page, /class="plans"/);
   assert.match(page, /class="payment-section"/);

@@ -88,9 +88,45 @@
         }
 
         .header {
-            padding: 20px 30px 30px;
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            padding: 18px 24px 46px;
             text-align: center;
-            background: linear-gradient(180deg, #ffffff 0%, #F8FAFC 100%);
+            background: #FFFEFC;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            z-index: 0;
+            right: -85px;
+            bottom: -96px;
+            width: 360px;
+            height: 165px;
+            border-radius: 50%;
+            background: #FFF3E1;
+            transform: rotate(-7deg);
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            z-index: 0;
+            top: 20px;
+            left: -44px;
+            width: 108px;
+            height: 108px;
+            border-radius: 50%;
+            background: #FFF7EC;
+        }
+
+        .header .logos,
+        .header h1,
+        .header .subtitle,
+        .header-spark,
+        .header-mark {
+            z-index: 1;
         }
 
         .logos {
@@ -98,7 +134,18 @@
             justify-content: center;
             align-items: center;
             gap: 15px;
-            margin-bottom: 25px;
+            position: relative;
+            margin-bottom: 19px;
+        }
+
+        .logos::after {
+            content: '';
+            position: absolute;
+            bottom: -11px;
+            width: 32px;
+            height: 4px;
+            border-radius: 999px;
+            background: #FF9800;
         }
 
         .logos img {
@@ -108,19 +155,55 @@
         }
 
         h1 {
+            position: relative;
             font-size: 1.75rem;
             font-weight: 800;
             color: var(--primary);
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
+            line-height: 1.55;
+            margin: 0 0 8px;
+            letter-spacing: -0.6px;
+        }
+
+        .header-highlight {
+            display: inline;
+            padding: 2px 7px 3px;
+            border-radius: 7px;
+            background: #FFE0A3;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
         }
 
         .subtitle {
+            position: relative;
             font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            max-width: 80%;
-            margin: 0 auto 10px;
+            color: #435574;
+            font-weight: 500;
+            line-height: 1.7;
+            max-width: 335px;
+            margin: 0 auto;
+        }
+
+        .header-spark {
+            position: absolute;
+            top: 71px;
+            left: 25px;
+            width: 27px;
+            height: 27px;
+            border-left: 6px solid #FF9800;
+            border-bottom: 6px solid #FF9800;
+            border-radius: 2px;
+            transform: rotate(-38deg) skew(8deg);
+        }
+
+        .header-mark {
+            position: absolute;
+            top: 58px;
+            right: 25px;
+            color: #FF9800;
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            transform: rotate(18deg);
         }
 
         .section-title {
@@ -1018,10 +1101,12 @@
             </div>
         </div>
         <header class="header">
+            <span class="header-spark" aria-hidden="true"></span>
+            <span class="header-mark" aria-hidden="true">•</span>
             <div class="logos">
                 <img src="revizy-logo-primary-as-text.png" alt="Revizy">
             </div>
-            <h1>ولدك او بنتك فالمدرسة الرائدة؟</h1>
+            <h1>ولدك او بنتك <span class="header-highlight">فالمدرسة الرائدة؟</span></h1>
             <p class="subtitle">باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟ ريفيزي معاكم خطوة بخطوة.</p>
         </header>
 
