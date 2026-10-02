@@ -34,6 +34,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /<header class="header">[\s\S]*?<img class="header-children" src="parts\/par-1\.png"/);
   assert.match(page, /\.header-children\s*\{[\s\S]*?width:\s*calc\(100% \+ 48px\)/);
   assert.match(page, /id="header-prompt-tags"/);
+  assert.ok(page.indexOf('class="subtitle"') < page.indexOf('id="header-prompt-tags"'));
   assert.match(page, /function chooseHeaderPrompts\(amount\)/);
   assert.match(page, /chooseHeaderPrompts\(5\)/);
   assert.match(page, /'باغي تراجع معاه؟'/);
