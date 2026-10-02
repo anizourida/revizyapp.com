@@ -46,13 +46,20 @@ test('LP1 explains Revizy learning support with original Darija copy', () => {
   assert.equal((page.match(/class="learning-topic"/g) || []).length, 4);
 });
 
-test('LP1 auto-swipes the supplied learning screenshots every four seconds', () => {
+test('LP1 shows the full-width screenshot swiper directly below the header', () => {
   assert.match(page, /class="learning-screens-swiper"/);
   assert.match(page, /images\/boy-screenshots\.png/);
   assert.match(page, /images\/girl-screenshots\.png/);
   assert.match(page, /function showLearningSlide\(index\)/);
   assert.match(page, /setInterval\([^;]+, 4000\)/);
   assert.match(page, /data-learning-slide/);
+  assert.match(page, /\.learning-screens-swiper\s*\{[\s\S]*?margin:\s*0 0 30px/);
+  assert.match(page, /\.learning-screen-slide img\s*\{[\s\S]*?height:\s*auto/);
+
+  const headerEnd = page.indexOf('</header>');
+  const swiperStart = page.indexOf('class="learning-screens-swiper"');
+  const videoStart = page.indexOf('class="video-section"');
+  assert.ok(swiperStart > headerEnd && swiperStart < videoStart);
 });
 
 test('LP1 has an audio-testimonials section with three placeholder voice cards', () => {

@@ -579,11 +579,12 @@
 
         .learning-screens-swiper {
             position: relative;
-            margin-top: 22px;
+            width: 100%;
+            margin: 0 0 30px;
             overflow: hidden;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            background: var(--bg);
+            border: 0;
+            border-radius: 0;
+            background: white;
             touch-action: pan-y;
         }
 
@@ -604,8 +605,7 @@
         .learning-screen-slide img {
             display: block;
             width: 100%;
-            height: 355px;
-            object-fit: contain;
+            height: auto;
         }
 
         .learning-screens-dots {
@@ -920,6 +920,21 @@
             <p class="subtitle">باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟ ريفيزي معاكم خطوة بخطوة.</p>
         </header>
 
+        <section class="learning-screens-swiper" id="learning-screens-swiper" aria-roledescription="carousel" aria-label="لقطات من تطبيق ريفيزي">
+            <div class="learning-screens-track" id="learning-screens-track">
+                <figure class="learning-screen-slide">
+                    <img src="images/boy-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذ">
+                </figure>
+                <figure class="learning-screen-slide">
+                    <img src="images/girl-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذة">
+                </figure>
+            </div>
+            <div class="learning-screens-dots" role="tablist" aria-label="اختيار لقطة من التطبيق">
+                <button class="learning-screen-dot" type="button" data-learning-slide="0" aria-label="الصورة الأولى" aria-current="true"></button>
+                <button class="learning-screen-dot" type="button" data-learning-slide="1" aria-label="الصورة الثانية" aria-current="false"></button>
+            </div>
+        </section>
+
         <section class="video-section" aria-labelledby="video-title">
             <p class="section-title" id="video-title">تعرف على تطبيق ريفيزي</p>
             <div class="video-divider" aria-hidden="true"></div>
@@ -1036,20 +1051,6 @@
                 <span class="learning-topic">اللغة العربية</span>
                 <span class="learning-topic">اللغة الفرنسية</span>
                 <span class="learning-topic">الرياضيات</span>
-            </div>
-            <div class="learning-screens-swiper" id="learning-screens-swiper" aria-roledescription="carousel" aria-label="لقطات من تطبيق ريفيزي">
-                <div class="learning-screens-track" id="learning-screens-track">
-                    <figure class="learning-screen-slide">
-                        <img src="images/boy-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذ">
-                    </figure>
-                    <figure class="learning-screen-slide">
-                        <img src="images/girl-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذة">
-                    </figure>
-                </div>
-                <div class="learning-screens-dots" role="tablist" aria-label="اختيار لقطة من التطبيق">
-                    <button class="learning-screen-dot" type="button" data-learning-slide="0" aria-label="الصورة الأولى" aria-current="true"></button>
-                    <button class="learning-screen-dot" type="button" data-learning-slide="1" aria-label="الصورة الثانية" aria-current="false"></button>
-                </div>
             </div>
         </section>
 
