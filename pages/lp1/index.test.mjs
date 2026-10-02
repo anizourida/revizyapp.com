@@ -56,6 +56,14 @@ test('LP1 explains Revizy learning support with original Darija copy', () => {
   assert.equal((page.match(/class="learning-topic"/g) || []).length, 4);
 });
 
+test('LP1 contrasts revision with and without Revizy using parent-facing Darija copy', () => {
+  assert.match(page, /class="revizy-contrast"/);
+  assert.match(page, /بلا ريفيزي ولا مع ريفيزي؟/);
+  assert.match(page, /class="revizy-contrast-card revizy-contrast-card--without"/);
+  assert.match(page, /class="revizy-contrast-card revizy-contrast-card--with"/);
+  assert.match(page, /خطوات واضحة على حساب الدروس/);
+});
+
 test('LP1 shows the full-width screenshot swiper directly below the header', () => {
   assert.match(page, /class="learning-screens-swiper"/);
   assert.match(page, /images\/boy-screenshots\.png/);

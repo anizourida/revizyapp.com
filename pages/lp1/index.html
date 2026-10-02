@@ -704,6 +704,116 @@
             font-weight: 700;
         }
 
+        .revizy-contrast {
+            margin: 0 24px 30px;
+            padding: 28px 16px 16px;
+            border: 1px solid #F2E7D2;
+            border-radius: 22px;
+            background: #FFFCF6;
+            text-align: center;
+        }
+
+        .revizy-contrast-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #A16207;
+            font-size: 0.76rem;
+            font-weight: 800;
+        }
+
+        .revizy-contrast-kicker::before,
+        .revizy-contrast-kicker::after {
+            content: '';
+            width: 15px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--app-yellow);
+        }
+
+        .revizy-contrast h2 {
+            margin: 8px 0 7px;
+            color: var(--primary);
+            font-size: 1.45rem;
+            line-height: 1.45;
+        }
+
+        .revizy-contrast > p {
+            margin: 0 0 18px;
+            color: var(--text-muted);
+            font-size: 0.84rem;
+            font-weight: 500;
+            line-height: 1.7;
+        }
+
+        .revizy-contrast-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px;
+            text-align: right;
+        }
+
+        .revizy-contrast-card {
+            min-width: 0;
+            padding: 15px 11px 13px;
+            border-radius: 16px;
+        }
+
+        .revizy-contrast-card--without {
+            border: 1px solid #E2E8F0;
+            background: #F8FAFC;
+            color: #64748B;
+        }
+
+        .revizy-contrast-card--with {
+            background: var(--primary);
+            box-shadow: 0 9px 20px rgba(36, 56, 87, 0.18);
+            color: white;
+        }
+
+        .revizy-contrast-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            font-weight: 800;
+        }
+
+        .revizy-contrast-label b {
+            display: grid;
+            place-items: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            line-height: 1;
+        }
+
+        .revizy-contrast-card--without .revizy-contrast-label b {
+            background: #E2E8F0;
+            color: #64748B;
+        }
+
+        .revizy-contrast-card--with .revizy-contrast-label b {
+            background: var(--app-yellow);
+            color: var(--primary);
+        }
+
+        .revizy-contrast-list {
+            display: grid;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .revizy-contrast-list li {
+            font-size: 0.72rem;
+            font-weight: 700;
+            line-height: 1.55;
+        }
+
         .learning-screens-swiper {
             position: relative;
             width: 100%;
@@ -1297,6 +1407,30 @@
                 <span class="learning-topic">اللغة العربية</span>
                 <span class="learning-topic">اللغة الفرنسية</span>
                 <span class="learning-topic">الرياضيات</span>
+            </div>
+        </section>
+
+        <section class="revizy-contrast" aria-labelledby="revizy-contrast-title">
+            <span class="revizy-contrast-kicker">الفرق كيبان فالمراجعة</span>
+            <h2 id="revizy-contrast-title">بلا ريفيزي ولا مع ريفيزي؟</h2>
+            <p>نفس الدروس، ولكن طريق أوضح باش تعاون ولدك أو بنتك فالدار.</p>
+            <div class="revizy-contrast-grid">
+                <article class="revizy-contrast-card revizy-contrast-card--without">
+                    <div class="revizy-contrast-label"><b aria-hidden="true">×</b> بلا ريفيزي</div>
+                    <ul class="revizy-contrast-list">
+                        <li>وقت كيمشي فالبحث: منين نبداو؟</li>
+                        <li>تمارين كثيرة بلا ترتيب واضح</li>
+                        <li>صعيب تعرفو فين خاصو يخدم أكثر</li>
+                    </ul>
+                </article>
+                <article class="revizy-contrast-card revizy-contrast-card--with">
+                    <div class="revizy-contrast-label"><b aria-hidden="true">✓</b> مع ريفيزي</div>
+                    <ul class="revizy-contrast-list">
+                        <li>خطوات واضحة على حساب الدروس</li>
+                        <li>تداريب منظمة فكل مادة</li>
+                        <li>تقدم خطوة بخطوة بلا ضغط</li>
+                    </ul>
+                </article>
             </div>
         </section>
 
