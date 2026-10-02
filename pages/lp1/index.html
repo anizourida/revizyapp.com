@@ -631,6 +631,10 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
+        .learning-swiper-nav.is-disabled {
+            display: none;
+        }
+
         .learning-swiper-prev {
             left: 12px;
         }
@@ -977,10 +981,10 @@
                     <img src="images/boy-screenshots.png" alt="" draggable="false">
                 </figure>
             </div>
-            <button class="learning-swiper-nav learning-swiper-prev" id="learning-prev" type="button" aria-label="الصورة السابقة" hidden>
+            <button class="learning-swiper-nav learning-swiper-prev is-disabled" id="learning-prev" type="button" aria-label="الصورة السابقة" hidden>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
             </button>
-            <button class="learning-swiper-nav learning-swiper-next" id="learning-next" type="button" aria-label="الصورة التالية">
+            <button class="learning-swiper-nav learning-swiper-next is-disabled" id="learning-next" type="button" aria-label="الصورة التالية">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
             </button>
             <div class="learning-screens-dots" role="tablist" aria-label="اختيار لقطة من التطبيق">

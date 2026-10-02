@@ -65,11 +65,19 @@ test('LP1 shows the full-width screenshot swiper directly below the header', () 
 test('LP1 screenshot swiper has Instagram-style previous and next controls', () => {
   assert.match(page, /id="learning-prev"/);
   assert.match(page, /id="learning-next"/);
-  assert.match(page, /class="learning-swiper-nav learning-swiper-prev"/);
-  assert.match(page, /class="learning-swiper-nav learning-swiper-next"/);
+  assert.match(page, /learning-swiper-prev/);
+  assert.match(page, /learning-swiper-next/);
   assert.match(page, /learningPrev\.addEventListener\('click'/);
   assert.match(page, /learningNext\.addEventListener\('click'/);
   assert.match(page, /function updateLearningNavigation\(\)/);
+});
+
+test('LP1 keeps carousel navigation logic but hides its visible arrows', () => {
+  assert.match(page, /class="learning-swiper-nav learning-swiper-prev is-disabled"/);
+  assert.match(page, /class="learning-swiper-nav learning-swiper-next is-disabled"/);
+  assert.match(page, /\.learning-swiper-nav\.is-disabled\s*\{\s*display:\s*none/);
+  assert.match(page, /learningPrev\.addEventListener\('click'/);
+  assert.match(page, /learningNext\.addEventListener\('click'/);
 });
 
 test('LP1 screenshot swiper prevents native image dragging so desktop swipes work', () => {
