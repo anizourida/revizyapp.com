@@ -96,6 +96,17 @@
             background: #FFFEFC;
         }
 
+        .header-children {
+            position: relative;
+            z-index: 1;
+            display: block;
+            width: calc(100% + 48px);
+            height: auto;
+            margin: -36px -24px 12px;
+            pointer-events: none;
+            user-select: none;
+        }
+
         .header::before {
             content: '';
             position: absolute;
@@ -1136,6 +1147,7 @@
         <header class="header">
             <span class="header-spark" aria-hidden="true"></span>
             <span class="header-mark" aria-hidden="true">•</span>
+            <img class="header-children" src="parts/par-1.png" alt="طفلان يراجعان معاً على جهاز لوحي">
             <h1>ولدك او بنتك <span class="header-highlight">فالمدرسة الرائدة؟</span></h1>
             <p class="subtitle">باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟ ريفيزي معاكم خطوة بخطوة.</p>
             <div class="header-learning">
