@@ -35,6 +35,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /\.header-children\s*\{[\s\S]*?width:\s*calc\(100% \+ 48px\)/);
   assert.match(page, /id="header-prompt-tags"/);
   assert.ok(page.indexOf('class="subtitle"') < page.indexOf('id="header-prompt-tags"'));
+  assert.match(page, /id="header-prompt-tags"[\s\S]*?<\/div>\s*<section class="video-section"[\s\S]*?<div class="header-learning">/);
   assert.match(page, /function chooseHeaderPrompts\(amount\)/);
   assert.match(page, /chooseHeaderPrompts\(5\)/);
   assert.match(page, /'باغي تراجع معاه؟'/);
@@ -98,8 +99,7 @@ test('LP1 shows the full-width screenshot swiper directly below the header', () 
 
   const headerEnd = page.indexOf('</header>');
   const swiperStart = page.indexOf('class="learning-screens-swiper"');
-  const videoStart = page.indexOf('class="video-section"');
-  assert.ok(swiperStart > headerEnd && swiperStart < videoStart);
+  assert.ok(swiperStart > headerEnd);
 });
 
 test('LP1 keeps the scrs gallery in its own compact-arrow swiper', () => {
