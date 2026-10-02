@@ -62,6 +62,16 @@ test('LP1 shows the full-width screenshot swiper directly below the header', () 
   assert.ok(swiperStart > headerEnd && swiperStart < videoStart);
 });
 
+test('LP1 screenshot swiper has Instagram-style previous and next controls', () => {
+  assert.match(page, /id="learning-prev"/);
+  assert.match(page, /id="learning-next"/);
+  assert.match(page, /class="learning-swiper-nav learning-swiper-prev"/);
+  assert.match(page, /class="learning-swiper-nav learning-swiper-next"/);
+  assert.match(page, /learningPrev\.addEventListener\('click'/);
+  assert.match(page, /learningNext\.addEventListener\('click'/);
+  assert.match(page, /function updateLearningNavigation\(\)/);
+});
+
 test('LP1 has an audio-testimonials section with three placeholder voice cards', () => {
   assert.match(page, /class="testimonials-section is-hidden"/);
   assert.match(page, /آراء أولياء الأمور/);

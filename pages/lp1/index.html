@@ -608,6 +608,44 @@
             height: auto;
         }
 
+        .learning-swiper-nav {
+            position: absolute;
+            top: calc(50% - 22px);
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.24);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .learning-swiper-prev {
+            left: 12px;
+        }
+
+        .learning-swiper-next {
+            right: 12px;
+        }
+
+        .learning-swiper-nav:hover,
+        .learning-swiper-nav:focus-visible {
+            transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
+        }
+
+        .learning-swiper-nav:focus-visible {
+            outline: 3px solid rgba(251, 191, 36, 0.7);
+            outline-offset: 2px;
+        }
+
         .learning-screens-dots {
             display: flex;
             justify-content: center;
@@ -929,6 +967,12 @@
                     <img src="images/girl-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذة">
                 </figure>
             </div>
+            <button class="learning-swiper-nav learning-swiper-prev" id="learning-prev" type="button" aria-label="الصورة السابقة" hidden>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+            </button>
+            <button class="learning-swiper-nav learning-swiper-next" id="learning-next" type="button" aria-label="الصورة التالية">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            </button>
             <div class="learning-screens-dots" role="tablist" aria-label="اختيار لقطة من التطبيق">
                 <button class="learning-screen-dot" type="button" data-learning-slide="0" aria-label="الصورة الأولى" aria-current="true"></button>
                 <button class="learning-screen-dot" type="button" data-learning-slide="1" aria-label="الصورة الثانية" aria-current="false"></button>
@@ -1258,6 +1302,8 @@
         const learningSwiper = document.getElementById('learning-screens-swiper');
         const learningTrack = document.getElementById('learning-screens-track');
         const learningDots = Array.from(document.querySelectorAll('[data-learning-slide]'));
+        const learningPrev = document.getElementById('learning-prev');
+        const learningNext = document.getElementById('learning-next');
         const reduceLearningMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         let learningSlideIndex = 0;
         let learningAutoSwipe;
@@ -1269,6 +1315,12 @@
             learningDots.forEach((dot, dotIndex) => {
                 dot.setAttribute('aria-current', String(dotIndex === learningSlideIndex));
             });
+            updateLearningNavigation();
+        }
+
+        function updateLearningNavigation() {
+            learningPrev.hidden = learningSlideIndex === 0;
+            learningNext.hidden = learningSlideIndex === learningDots.length - 1;
         }
 
         function stopLearningAutoSwipe() {
@@ -1287,6 +1339,16 @@
                 showLearningSlide(Number(dot.dataset.learningSlide));
                 startLearningAutoSwipe();
             });
+        });
+
+        learningPrev.addEventListener('click', () => {
+            showLearningSlide(learningSlideIndex - 1);
+            startLearningAutoSwipe();
+        });
+
+        learningNext.addEventListener('click', () => {
+            showLearningSlide(learningSlideIndex + 1);
+            startLearningAutoSwipe();
         });
 
         learningSwiper.addEventListener('pointerdown', (event) => {
@@ -1311,6 +1373,7 @@
         });
         learningSwiper.addEventListener('mouseenter', stopLearningAutoSwipe);
         learningSwiper.addEventListener('mouseleave', startLearningAutoSwipe);
+        updateLearningNavigation();
         startLearningAutoSwipe();
 
         function selectPlan(element) {
