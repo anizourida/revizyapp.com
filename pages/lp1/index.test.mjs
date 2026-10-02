@@ -33,6 +33,12 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /class="header-mark"/);
   assert.match(page, /<header class="header">[\s\S]*?<img class="header-children" src="parts\/par-1\.png"/);
   assert.match(page, /\.header-children\s*\{[\s\S]*?width:\s*calc\(100% \+ 48px\)/);
+  assert.match(page, /id="header-prompt-tags"/);
+  assert.match(page, /function chooseHeaderPrompts\(amount\)/);
+  assert.match(page, /chooseHeaderPrompts\(5\)/);
+  assert.match(page, /'باغي تراجع معاه؟'/);
+  assert.match(page, /'كايشد التيليفون بلا فائدة؟'/);
+  assert.match(page, /\.header-prompt-tags span\s*\{[\s\S]*?animation:\s*promptFloat/);
   assert.match(page, /\.header-highlight\s*\{[\s\S]*?background:\s*#FFE0A3/);
   assert.match(page, /باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟/);
   assert.match(page, /class="plans"/);
