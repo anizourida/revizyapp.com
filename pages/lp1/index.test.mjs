@@ -48,9 +48,8 @@ test('LP1 explains Revizy learning support with original Darija copy', () => {
 
 test('LP1 shows the full-width screenshot swiper directly below the header', () => {
   assert.match(page, /class="learning-screens-swiper"/);
-  for (let index = 1; index <= 12; index += 1) {
-    assert.match(page, new RegExp(`scrs/scr-${index}\\.png`));
-  }
+  assert.match(page, /images\/boy-screenshots\.png/);
+  assert.match(page, /images\/girl-screenshots\.png/);
   assert.match(page, /function showLearningSlide\(index\)/);
   assert.match(page, /setInterval\([^;]+, 4000\)/);
   assert.match(page, /data-learning-slide/);
@@ -63,6 +62,18 @@ test('LP1 shows the full-width screenshot swiper directly below the header', () 
   assert.ok(swiperStart > headerEnd && swiperStart < videoStart);
 });
 
+test('LP1 keeps the scrs gallery in its own compact-arrow swiper', () => {
+  assert.match(page, /class="scrs-swiper"/);
+  for (let index = 1; index <= 12; index += 1) {
+    assert.match(page, new RegExp(`scrs/scr-${index}\\.png`));
+  }
+  assert.match(page, /id="scrs-prev"/);
+  assert.match(page, /id="scrs-next"/);
+  assert.match(page, /\.scrs-swiper-nav\s*\{[\s\S]*?width:\s*34px[\s\S]*?height:\s*34px/);
+  assert.match(page, /scrsPrev\.addEventListener\('click'/);
+  assert.match(page, /scrsNext\.addEventListener\('click'/);
+});
+
 test('LP1 screenshot swiper has Instagram-style previous and next controls', () => {
   assert.match(page, /id="learning-prev"/);
   assert.match(page, /id="learning-next"/);
@@ -73,10 +84,10 @@ test('LP1 screenshot swiper has Instagram-style previous and next controls', () 
   assert.match(page, /function updateLearningNavigation\(\)/);
 });
 
-test('LP1 shows compact carousel arrows while keeping its navigation logic reusable', () => {
-  assert.doesNotMatch(page, /learning-swiper-nav learning-swiper-prev is-disabled/);
-  assert.doesNotMatch(page, /learning-swiper-nav learning-swiper-next is-disabled/);
-  assert.match(page, /\.learning-swiper-nav\s*\{[\s\S]*?width:\s*34px[\s\S]*?height:\s*34px/);
+test('LP1 keeps the original carousel navigation logic while its visible arrows are disabled', () => {
+  assert.match(page, /learning-swiper-nav learning-swiper-prev is-disabled/);
+  assert.match(page, /learning-swiper-nav learning-swiper-next is-disabled/);
+  assert.match(page, /\.learning-swiper-nav\.is-disabled\s*\{\s*display:\s*none/);
   assert.match(page, /learningPrev\.addEventListener\('click'/);
   assert.match(page, /learningNext\.addEventListener\('click'/);
 });

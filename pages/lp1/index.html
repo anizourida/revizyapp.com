@@ -684,6 +684,65 @@
             outline-offset: 3px;
         }
 
+        .scrs-swiper {
+            position: relative;
+            margin: 0 24px 30px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: white;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .scrs-track {
+            display: flex;
+            direction: ltr;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+
+        .scrs-slide {
+            flex: 0 0 100%;
+            min-width: 0;
+            background: white;
+        }
+
+        .scrs-slide img {
+            display: block;
+            width: 100%;
+            height: auto;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .scrs-swiper-nav {
+            position: absolute;
+            top: calc(50% - 17px);
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.24);
+            cursor: pointer;
+        }
+
+        .scrs-swiper-prev { left: 10px; }
+        .scrs-swiper-next { right: 10px; }
+
+        .scrs-swiper-nav:focus-visible {
+            outline: 3px solid rgba(251, 191, 36, 0.7);
+            outline-offset: 2px;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             .learning-screens-track {
                 transition: none;
@@ -968,40 +1027,20 @@
 
         <section class="learning-screens-swiper" id="learning-screens-swiper" aria-roledescription="carousel" aria-label="لقطات من تطبيق ريفيزي">
             <div class="learning-screens-track" id="learning-screens-track">
-                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="scrs/scr-12.png" alt="" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-1.png" alt="لقطة من تطبيق ريفيزي 1" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-2.png" alt="لقطة من تطبيق ريفيزي 2" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-3.png" alt="لقطة من تطبيق ريفيزي 3" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-4.png" alt="لقطة من تطبيق ريفيزي 4" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-5.png" alt="لقطة من تطبيق ريفيزي 5" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-6.png" alt="لقطة من تطبيق ريفيزي 6" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-7.png" alt="لقطة من تطبيق ريفيزي 7" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-8.png" alt="لقطة من تطبيق ريفيزي 8" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-9.png" alt="لقطة من تطبيق ريفيزي 9" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-10.png" alt="لقطة من تطبيق ريفيزي 10" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-11.png" alt="لقطة من تطبيق ريفيزي 11" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="scrs/scr-12.png" alt="لقطة من تطبيق ريفيزي 12" draggable="false"></figure>
-                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="scrs/scr-1.png" alt="" draggable="false"></figure>
+                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/girl-screenshots.png" alt="" draggable="false"></figure>
+                <figure class="learning-screen-slide"><img src="images/boy-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذ" draggable="false"></figure>
+                <figure class="learning-screen-slide"><img src="images/girl-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذة" draggable="false"></figure>
+                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/boy-screenshots.png" alt="" draggable="false"></figure>
             </div>
-            <button class="learning-swiper-nav learning-swiper-prev" id="learning-prev" type="button" aria-label="الصورة السابقة">
+            <button class="learning-swiper-nav learning-swiper-prev is-disabled" id="learning-prev" type="button" aria-label="الصورة السابقة" hidden>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
             </button>
-            <button class="learning-swiper-nav learning-swiper-next" id="learning-next" type="button" aria-label="الصورة التالية">
+            <button class="learning-swiper-nav learning-swiper-next is-disabled" id="learning-next" type="button" aria-label="الصورة التالية">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
             </button>
             <div class="learning-screens-dots" role="tablist" aria-label="اختيار لقطة من التطبيق">
                 <button class="learning-screen-dot" type="button" data-learning-slide="0" aria-label="الصورة الأولى" aria-current="true"></button>
                 <button class="learning-screen-dot" type="button" data-learning-slide="1" aria-label="الصورة الثانية" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="2" aria-label="الصورة الثالثة" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="3" aria-label="الصورة الرابعة" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="4" aria-label="الصورة الخامسة" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="5" aria-label="الصورة السادسة" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="6" aria-label="الصورة السابعة" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="7" aria-label="الصورة الثامنة" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="8" aria-label="الصورة التاسعة" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="9" aria-label="الصورة العاشرة" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="10" aria-label="الصورة الحادية عشرة" aria-current="false"></button>
-                <button class="learning-screen-dot" type="button" data-learning-slide="11" aria-label="الصورة الثانية عشرة" aria-current="false"></button>
             </div>
         </section>
 
@@ -1122,6 +1161,25 @@
                 <span class="learning-topic">اللغة الفرنسية</span>
                 <span class="learning-topic">الرياضيات</span>
             </div>
+        </section>
+
+        <section class="scrs-swiper" id="scrs-swiper" aria-roledescription="carousel" aria-label="لقطات إضافية من تطبيق ريفيزي">
+            <div class="scrs-track" id="scrs-track">
+                <figure class="scrs-slide"><img src="scrs/scr-1.png" alt="لقطة من تطبيق ريفيزي 1" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-2.png" alt="لقطة من تطبيق ريفيزي 2" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-3.png" alt="لقطة من تطبيق ريفيزي 3" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-4.png" alt="لقطة من تطبيق ريفيزي 4" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-5.png" alt="لقطة من تطبيق ريفيزي 5" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-6.png" alt="لقطة من تطبيق ريفيزي 6" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-7.png" alt="لقطة من تطبيق ريفيزي 7" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-8.png" alt="لقطة من تطبيق ريفيزي 8" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-9.png" alt="لقطة من تطبيق ريفيزي 9" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-10.png" alt="لقطة من تطبيق ريفيزي 10" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-11.png" alt="لقطة من تطبيق ريفيزي 11" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-12.png" alt="لقطة من تطبيق ريفيزي 12" draggable="false"></figure>
+            </div>
+            <button class="scrs-swiper-nav scrs-swiper-prev" id="scrs-prev" type="button" aria-label="الصورة السابقة"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+            <button class="scrs-swiper-nav scrs-swiper-next" id="scrs-next" type="button" aria-label="الصورة التالية"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
         </section>
 
         <section class="testimonials-section is-hidden" aria-labelledby="testimonials-title" hidden>
@@ -1453,6 +1511,83 @@
         resetLearningTrackToRealSlide(learningSlideIndex);
         updateLearningNavigation();
         startLearningAutoSwipe();
+
+        const scrsSwiper = document.getElementById('scrs-swiper');
+        const scrsTrack = document.getElementById('scrs-track');
+        const scrsPrev = document.getElementById('scrs-prev');
+        const scrsNext = document.getElementById('scrs-next');
+        const scrsSlides = Array.from(scrsTrack.children);
+        const scrsSlideCount = scrsSlides.length;
+        const scrsFirstClone = scrsSlides[0].cloneNode(true);
+        const scrsLastClone = scrsSlides.at(-1).cloneNode(true);
+        let scrsSlideIndex = 0;
+        let scrsTrackIndex = 1;
+        let scrsStartX;
+        let scrsIsLooping = false;
+
+        [scrsFirstClone, scrsLastClone].forEach((clone) => {
+            clone.setAttribute('aria-hidden', 'true');
+            clone.querySelector('img').alt = '';
+        });
+        scrsTrack.prepend(scrsLastClone);
+        scrsTrack.append(scrsFirstClone);
+
+        function setScrsTrackPosition(index, animate = true) {
+            if (!animate) scrsTrack.style.transition = 'none';
+            scrsTrack.style.transform = `translateX(-${index * 100}%)`;
+            if (!animate) {
+                void scrsTrack.offsetWidth;
+                scrsTrack.style.transition = '';
+            }
+        }
+
+        function resetScrsTrackToRealSlide(index) {
+            scrsTrackIndex = index + 1;
+            setScrsTrackPosition(scrsTrackIndex, false);
+        }
+
+        function showScrsSlide(index) {
+            if (scrsIsLooping) return;
+
+            const nextIndex = (index + scrsSlideCount) % scrsSlideCount;
+            const isForwardLoop = scrsSlideIndex === scrsSlideCount - 1 && nextIndex === 0;
+            const isBackwardLoop = scrsSlideIndex === 0 && nextIndex === scrsSlideCount - 1;
+            scrsSlideIndex = nextIndex;
+            scrsTrackIndex = isForwardLoop ? scrsSlideCount + 1 : isBackwardLoop ? 0 : scrsSlideIndex + 1;
+            setScrsTrackPosition(scrsTrackIndex);
+
+            if (isForwardLoop || isBackwardLoop) {
+                const resetAfterLoop = () => {
+                    resetScrsTrackToRealSlide(scrsSlideIndex);
+                    scrsIsLooping = false;
+                };
+
+                scrsIsLooping = true;
+                if (reduceLearningMotion) {
+                    resetAfterLoop();
+                } else {
+                    scrsTrack.addEventListener('transitionend', resetAfterLoop, { once: true });
+                }
+            }
+        }
+
+        scrsPrev.addEventListener('click', () => showScrsSlide(scrsSlideIndex - 1));
+        scrsNext.addEventListener('click', () => showScrsSlide(scrsSlideIndex + 1));
+        scrsSwiper.addEventListener('pointerdown', (event) => {
+            if (event.target.closest('.scrs-swiper-nav')) return;
+            scrsSwiper.setPointerCapture(event.pointerId);
+            scrsStartX = event.clientX;
+        });
+        scrsSwiper.addEventListener('pointerup', (event) => {
+            if (typeof scrsStartX === 'number' && Math.abs(event.clientX - scrsStartX) > 35) {
+                showScrsSlide(scrsSlideIndex + (event.clientX < scrsStartX ? 1 : -1));
+            }
+            scrsStartX = undefined;
+            if (scrsSwiper.hasPointerCapture(event.pointerId)) scrsSwiper.releasePointerCapture(event.pointerId);
+        });
+        scrsSwiper.addEventListener('pointercancel', () => { scrsStartX = undefined; });
+        scrsSwiper.addEventListener('dragstart', (event) => event.preventDefault());
+        resetScrsTrackToRealSlide(scrsSlideIndex);
 
         function selectPlan(element) {
             document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('active'));
