@@ -54,6 +54,9 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /\.header-prompt-tags span:nth-child\(3n \+ 2\)\s*\{[\s\S]*?background:\s*#FFF3D8/);
   assert.match(page, /\.header-highlight\s*\{[\s\S]*?background:\s*#FFE0A3/);
   assert.match(page, /باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟/);
+  assert.match(page, /<span class="header-curriculum">جميع مواد المنهاج<\/span>/);
+  assert.match(page, /ريفيزي كيتضمن جميع المواد اللي كيقراها ولدك أو بنتك فالمدرسة الرائدة/);
+  assert.match(page, /\.header-learning \.header-curriculum-description\s*\{/);
   assert.match(page, /<span class="header-curriculum">ميزات ريفيزي<\/span>/);
   assert.match(page, /class="header-features"/);
   for (let index = 1; index <= 8; index += 1) {
