@@ -11,6 +11,8 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
   assert.match(page, /aria-label="تشغيل"/);
   assert.match(page, /function toggleVideo\(\)/);
   assert.match(page, /class="video-divider"/);
+  assert.doesNotMatch(page, /id="video-title"/);
+  assert.match(page, /<section class="video-section" aria-label="فيديو يشرح تطبيق ريفيزي">/);
   assert.match(page, /\.header\s*\{[\s\S]*?padding:\s*0/);
   assert.match(page, /\.video-section\s*\{[\s\S]*?padding:\s*0/);
   assert.match(page, /\.video-player\s*\{[\s\S]*?margin:\s*-15px 0/);
