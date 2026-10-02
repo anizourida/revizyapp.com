@@ -72,6 +72,13 @@ test('LP1 screenshot swiper has Instagram-style previous and next controls', () 
   assert.match(page, /function updateLearningNavigation\(\)/);
 });
 
+test('LP1 screenshot swiper prevents native image dragging so desktop swipes work', () => {
+  assert.match(page, /draggable="false"/);
+  assert.match(page, /-webkit-user-drag:\s*none/);
+  assert.match(page, /learningSwiper\.addEventListener\('dragstart', \(event\) => event\.preventDefault\(\)\)/);
+  assert.match(page, /learningSwiper\.setPointerCapture\(event\.pointerId\)/);
+});
+
 test('LP1 has an audio-testimonials section with three placeholder voice cards', () => {
   assert.match(page, /class="testimonials-section is-hidden"/);
   assert.match(page, /آراء أولياء الأمور/);

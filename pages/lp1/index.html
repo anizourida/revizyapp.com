@@ -586,6 +586,8 @@
             border-radius: 0;
             background: white;
             touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .learning-screens-track {
@@ -606,6 +608,8 @@
             display: block;
             width: 100%;
             height: auto;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .learning-swiper-nav {
@@ -961,10 +965,10 @@
         <section class="learning-screens-swiper" id="learning-screens-swiper" aria-roledescription="carousel" aria-label="لقطات من تطبيق ريفيزي">
             <div class="learning-screens-track" id="learning-screens-track">
                 <figure class="learning-screen-slide">
-                    <img src="images/boy-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذ">
+                    <img src="images/boy-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذ" draggable="false">
                 </figure>
                 <figure class="learning-screen-slide">
-                    <img src="images/girl-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذة">
+                    <img src="images/girl-screenshots.png" alt="لقطات من تطبيق ريفيزي لتلميذة" draggable="false">
                 </figure>
             </div>
             <button class="learning-swiper-nav learning-swiper-prev" id="learning-prev" type="button" aria-label="الصورة السابقة" hidden>
@@ -1352,6 +1356,9 @@
         });
 
         learningSwiper.addEventListener('pointerdown', (event) => {
+            if (event.target.closest('.learning-swiper-nav')) return;
+
+            learningSwiper.setPointerCapture(event.pointerId);
             learningStartX = event.clientX;
             stopLearningAutoSwipe();
         });
@@ -1364,6 +1371,9 @@
                 }
             }
             learningStartX = undefined;
+            if (learningSwiper.hasPointerCapture(event.pointerId)) {
+                learningSwiper.releasePointerCapture(event.pointerId);
+            }
             startLearningAutoSwipe();
         });
 
@@ -1371,6 +1381,7 @@
             learningStartX = undefined;
             startLearningAutoSwipe();
         });
+        learningSwiper.addEventListener('dragstart', (event) => event.preventDefault());
         learningSwiper.addEventListener('mouseenter', stopLearningAutoSwipe);
         learningSwiper.addEventListener('mouseleave', startLearningAutoSwipe);
         updateLearningNavigation();
