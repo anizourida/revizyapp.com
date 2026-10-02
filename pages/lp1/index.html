@@ -173,24 +173,16 @@
         .header-prompt-tags span {
             display: inline-flex;
             align-items: center;
-            min-height: 29px;
-            padding: 5px 10px;
-            border: 1px solid #F0DEC3;
-            border-radius: 999px;
-            background: #FFFDF8;
-            box-shadow: 0 5px 12px rgba(91, 63, 28, 0.07);
-            color: #56657B;
+            padding: 2px 7px 3px;
+            border: 0;
+            border-radius: 7px;
+            background: #FFE0A3;
+            color: var(--primary);
             font-size: 0.72rem;
             font-weight: 700;
             line-height: 1.3;
             animation: promptFloat 4.8s ease-in-out infinite;
             animation-delay: var(--float-delay, 0s);
-        }
-
-        .header-prompt-tags span:nth-child(3n + 1) {
-            border-color: #F7D99D;
-            background: #FFF8E9;
-            color: #8A5A12;
         }
 
         .header-prompt-tags span:nth-child(3n + 2) {
@@ -1312,11 +1304,11 @@
             <img class="header-children" src="parts/par-1.png" alt="طفلان يراجعان معاً على جهاز لوحي">
             <h1>ولدك او بنتك <span class="header-highlight">فالمدرسة الرائدة؟</span></h1>
             <div class="header-prompt-tags" id="header-prompt-tags" aria-label="مواقف كتعيشها فالمراجعة">
-                <span>باغي تراجع معاه؟</span>
-                <span>ماعارفش منين تبدا معاه؟</span>
-                <span>كايشد التيليفون بلا فائدة؟</span>
-                <span>الواجبات ولات معركة؟</span>
-                <span>باغي يتعلم بوحدو بلا ما تبقى حدا راسو؟</span>
+                <span class="header-highlight">باغي تراجع معاه؟</span>
+                <span class="header-highlight">ماعارفش منين تبدا معاه؟</span>
+                <span class="header-highlight">كايشد التيليفون بلا فائدة؟</span>
+                <span class="header-highlight">الواجبات ولات معركة؟</span>
+                <span class="header-highlight">باغي يتعلم بوحدو بلا ما تبقى حدا راسو؟</span>
             </div>
             <p class="subtitle">باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟ ريفيزي معاكم خطوة بخطوة.</p>
             <div class="header-learning">
@@ -1700,6 +1692,7 @@
         function renderHeaderPrompts() {
             const promptNodes = chooseHeaderPrompts(5).map((prompt, index) => {
                 const tag = document.createElement('span');
+                tag.className = 'header-highlight';
                 tag.textContent = prompt;
                 tag.style.setProperty('--float-delay', `${index * -0.65}s`);
                 return tag;
