@@ -66,7 +66,8 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.ok(page.indexOf('features/feat-8.png') < page.indexOf('features/feat-1.png'));
   assert.match(page, /features\/feat-7\.png"[\s\S]*?>الحوارات/);
   assert.match(page, /features\/feat-8\.png"[\s\S]*?>البطاقات التعليمية/);
-  assert.match(page, /class="header-feature-more"><img src="features\/feat-0\.png"[\s\S]*?>المزيد قريبًا/);
+  assert.match(page, /class="header-feature-more"><img src="features\/feat-0\.png"[\s\S]*?>المزيد/);
+  assert.doesNotMatch(page, /المزيد قريبًا/);
   assert.match(page, /\.header-features\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(page, /class="plans"/);
   assert.match(page, /class="payment-section"/);
