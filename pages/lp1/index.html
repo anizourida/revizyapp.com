@@ -1369,6 +1369,18 @@
             box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.18);
         }
 
+        .form-field input.is-invalid {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 107, 45, 0.12);
+        }
+
+        .form-error {
+            color: #C2410C;
+            font-size: 0.74rem;
+            font-weight: 600;
+            line-height: 1.45;
+        }
+
         .grade-selectors {
             display: grid;
             gap: 10px;
@@ -1866,7 +1878,8 @@
                     </div>
                     <div class="form-field">
                         <label for="parent-phone">رقم الواتساب</label>
-                        <input id="parent-phone" name="parent_phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="06XXXXXXXX">
+                        <input id="parent-phone" name="parent_phone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="parent-phone-error" placeholder="06XXXXXXXX أو +212 6XXXXXXXX">
+                        <small class="form-error" id="parent-phone-error" hidden>دخل رقم واتساب مغربي صحيح: 06 أو 07، أو +212 6/7.</small>
                     </div>
                     <div class="form-field">
                         <label for="parent-city">المدينة</label>
@@ -2238,6 +2251,8 @@
         const planSelector = document.getElementById('plan-selector');
         const activationIntro = document.querySelector('.activation-intro');
         const whatsappBtn = document.getElementById('whatsapp-btn');
+        const parentPhoneInput = document.getElementById('parent-phone');
+        const parentPhoneError = document.getElementById('parent-phone-error');
         const gradeSelectorTitle = document.getElementById('grade-selector-title');
         const gradeSelectors = document.getElementById('grade-selectors');
         const primarySchoolGrades = [
@@ -2295,15 +2310,36 @@
             const formData = new FormData(activationForm);
             const hasContactDetails = ['parent_name', 'parent_phone', 'parent_city']
                 .every((field) => formData.get(field)?.trim());
+            const hasValidMoroccanPhone = validateMoroccanPhone();
             const studentCount = Number(document.querySelector('.plan-card.active').dataset.studentCount);
             const names = formData.getAll('student_name');
             const grades = formData.getAll('student_grade');
             const hasGrades = grades.length === studentCount && grades.every(Boolean);
             const hasStudentNames = names.length === studentCount && names.every(name => name.trim());
             const isReady = hasContactDetails
+                && hasValidMoroccanPhone
                 && hasGrades
                 && hasStudentNames;
             whatsappBtn.disabled = !isReady;
+        }
+
+        function normalizeMoroccanPhone(phone) {
+            const arabicDigits = '٠١٢٣٤٥٦٧٨٩';
+            return phone
+                .replace(/[٠-٩]/g, (digit) => String(arabicDigits.indexOf(digit)))
+                .replace(/[\s().-]/g, '');
+        }
+
+        function validateMoroccanPhone() {
+            const normalizedPhone = normalizeMoroccanPhone(parentPhoneInput.value.trim());
+            const isEmpty = normalizedPhone.length === 0;
+            const isValid = /^(?:(?:\+|00)212|0)[67]\d{8}$/.test(normalizedPhone);
+            const hasError = !isEmpty && !isValid;
+
+            parentPhoneInput.classList.toggle('is-invalid', hasError);
+            parentPhoneInput.setCustomValidity(hasError ? 'رقم الواتساب يجب أن يكون رقماً مغربياً صحيحاً.' : '');
+            parentPhoneError.hidden = !hasError;
+            return isValid;
         }
 
         function sendWhatsApp() {

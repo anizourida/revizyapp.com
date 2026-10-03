@@ -99,6 +99,10 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /فعّل اشتراك ريفيزي/);
   assert.match(page, /id="parent-name"/);
   assert.match(page, /id="parent-phone"/);
+  assert.match(page, /id="parent-phone-error"/);
+  assert.match(page, /function normalizeMoroccanPhone\(phone\)/);
+  assert.match(page, /function validateMoroccanPhone\(\)/);
+  assert.match(page, /\[67\]\\d\{8\}/);
   assert.match(page, /id="parent-city"/);
   assert.match(page, /id="grade-selectors"/);
   assert.match(page, /data-student-count="1"/);
@@ -122,6 +126,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /function selectPlan\(element\)/);
   assert.match(page, /const price = element\.dataset\.price/);
   assert.match(page, /function updateActivationButton\(\)/);
+  assert.match(page, /hasValidMoroccanPhone/);
   assert.match(page, /formData\.get\('parent_name'\)/);
 });
 
