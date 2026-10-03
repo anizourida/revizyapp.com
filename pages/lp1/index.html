@@ -401,7 +401,7 @@
         .activation-card .plan-selector .price-container {
             display: block;
             flex: 0 0 auto;
-            order: 2;
+            order: 3;
         }
 
         .activation-card .plan-selector .plan-title {
@@ -415,6 +415,13 @@
 
         .activation-card .plan-selector .plan-period {
             display: none;
+        }
+
+        .activation-card .plan-selector .plan-original-price {
+            align-self: center;
+            order: 2;
+            margin-bottom: 2px;
+            font-size: 0.58rem;
         }
 
         .activation-card .plan-selector .price-row {
@@ -432,7 +439,7 @@
         }
 
         .activation-card .plan-selector .plan-savings {
-            order: 3;
+            order: 4;
             justify-content: center;
             gap: 2px;
             margin: 0;
@@ -1664,11 +1671,12 @@
                 <div class="plan-details">
                     <div class="plan-title">ابن واحد</div>
                     <div class="plan-period">اشتراك سنوي</div>
-                    <div class="plan-savings"><span class="plan-original-price">350 درهم</span><span>وفّر 101 درهم</span></div>
+                    <span class="plan-original-price">350 درهم</span>
                 </div>
                 <div class="price-container">
                     <div class="price-row"><div class="price">249</div><div class="currency">درهم</div></div>
                 </div>
+                <div class="plan-savings">وفّر 101 درهم</div>
             </button>
 
             <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="ابنان، اشتراك سنوي، 399 درهم" data-price="399" data-student-count="2" onclick="selectPlan(this)">
@@ -1681,11 +1689,12 @@
                 <div class="plan-details">
                     <div class="plan-title">ابنان</div>
                     <div class="plan-period">اشتراك سنوي</div>
-                    <div class="plan-savings"><span class="plan-original-price">500 درهم</span><span>وفّر 101 درهم</span></div>
+                    <span class="plan-original-price">500 درهم</span>
                 </div>
                 <div class="price-container">
                     <div class="price-row"><div class="price">399</div><div class="currency">درهم</div></div>
                 </div>
+                <div class="plan-savings">وفّر 101 درهم</div>
             </button>
 
             <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="3 أبناء، اشتراك سنوي، 449 درهم" data-price="449" data-student-count="3" onclick="selectPlan(this)">
@@ -1698,11 +1707,12 @@
                 <div class="plan-details">
                     <div class="plan-title">3 أبناء</div>
                     <div class="plan-period">اشتراك سنوي</div>
-                    <div class="plan-savings"><span class="plan-original-price">600 درهم</span><span>وفّر 151 درهم</span></div>
+                    <span class="plan-original-price">600 درهم</span>
                 </div>
                 <div class="price-container">
                     <div class="price-row"><div class="price">449</div><div class="currency">درهم</div></div>
                 </div>
+                <div class="plan-savings">وفّر 151 درهم</div>
             </button>
         </div>
         </section>
