@@ -214,6 +214,10 @@ test('LP1 shows the full-width screenshot swiper directly below the header', () 
   assert.ok(swiperStart > headerEnd);
 });
 
+test('LP1 presents the pioneer-school workbooks beneath its curriculum introduction', () => {
+  assert.match(page, /<figure class="curriculum-livrets"[^>]*>\s*<img src="parts\/livrets-raida\.png" alt="كتب الفرنسية الخاصة بالمدرسة الرائدة">\s*<figcaption>محتوى قريب من الدروس اللي كيقراها ولدك أو بنتك<\/figcaption>/);
+});
+
 test('LP1 keeps the scrs gallery in its own compact-arrow swiper', () => {
   assert.match(page, /<div class="scrs-gallery-intro">\s*<h2 id="scrs-gallery-title">تصفح ميزات ريفيزي<\/h2>\s*<p>شوف أمثلة من الأنشطة اللي كيتعلّم بها ولدك أو بنتك بطريقة تفاعلية\.<\/p>/);
   assert.match(page, /<section class="scrs-swiper" id="scrs-swiper"[^>]*aria-labelledby="scrs-gallery-title"/);

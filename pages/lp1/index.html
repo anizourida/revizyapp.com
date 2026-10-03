@@ -280,6 +280,31 @@
             line-height: 1.65;
         }
 
+        .curriculum-livrets {
+            display: grid;
+            justify-items: center;
+            margin: 0 0 16px;
+            padding: 10px 16px 12px;
+            border: 1px solid #F1E4D1;
+            border-radius: 16px;
+            background: #FFFDF9;
+        }
+
+        .curriculum-livrets img {
+            display: block;
+            width: min(210px, 62vw);
+            height: 132px;
+            object-fit: contain;
+        }
+
+        .curriculum-livrets figcaption {
+            margin-top: 2px;
+            color: #52637D;
+            font-size: 0.74rem;
+            font-weight: 600;
+            line-height: 1.55;
+        }
+
         .header-subjects {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1820,6 +1845,10 @@
                 <section class="header-learning-section" aria-labelledby="curriculum-title">
                     <span class="header-curriculum" id="curriculum-title">جميع مواد المنهاج</span>
                     <p class="header-curriculum-description">ريفيزي كيتضمن جميع المواد اللي كيقراها ولدك أو بنتك فالمدرسة الرائدة.</p>
+                    <figure class="curriculum-livrets" aria-label="كتب الفرنسية الخاصة بالمدرسة الرائدة">
+                        <img src="parts/livrets-raida.png" alt="كتب الفرنسية الخاصة بالمدرسة الرائدة">
+                        <figcaption>محتوى قريب من الدروس اللي كيقراها ولدك أو بنتك</figcaption>
+                    </figure>
                     <ul class="header-subjects" aria-label="مجالات التعلم في ريفيزي">
                         <li><img src="parts/par-3.png" alt="" width="1378" height="1142">اللغة العربية</li>
                         <li><img src="parts/par-4.png" alt="" width="1417" height="1110">اللغة الفرنسية</li>
