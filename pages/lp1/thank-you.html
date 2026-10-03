@@ -189,22 +189,43 @@
             line-height: 1.55;
         }
 
+        .contact-actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .whatsapp-link,
         .home-link {
             display: flex;
             min-height: 52px;
             align-items: center;
             justify-content: center;
             border-radius: 14px;
-            background: var(--primary);
             color: #fff;
             font-size: .92rem;
             font-weight: 800;
             text-decoration: none;
-            transition: transform .18s ease, background .18s ease;
+            transition: transform .18s ease, background .18s ease, border-color .18s ease;
         }
 
-        .home-link:hover { background: #1c2c45; }
+        .whatsapp-link {
+            gap: 9px;
+            background: #16b784;
+        }
+
+        .whatsapp-link img { width: 22px; height: 22px; object-fit: contain; }
+        .whatsapp-link:hover { background: #10976c; }
+
+        .home-link {
+            border: 1px solid #d6e0ec;
+            background: #fff;
+            color: var(--primary);
+        }
+
+        .home-link:hover { border-color: #1c2c45; color: #fff; }
+        .whatsapp-link:active,
         .home-link:active { transform: scale(.98); }
+        .whatsapp-link:focus-visible,
         .home-link:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
 
         .note {
@@ -245,8 +266,13 @@
                 </div>
             </section>
 
-            <a class="home-link" href="index.html">رجع للصفحة الرئيسية</a>
-            <p class="note">إلى بقى عندك شي سؤال، تواصل معنا فواتساب وغادي نعاونوك.</p>
+            <div class="contact-actions">
+                <a class="whatsapp-link" href="https://wa.me/212624853412" target="_blank" rel="noopener noreferrer">
+                    <img src="whatsapp.png" alt="">تواصل معنا فواتساب دابا
+                </a>
+                <a class="home-link" href="index.html">رجع للصفحة الرئيسية</a>
+            </div>
+            <p class="note">إلى بقى عندك شي سؤال، صيفط لينا رسالة فواتساب وغادي نعاونوك.</p>
         </main>
     </div>
 </body>
