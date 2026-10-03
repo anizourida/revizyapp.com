@@ -147,6 +147,7 @@ test('LP1 provides Revizy-specific expandable answers after activation', () => {
   assert.doesNotMatch(page, /قبل ما تفعّل اشتراك ريفيزي/);
   assert.match(page, /\.faq-section \{\s+margin: 0 24px 34px;\s+text-align: center;/);
   assert.match(page, /\.faq-list \{\s+display: grid;\s+gap: 8px;\s+direction: rtl;\s+text-align: right;/);
+  assert.match(page, /\.faq-item summary::before \{\s+content: '\+';\s+order: 1;/);
   assert.match(page, /paymentSection\.after\(faqSection\)/);
   assert.match(page, /شنو هو ريفيزي؟/);
   assert.match(page, /واش ريفيزي غير فيديوهات؟/);
