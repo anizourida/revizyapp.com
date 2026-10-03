@@ -141,12 +141,12 @@ test('LP1 has a moving annual-plan offer ticker above the header', () => {
 });
 
 test('LP1 provides Revizy-specific expandable answers after activation', () => {
-  assert.match(page, /class="faq-section"/);
+  assert.match(page, /class="faq-section" aria-labelledby="faq-title" dir="rtl"/);
   assert.match(page, /<span class="faq-kicker" id="faq-title">أسئلة متكررة<\/span>/);
   assert.doesNotMatch(page, /<h2 id="faq-title">/);
   assert.doesNotMatch(page, /قبل ما تفعّل اشتراك ريفيزي/);
   assert.match(page, /\.faq-section \{\s+margin: 0 24px 34px;\s+text-align: center;/);
-  assert.match(page, /\.faq-list \{\s+display: grid;\s+gap: 8px;\s+text-align: right;/);
+  assert.match(page, /\.faq-list \{\s+display: grid;\s+gap: 8px;\s+direction: rtl;\s+text-align: right;/);
   assert.match(page, /paymentSection\.after\(faqSection\)/);
   assert.match(page, /شنو هو ريفيزي؟/);
   assert.match(page, /واش ريفيزي غير فيديوهات؟/);
