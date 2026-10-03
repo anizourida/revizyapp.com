@@ -1,4 +1,4 @@
-const CACHE_NAME = 'revizy-lp1-v2';
+const CACHE_NAME = 'revizy-lp1-v3';
 const APP_SHELL = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const APP_SHELL = [
   './pwa-icon.svg',
   './pwa-icon-192.png',
   './pwa-icon-512.png',
+  './video-poster.webp',
 ];
 
 self.addEventListener('install', (event) => {

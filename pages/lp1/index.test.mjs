@@ -5,6 +5,7 @@ import test from 'node:test';
 const page = await readFile(new URL('./index.html', import.meta.url), 'utf8');
 const manifestPath = new URL('./manifest.webmanifest', import.meta.url);
 const serviceWorkerPath = new URL('./service-worker.js', import.meta.url);
+const videoPosterPath = new URL('./video-poster.webp', import.meta.url);
 
 test('LP1 contains an accessible custom player for the local Revizy video', () => {
   assert.match(page, /<video[^>]+id="revizy-video"/);
@@ -68,6 +69,24 @@ test('LP1 tracks only page views and completed WhatsApp contact intent with Meta
   assert.match(whatsappFlow, /window\.fbq\('track', 'Contact'\)/);
   assert.doesNotMatch(whatsappFlow, /fbq\([^;]*(?:parent_name|parent_phone|parent_city|student_name|student_grade)/);
   assert.doesNotMatch(page, /fbq\('track', 'Lead'/);
+});
+
+test('LP1 reserves image layout, defers noncritical media, and exposes accessible document landmarks', async () => {
+  assert.match(page, /<meta name="description" content="ريفيزي كيساعد ولدك أو بنتك يراجع دروس المدرسة الرائدة فالعربية والفرنسية والرياضيات بطريقة تفاعلية\.">/);
+  assert.match(page, /<title>ريفيزي \| مراجعة دروس المدرسة الرائدة<\/title>/);
+  assert.match(page, /family=Rubik:wght@400;500;700;800/);
+  assert.doesNotMatch(page, /family=Inter|family=Noto\+Naskh/);
+  assert.match(page, /<main id="lp1-content">/);
+  assert.match(page, /<div class="offer-ticker">\s*<span class="sr-only">عرض خاص:/);
+  assert.match(page, /<div class="learning-screens-dots" role="group" aria-label="اختيار لقطة من التطبيق">/);
+  assert.match(page, /<img class="header-children"[^>]+width="1536"[^>]+height="1024"/);
+  assert.match(page, /<video id="revizy-video" preload="none" poster="video-poster\.webp"/);
+  await assert.doesNotReject(() => readFile(videoPosterPath));
+
+  const scrsImages = page.match(/<img src="scrs\/scr-\d+\.webp"[^>]*>/g) ?? [];
+  assert.equal(scrsImages.length, 12);
+  assert.ok(scrsImages.every((image) => image.includes('loading="lazy"') && image.includes('decoding="async"')));
+  assert.match(page, /<img src="credits\/madrastna\.webp"[^>]+loading="lazy"[^>]+decoding="async"/);
 });
 
 test('LP1 preserves the original payment design and flow around the video', () => {
@@ -207,11 +226,11 @@ test('LP1 ends with a local trust footer for Madrastna, pioneer schools, and the
   assert.equal((page.match(/class="trust-credit"/g) || []).length, 3);
   assert.doesNotMatch(page, /class="trust-grid"/);
   assert.doesNotMatch(page, /class="trust-card"/);
-  assert.match(page, /<img src="credits\/madrastna\.webp" alt="مدرستنا">/);
+  assert.match(page, /<img src="credits\/madrastna\.webp" alt="مدرستنا" width="2216" height="640" loading="lazy" decoding="async">/);
   assert.match(page, /ريفيزي يساهم في جعل المدرسة ذات جودة للجميع/);
-  assert.match(page, /<img src="credits\/pionniers\.webp" alt="EE TaRL Label AES">/);
+  assert.match(page, /<img src="credits\/pionniers\.webp" alt="EE TaRL Label AES" width="1254" height="1254" loading="lazy" decoding="async">/);
   assert.match(page, /ريفيزي مطابق تماماً لدروس المدرسة الرائدة/);
-  assert.match(page, /<img src="credits\/men\.webp" alt="وزارة التربية الوطنية والتعليم الأولي والرياضة">/);
+  assert.match(page, /<img src="credits\/men\.webp" alt="وزارة التربية الوطنية والتعليم الأولي والرياضة" width="1616" height="340" loading="lazy" decoding="async">/);
   assert.match(page, /\.trust-logo img \{\s+display: block;\s+width: 100%;\s+height: 100%;\s+object-fit: contain;/);
   assert.match(page, /\.trust-logo--pioneers \{\s+width: 112px;\s+height: 112px;/);
   assert.match(page, /ريفيزي مطابق لمنهاج وتوصيات وزارة التربية الوطنية/);
@@ -256,7 +275,7 @@ test('LP1 shows the full-width screenshot swiper directly below the header', () 
 });
 
 test('LP1 presents the pioneer-school workbooks beneath its curriculum introduction', () => {
-  assert.match(page, /<figure class="curriculum-livrets"[^>]*>\s*<img src="parts\/livrets-raida\.webp" alt="كتب الفرنسية الخاصة بالمدرسة الرائدة">\s*<figcaption>محتوى مطابق تماماً للدروس لي كايقراوها فالمدارس<\/figcaption>/);
+  assert.match(page, /<figure class="curriculum-livrets"[^>]*>\s*<img src="parts\/livrets-raida\.webp" alt="كتب الفرنسية الخاصة بالمدرسة الرائدة" width="400" height="400" loading="lazy" decoding="async">\s*<figcaption>محتوى مطابق تماماً للدروس لي كايقراوها فالمدارس<\/figcaption>/);
 });
 
 test('LP1 keeps the scrs gallery in its own compact-arrow swiper', () => {

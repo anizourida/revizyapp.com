@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revizy - Paiement Sécurisé</title>
+    <title>ريفيزي | مراجعة دروس المدرسة الرائدة</title>
+    <meta name="description" content="ريفيزي كيساعد ولدك أو بنتك يراجع دروس المدرسة الرائدة فالعربية والفرنسية والرياضيات بطريقة تفاعلية.">
     <meta name="theme-color" content="#243857">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -12,7 +13,7 @@
     <link rel="apple-touch-icon" href="pwa-icon-192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
     <!-- Meta Pixel: page view only. Form details are never included in browser events. -->
     <script>
         !function(f,b,e,v,n,t,s)
@@ -51,7 +52,7 @@
 
         body {
             background-color: var(--bg);
-            font-family: 'Rubik', 'Inter', sans-serif;
+            font-family: 'Rubik', sans-serif;
             display: flex;
             justify-content: center;
             min-height: 100vh;
@@ -72,6 +73,18 @@
             flex-direction: column;
             position: relative;
             margin: 0;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         .offer-ticker {
@@ -1853,16 +1866,18 @@
 <body>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2359056121533443&ev=PageView&noscript=1" alt=""></noscript>
     <div class="container">
-        <div class="offer-ticker" aria-label="عرض خاص: الاشتراك السنوي بـ 249 درهم، وفر 99 درهم">
+        <div class="offer-ticker">
+            <span class="sr-only">عرض خاص: الاشتراك السنوي ابتداءً من 249 درهم، وفّر حتى 151 درهم.</span>
             <div class="offer-ticker-track" aria-hidden="true">
                 <span>عرض خاص ✦ اشتراك سنوي ابتداءً من 249 درهم ✦ وفّر حتى 151 درهم</span>
                 <span>عرض خاص ✦ اشتراك سنوي ابتداءً من 249 درهم ✦ وفّر حتى 151 درهم</span>
             </div>
         </div>
+        <main id="lp1-content">
         <header class="header">
             <span class="header-spark" aria-hidden="true"></span>
             <span class="header-mark" aria-hidden="true">•</span>
-            <img class="header-children" src="parts/par-1.webp" alt="طفلان يراجعان معاً على جهاز لوحي" fetchpriority="high" loading="eager" decoding="async">
+            <img class="header-children" src="parts/par-1.webp" alt="طفلان يراجعان معاً على جهاز لوحي" width="1536" height="1024" fetchpriority="high" loading="eager" decoding="async">
             <h1>ولدك او بنتك <span class="header-highlight">فالمدرسة الرائدة؟</span></h1>
             <p class="subtitle">باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟ ريفيزي معاكم خطوة بخطوة.</p>
             <div class="header-prompt-tags" id="header-prompt-tags" aria-label="مواقف كتعيشها فالمراجعة">
@@ -1873,12 +1888,12 @@
                 <span class="header-highlight">باغي يتعلم بوحدو بلا ما تبقى حدا راسو؟</span>
             </div>
             <div class="header-tracing-illustration" aria-hidden="true">
-                <img src="parts/par-6.webp" alt="">
+                <img src="parts/par-6.webp" alt="" width="1024" height="1536" decoding="async">
             </div>
             <section class="video-section" aria-label="فيديو يشرح تطبيق ريفيزي">
                 <div class="video-divider" aria-hidden="true"></div>
                 <div class="video-player" id="video-player">
-                    <video id="revizy-video" preload="metadata" playsinline aria-label="فيديو يشرح تطبيق ريفيزي">
+                    <video id="revizy-video" preload="none" poster="video-poster.webp" playsinline aria-label="فيديو يشرح تطبيق ريفيزي">
                         <source src="1001.mp4" type="video/mp4">
                         متصفحك لا يدعم تشغيل الفيديو.
                     </video>
@@ -1910,28 +1925,28 @@
                     <span class="header-curriculum" id="curriculum-title">جميع مواد المنهاج</span>
                     <p class="header-curriculum-description">ريفيزي كيتضمن جميع المواد اللي كيقراها ولدك أو بنتك فالمدرسة الرائدة.</p>
                     <figure class="curriculum-livrets" aria-label="كتب الفرنسية الخاصة بالمدرسة الرائدة">
-                        <img src="parts/livrets-raida.webp" alt="كتب الفرنسية الخاصة بالمدرسة الرائدة">
+                        <img src="parts/livrets-raida.webp" alt="كتب الفرنسية الخاصة بالمدرسة الرائدة" width="400" height="400" loading="lazy" decoding="async">
                         <figcaption>محتوى مطابق تماماً للدروس لي كايقراوها فالمدارس</figcaption>
                     </figure>
                     <ul class="header-subjects" aria-label="مجالات التعلم في ريفيزي">
-                        <li><img src="parts/par-3.webp" alt="" width="1378" height="1142">اللغة العربية</li>
-                        <li><img src="parts/par-4.webp" alt="" width="1417" height="1110">اللغة الفرنسية</li>
-                        <li><img src="parts/par-5.webp" alt="" width="1254" height="1254">الرياضيات</li>
+                        <li><img src="parts/par-3.webp" alt="" width="1378" height="1142" loading="lazy" decoding="async">اللغة العربية</li>
+                        <li><img src="parts/par-4.webp" alt="" width="1417" height="1110" loading="lazy" decoding="async">اللغة الفرنسية</li>
+                        <li><img src="parts/par-5.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async">الرياضيات</li>
                     </ul>
                 </section>
                 <section class="header-learning-section" aria-labelledby="features-title">
                     <span class="header-curriculum" id="features-title">ميزات ريفيزي</span>
                     <p class="header-curriculum-description">أنشطة تفاعلية متنوعة كتساعد ولدك أو بنتك يفهم، يتدرّب، ويتقدّم خطوة بخطوة.</p>
                     <ul class="header-features" aria-label="ميزات تطبيق ريفيزي">
-                        <li><img src="features/feat-7.webp" alt="" width="1254" height="1254">الحوارات</li>
-                        <li><img src="features/feat-8.webp" alt="" width="1254" height="1254">البطاقات التعليمية</li>
-                        <li><img src="features/feat-1.webp" alt="" width="1254" height="1254">الاستماع والفهم</li>
-                        <li><img src="features/feat-2.webp" alt="" width="1254" height="1254">التحدث والنطق</li>
-                        <li><img src="features/feat-3.webp" alt="" width="1254" height="1254">تتبّع الحروف وكتابتها</li>
-                        <li><img src="features/feat-4.webp" alt="" width="1536" height="1024">تركيب الكلمات</li>
-                        <li><img src="features/feat-5.webp" alt="" width="1254" height="1254">الجمع والحساب</li>
-                        <li><img src="features/feat-6.webp" alt="" width="1254" height="1254">الأعداد الكسرية</li>
-                        <li class="header-feature-more"><img src="features/feat-0.webp" alt="" width="1254" height="1254">المزيد</li>
+                        <li><img src="features/feat-7.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async">الحوارات</li>
+                        <li><img src="features/feat-8.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async">البطاقات التعليمية</li>
+                        <li><img src="features/feat-1.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async">الاستماع والفهم</li>
+                        <li><img src="features/feat-2.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async">التحدث والنطق</li>
+                        <li><img src="features/feat-3.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async">تتبّع الحروف وكتابتها</li>
+                        <li><img src="features/feat-4.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async">تركيب الكلمات</li>
+                        <li><img src="features/feat-5.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async">الجمع والحساب</li>
+                        <li><img src="features/feat-6.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async">الأعداد الكسرية</li>
+                        <li class="header-feature-more"><img src="features/feat-0.webp" alt="" width="1254" height="1254" loading="lazy" decoding="async">المزيد</li>
                     </ul>
                 </section>
             </div>
@@ -1939,10 +1954,10 @@
 
         <section class="learning-screens-swiper" id="learning-screens-swiper" aria-roledescription="carousel" aria-label="لقطات من تطبيق ريفيزي">
             <div class="learning-screens-track" id="learning-screens-track">
-                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/girl-screenshots.webp" alt="" draggable="false" loading="lazy" decoding="async"></figure>
-                <figure class="learning-screen-slide"><img src="images/boy-screenshots.webp" alt="لقطات من تطبيق ريفيزي لتلميذ" draggable="false" loading="lazy" decoding="async"></figure>
-                <figure class="learning-screen-slide"><img src="images/girl-screenshots.webp" alt="لقطات من تطبيق ريفيزي لتلميذة" draggable="false" loading="lazy" decoding="async"></figure>
-                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/boy-screenshots.webp" alt="" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/girl-screenshots.webp" alt="" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="learning-screen-slide"><img src="images/boy-screenshots.webp" alt="لقطات من تطبيق ريفيزي لتلميذ" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="learning-screen-slide"><img src="images/girl-screenshots.webp" alt="لقطات من تطبيق ريفيزي لتلميذة" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/boy-screenshots.webp" alt="" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
             </div>
             <button class="learning-swiper-nav learning-swiper-prev is-disabled" id="learning-prev" type="button" aria-label="الصورة السابقة" hidden>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
@@ -1950,7 +1965,7 @@
             <button class="learning-swiper-nav learning-swiper-next is-disabled" id="learning-next" type="button" aria-label="الصورة التالية">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
             </button>
-            <div class="learning-screens-dots" role="tablist" aria-label="اختيار لقطة من التطبيق">
+            <div class="learning-screens-dots" role="group" aria-label="اختيار لقطة من التطبيق">
                 <button class="learning-screen-dot" type="button" data-learning-slide="0" aria-label="الصورة الأولى" aria-current="true"></button>
                 <button class="learning-screen-dot" type="button" data-learning-slide="1" aria-label="الصورة الثانية" aria-current="false"></button>
             </div>
@@ -2112,18 +2127,18 @@
         </div>
         <section class="scrs-swiper" id="scrs-swiper" aria-roledescription="carousel" aria-labelledby="scrs-gallery-title">
             <div class="scrs-track" id="scrs-track">
-                <figure class="scrs-slide"><img src="scrs/scr-1.webp" alt="لقطة من تطبيق ريفيزي 1" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-2.webp" alt="لقطة من تطبيق ريفيزي 2" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-3.webp" alt="لقطة من تطبيق ريفيزي 3" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-4.webp" alt="لقطة من تطبيق ريفيزي 4" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-5.webp" alt="لقطة من تطبيق ريفيزي 5" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-6.webp" alt="لقطة من تطبيق ريفيزي 6" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-7.webp" alt="لقطة من تطبيق ريفيزي 7" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-8.webp" alt="لقطة من تطبيق ريفيزي 8" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-9.webp" alt="لقطة من تطبيق ريفيزي 9" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-10.webp" alt="لقطة من تطبيق ريفيزي 10" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-11.webp" alt="لقطة من تطبيق ريفيزي 11" draggable="false"></figure>
-                <figure class="scrs-slide"><img src="scrs/scr-12.webp" alt="لقطة من تطبيق ريفيزي 12" draggable="false"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-1.webp" alt="لقطة من تطبيق ريفيزي 1" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-2.webp" alt="لقطة من تطبيق ريفيزي 2" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-3.webp" alt="لقطة من تطبيق ريفيزي 3" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-4.webp" alt="لقطة من تطبيق ريفيزي 4" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-5.webp" alt="لقطة من تطبيق ريفيزي 5" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-6.webp" alt="لقطة من تطبيق ريفيزي 6" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-7.webp" alt="لقطة من تطبيق ريفيزي 7" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-8.webp" alt="لقطة من تطبيق ريفيزي 8" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-9.webp" alt="لقطة من تطبيق ريفيزي 9" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-10.webp" alt="لقطة من تطبيق ريفيزي 10" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-11.webp" alt="لقطة من تطبيق ريفيزي 11" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="scrs-slide"><img src="scrs/scr-12.webp" alt="لقطة من تطبيق ريفيزي 12" width="1024" height="1536" draggable="false" loading="lazy" decoding="async"></figure>
             </div>
             <button class="scrs-swiper-nav scrs-swiper-prev" id="scrs-prev" type="button" aria-label="الصورة السابقة"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
             <button class="scrs-swiper-nav scrs-swiper-next" id="scrs-next" type="button" aria-label="الصورة التالية"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
@@ -2227,24 +2242,26 @@
             </div>
         </section>
 
+        </main>
+
         <footer class="trust-footer" id="trust-footer" aria-label="التزامات ريفيزي التعليمية">
             <p class="trust-footer-title">ريفيزي كيدعم تعلّم ولدك أو بنتك بثقة</p>
             <div class="trust-credits">
                 <article class="trust-credit">
                     <div class="trust-logo trust-logo--madrastna">
-                        <img src="credits/madrastna.webp" alt="مدرستنا">
+                        <img src="credits/madrastna.webp" alt="مدرستنا" width="2216" height="640" loading="lazy" decoding="async">
                     </div>
                     <p>ريفيزي يساهم في جعل المدرسة ذات جودة للجميع.</p>
                 </article>
                 <article class="trust-credit">
                     <div class="trust-logo trust-logo--pioneers">
-                        <img src="credits/pionniers.webp" alt="EE TaRL Label AES">
+                        <img src="credits/pionniers.webp" alt="EE TaRL Label AES" width="1254" height="1254" loading="lazy" decoding="async">
                     </div>
                     <p>ريفيزي مطابق تماماً لدروس المدرسة الرائدة.</p>
                 </article>
                 <article class="trust-credit">
                     <div class="trust-logo trust-logo--men">
-                        <img src="credits/men.webp" alt="وزارة التربية الوطنية والتعليم الأولي والرياضة">
+                        <img src="credits/men.webp" alt="وزارة التربية الوطنية والتعليم الأولي والرياضة" width="1616" height="340" loading="lazy" decoding="async">
                     </div>
                     <p>ريفيزي مطابق لمنهاج وتوصيات وزارة التربية الوطنية.</p>
                 </article>
