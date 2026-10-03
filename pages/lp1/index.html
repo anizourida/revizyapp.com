@@ -1256,6 +1256,31 @@
             box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.18);
         }
 
+        .grade-selectors {
+            display: grid;
+            gap: 10px;
+        }
+
+        .grade-selector {
+            width: 100%;
+            min-height: 50px;
+            padding: 12px 14px;
+            border: 1px solid #D9E1EC;
+            border-radius: 14px;
+            background: white;
+            color: var(--text-main);
+            font: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .grade-selector:focus {
+            border-color: var(--app-yellow);
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.18);
+        }
+
         .form-group {
             min-width: 0;
             margin: 22px 0 0;
@@ -1496,7 +1521,7 @@
 
         <p class="section-title">اختر خطتك</p>
         <div class="plans" role="radiogroup" aria-label="اختيار الاشتراك السنوي">
-            <button class="plan-card active" type="button" role="radio" aria-checked="true" aria-label="تلميذ واحد، اشتراك سنوي، 249 درهم" data-price="249" onclick="selectPlan(this)">
+            <button class="plan-card active" type="button" role="radio" aria-checked="true" aria-label="تلميذ واحد، اشتراك سنوي، 249 درهم" data-price="249" data-student-count="1" onclick="selectPlan(this)">
                 <div class="radio-container">
                     <div class="radio-outer">
                         <div class="radio-inner"></div>
@@ -1512,7 +1537,7 @@
                 </div>
             </button>
 
-            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="تلميذان، اشتراك سنوي للإخوة والأخوات، 399 درهم" data-price="399" onclick="selectPlan(this)">
+            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="تلميذان، اشتراك سنوي للإخوة والأخوات، 399 درهم" data-price="399" data-student-count="2" onclick="selectPlan(this)">
                 <span class="badge">إخوة وأخوات</span>
                 <div class="radio-container">
                     <div class="radio-outer">
@@ -1529,7 +1554,7 @@
                 </div>
             </button>
 
-            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="3 إخوة وأخوات، اشتراك سنوي، 449 درهم" data-price="449" onclick="selectPlan(this)">
+            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="3 إخوة وأخوات، اشتراك سنوي، 449 درهم" data-price="449" data-student-count="3" onclick="selectPlan(this)">
                 <span class="badge">إخوة وأخوات</span>
                 <div class="radio-container">
                     <div class="radio-outer">
@@ -1702,6 +1727,12 @@
                         <label for="parent-city">المدينة</label>
                         <input id="parent-city" name="parent_city" type="text" autocomplete="address-level2" required placeholder="مثال: الدار البيضاء">
                     </div>
+
+                    <fieldset class="form-group grade-selector-group" aria-describedby="grade-selector-help">
+                        <legend id="grade-selector-title">المستوى الدراسي للتلميذ</legend>
+                        <div class="grade-selectors" id="grade-selectors"></div>
+                        <p id="grade-selector-help" class="footer-note">اختار المستوى الدراسي لكل تلميذ داخل الاشتراك.</p>
+                    </fieldset>
 
                     <fieldset class="form-group">
                         <legend>شنو بغيتي ولدك أو بنتك يقوّي؟</legend>
@@ -2045,6 +2076,7 @@
             document.querySelectorAll('.activation-amount').forEach(el => {
                 el.innerText = price;
             });
+            renderGradeSelectors(Number(element.dataset.studentCount));
         }
 
         const planCards = Array.from(document.querySelectorAll('.plan-card'));
@@ -2070,12 +2102,41 @@
 
         const activationForm = document.getElementById('activation-form');
         const whatsappBtn = document.getElementById('whatsapp-btn');
+        const gradeSelectorTitle = document.getElementById('grade-selector-title');
+        const gradeSelectors = document.getElementById('grade-selectors');
+        const primarySchoolGrades = [
+            'المستوى الأول ابتدائي',
+            'المستوى الثاني ابتدائي',
+            'المستوى الثالث ابتدائي',
+            'المستوى الرابع ابتدائي',
+            'المستوى الخامس ابتدائي',
+            'المستوى السادس ابتدائي'
+        ];
+
+        function renderGradeSelectors(studentCount) {
+            gradeSelectorTitle.textContent = studentCount === 1
+                ? 'المستوى الدراسي للتلميذ'
+                : `المستوى الدراسي لـ ${studentCount} تلاميذ`;
+
+            gradeSelectors.replaceChildren(...Array.from({ length: studentCount }, (_, index) => {
+                const select = document.createElement('select');
+                select.className = 'grade-selector';
+                select.name = 'student_grade';
+                select.required = true;
+                select.setAttribute('aria-label', `المستوى الدراسي للتلميذ ${index + 1}`);
+                select.innerHTML = `<option value="" selected disabled>اختار مستوى التلميذ ${index + 1}</option>${primarySchoolGrades.map((grade) => `<option value="${grade}">${grade}</option>`).join('')}`;
+                return select;
+            }));
+            updateActivationButton();
+        }
 
         function updateActivationButton() {
             const formData = new FormData(activationForm);
             const hasContactDetails = ['parent_name', 'parent_phone', 'parent_city']
                 .every((field) => formData.get(field)?.trim());
+            const hasGrades = formData.getAll('student_grade').every(Boolean);
             const isReady = hasContactDetails
+                && hasGrades
                 && Boolean(formData.get('learning_need'));
             whatsappBtn.disabled = !isReady;
         }
@@ -2088,13 +2149,17 @@
             const selectedPlan = document.querySelector('.plan-card.active');
             const planName = selectedPlan.querySelector('.plan-title').textContent.trim();
             const price = selectedPlan.dataset.price;
-            const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمراجعة اللي محتاجين: ${formData.get('learning_need')}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`;
+            const gradeDetails = formData.getAll('student_grade')
+                .map((grade, index) => `التلميذ ${index + 1}: ${grade}`)
+                .join('\n');
+            const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالمراجعة اللي محتاجين: ${formData.get('learning_need')}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`;
             const whatsappUrl = `https://wa.me/212624853412?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
         activationForm.addEventListener('input', updateActivationButton);
         activationForm.addEventListener('change', updateActivationButton);
+        renderGradeSelectors(1);
     </script>
 </body>
 </html>

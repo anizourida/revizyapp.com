@@ -96,6 +96,14 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /id="parent-name"/);
   assert.match(page, /id="parent-phone"/);
   assert.match(page, /id="parent-city"/);
+  assert.match(page, /id="grade-selectors"/);
+  assert.match(page, /data-student-count="1"/);
+  assert.match(page, /data-student-count="2"/);
+  assert.match(page, /data-student-count="3"/);
+  assert.match(page, /function renderGradeSelectors\(studentCount\)/);
+  assert.match(page, /renderGradeSelectors\(1\)/);
+  assert.match(page, /formData\.getAll\('student_grade'\)/);
+  assert.match(page, /المستوى السادس ابتدائي/);
   assert.match(page, /شنو بغيتي ولدك أو بنتك يقوّي؟/);
   assert.match(page, /صيفط طلب التفعيل فواتساب/);
   assert.doesNotMatch(page, /Attijari/);
