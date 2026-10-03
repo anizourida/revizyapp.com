@@ -47,6 +47,17 @@ test('LP1 is installable and renders its header immediately without a blocking l
   assert.match(serviceWorker, /request\.destination === "video"/);
 });
 
+test('LP1 gives ad visitors a persistent, accessible route to the activation form', () => {
+  assert.match(page, /<a class="sticky-activation-cta" id="activation-cta" href="#activation-title"/);
+  assert.match(page, /aria-label="فعّل اشتراك ريفيزي ابتداءً من 249 درهم"/);
+  assert.match(page, /فعّل اشتراكك/);
+  assert.match(page, /\.sticky-activation-cta\s*\{[\s\S]*?position:\s*fixed/);
+  assert.match(page, /\.payment-section\s*\{[\s\S]*?scroll-margin-top:/);
+  assert.match(page, /const activationCta = document\.getElementById\('activation-cta'\)/);
+  assert.match(page, /new IntersectionObserver/);
+  assert.match(page, /activationCta\.classList\.toggle\('is-hidden'/);
+});
+
 test('LP1 preserves the original payment design and flow around the video', () => {
   assert.doesNotMatch(page, /src="revizy-logo-primary-as-text\.png"/);
   assert.match(page, /h1\s*\{[\s\S]*?font-size:\s*2\.2rem[\s\S]*?line-height:\s*2/);

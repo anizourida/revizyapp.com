@@ -32,6 +32,10 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg);
             font-family: 'Rubik', 'Inter', sans-serif;
@@ -1403,6 +1407,53 @@
         .payment-section {
             padding: 10px 24px 44px;
             margin-top: auto;
+            scroll-margin-top: 14px;
+        }
+
+        .sticky-activation-cta {
+            position: fixed;
+            z-index: 30;
+            right: 50%;
+            bottom: max(14px, env(safe-area-inset-bottom));
+            display: flex;
+            width: min(calc(100% - 32px), 448px);
+            min-height: 54px;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 16px;
+            border-radius: 18px;
+            background: var(--primary);
+            box-shadow: 0 10px 24px rgba(36, 56, 87, 0.24);
+            color: #fff;
+            font-size: 0.92rem;
+            font-weight: 800;
+            text-decoration: none;
+            transform: translateX(50%);
+            transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+        }
+
+        .sticky-activation-cta strong {
+            color: var(--app-yellow);
+            font-size: 1rem;
+        }
+
+        .sticky-activation-cta:focus-visible {
+            outline: 3px solid var(--app-yellow);
+            outline-offset: 3px;
+        }
+
+        .sticky-activation-cta.is-hidden {
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(50%, 14px);
+        }
+
+        @media (min-width: 481px) {
+            .sticky-activation-cta {
+                display: none;
+            }
         }
 
         .activation-card {
@@ -1874,10 +1925,10 @@
 
         <section class="learning-screens-swiper" id="learning-screens-swiper" aria-roledescription="carousel" aria-label="لقطات من تطبيق ريفيزي">
             <div class="learning-screens-track" id="learning-screens-track">
-                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/girl-screenshots.webp" alt="" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="images/boy-screenshots.webp" alt="لقطات من تطبيق ريفيزي لتلميذ" draggable="false"></figure>
-                <figure class="learning-screen-slide"><img src="images/girl-screenshots.webp" alt="لقطات من تطبيق ريفيزي لتلميذة" draggable="false"></figure>
-                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/boy-screenshots.webp" alt="" draggable="false"></figure>
+                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/girl-screenshots.webp" alt="" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="learning-screen-slide"><img src="images/boy-screenshots.webp" alt="لقطات من تطبيق ريفيزي لتلميذ" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="learning-screen-slide"><img src="images/girl-screenshots.webp" alt="لقطات من تطبيق ريفيزي لتلميذة" draggable="false" loading="lazy" decoding="async"></figure>
+                <figure class="learning-screen-slide" data-learning-clone aria-hidden="true"><img src="images/boy-screenshots.webp" alt="" draggable="false" loading="lazy" decoding="async"></figure>
             </div>
             <button class="learning-swiper-nav learning-swiper-prev is-disabled" id="learning-prev" type="button" aria-label="الصورة السابقة" hidden>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
@@ -2187,6 +2238,10 @@
             <p class="trust-copyright">© 2026 ريفيزي — جميع الحقوق محفوظة.</p>
         </footer>
     </div>
+
+    <a class="sticky-activation-cta" id="activation-cta" href="#activation-title" aria-label="فعّل اشتراك ريفيزي ابتداءً من 249 درهم">
+        فعّل اشتراكك <strong>ابتداءً من 249 درهم</strong>
+    </a>
 
     <script>
         if ('serviceWorker' in navigator) {
@@ -2547,6 +2602,7 @@
         const paymentSection = document.querySelector('.payment-section');
         const faqSection = document.querySelector('.faq-section');
         const trustFooter = document.getElementById('trust-footer');
+        const activationCta = document.getElementById('activation-cta');
         const whatsappBtn = document.getElementById('whatsapp-btn');
         const parentPhoneInput = document.getElementById('parent-phone');
         const parentPhoneError = document.getElementById('parent-phone-error');
@@ -2661,6 +2717,13 @@
         paymentSection.after(faqSection);
         faqSection.after(trustFooter);
         renderGradeSelectors(1);
+
+        if ('IntersectionObserver' in window) {
+            const activationCtaObserver = new IntersectionObserver(([entry]) => {
+                activationCta.classList.toggle('is-hidden', entry.isIntersecting);
+            }, { threshold: 0.12 });
+            activationCtaObserver.observe(paymentSection);
+        }
     </script>
 </body>
 </html>
