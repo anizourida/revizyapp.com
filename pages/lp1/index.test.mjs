@@ -10,6 +10,7 @@ const videoPosterPath = new URL('./video-poster.webp', import.meta.url);
 test('LP1 contains an accessible custom player for the local Revizy video', () => {
   assert.match(page, /<video[^>]+id="revizy-video"/);
   assert.match(page, /src="1001\.mp4"/);
+  assert.match(page, /<track kind="subtitles" srclang="ar" label="العربية" src="1001\.vtt" default>/);
   assert.match(page, /<button[^>]+id="video-toggle"/);
   assert.match(page, /aria-label="تشغيل"/);
   assert.match(page, /function toggleVideo\(\)/);
