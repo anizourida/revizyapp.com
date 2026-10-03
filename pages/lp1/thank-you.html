@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>شكراً | ريفيزي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #243857;
+            --orange: #ff9800;
+            --yellow: #ffe0a3;
+            --cream: #fffefc;
+            --page: #f8fafc;
+            --muted: #52637d;
+            --border: #f1e4d1;
+            --green: #16b784;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: var(--page);
+            color: var(--primary);
+            font-family: "Rubik", sans-serif;
+        }
+
+        .page {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            margin: 0 auto;
+            overflow: hidden;
+            background: var(--cream);
+            border-inline: 1px solid #e2e8f0;
+        }
+
+        .page::before,
+        .page::after {
+            position: absolute;
+            z-index: 0;
+            content: "";
+            pointer-events: none;
+        }
+
+        .page::before {
+            top: 63px;
+            left: -66px;
+            width: 162px;
+            height: 162px;
+            border-radius: 50%;
+            background: #fff3e1;
+        }
+
+        .page::after {
+            right: -86px;
+            bottom: -76px;
+            width: 265px;
+            height: 175px;
+            border-radius: 50%;
+            background: #fff3e1;
+            transform: rotate(-10deg);
+        }
+
+        .offer-bar {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            min-height: 42px;
+            padding: 9px 24px;
+            place-items: center;
+            background: #ffaf01;
+            color: #fff;
+            font-size: .78rem;
+            font-weight: 800;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            padding: 58px 24px 42px;
+            text-align: center;
+        }
+
+        .success-mark {
+            display: grid;
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            place-items: center;
+            background: var(--yellow);
+            color: var(--primary);
+            box-shadow: 0 10px 24px rgba(255, 152, 0, .17);
+        }
+
+        .success-mark svg { width: 40px; height: 40px; }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: clamp(1.65rem, 7vw, 2.1rem);
+            font-weight: 800;
+            line-height: 1.55;
+            letter-spacing: -.5px;
+        }
+
+        .intro {
+            max-width: 330px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: .95rem;
+            font-weight: 500;
+            line-height: 1.85;
+        }
+
+        .next-steps {
+            margin: 34px 0 28px;
+            padding: 21px 18px 12px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: #fff;
+            text-align: right;
+        }
+
+        .next-steps h2 {
+            margin: 0 4px 12px;
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 31px 1fr;
+            gap: 11px;
+            align-items: center;
+            padding: 13px 4px;
+            border-top: 1px dashed #eadcc7;
+        }
+
+        .step:first-of-type { border-top: 0; }
+
+        .step-number {
+            display: grid;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            place-items: center;
+            background: #fff3d8;
+            color: var(--primary);
+            font-size: .78rem;
+            font-weight: 800;
+        }
+
+        .step strong {
+            display: block;
+            margin-bottom: 2px;
+            font-size: .88rem;
+        }
+
+        .step span {
+            color: var(--muted);
+            font-size: .75rem;
+            font-weight: 500;
+            line-height: 1.55;
+        }
+
+        .home-link {
+            display: flex;
+            min-height: 52px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: var(--primary);
+            color: #fff;
+            font-size: .92rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform .18s ease, background .18s ease;
+        }
+
+        .home-link:hover { background: #1c2c45; }
+        .home-link:active { transform: scale(.98); }
+        .home-link:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+
+        .note {
+            margin: 16px auto 0;
+            color: #71809a;
+            font-size: .72rem;
+            font-weight: 500;
+            line-height: 1.65;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="offer-bar">ريفيزي معاكم خطوة بخطوة فالمراجعة فالدار</div>
+        <main>
+            <div class="success-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.2 4L19 6.7"></path></svg>
+            </div>
+            <h1>شكراً، توصّلنا بطلبك</h1>
+            <p class="intro">غادي نتواصلو معاك فواتساب باش نكملو معاك تفعيل اشتراك ريفيزي بطريقة واضحة.</p>
+
+            <section class="next-steps" aria-labelledby="steps-title">
+                <h2 id="steps-title">شنو غادي يوقع دابا؟</h2>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div><strong>كنراجعو المعلومات ديالك</strong><span>باش نلقاو الخطة والمستويات المناسبة للأبناء.</span></div>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div><strong>كنرجعو ليك فواتساب</strong><span>الفريق ديال ريفيزي غادي يتواصل معاك مباشرة.</span></div>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div><strong>كنكملو معاك التفعيل</strong><span>وغادي تاخذ جميع الخطوات اللي خاصك باش يبدا ولدك أو بنتك.</span></div>
+                </div>
+            </section>
+
+            <a class="home-link" href="index.html">رجع للصفحة الرئيسية</a>
+            <p class="note">إلى بقى عندك شي سؤال، تواصل معنا فواتساب وغادي نعاونوك.</p>
+        </main>
+    </div>
+</body>
+</html>
