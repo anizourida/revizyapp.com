@@ -3,6 +3,8 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const page = await readFile(new URL('./index.html', import.meta.url), 'utf8');
+const manifestPath = new URL('./manifest.webmanifest', import.meta.url);
+const serviceWorkerPath = new URL('./service-worker.js', import.meta.url);
 
 test('LP1 contains an accessible custom player for the local Revizy video', () => {
   assert.match(page, /<video[^>]+id="revizy-video"/);
@@ -29,6 +31,20 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
   assert.match(page, /width:\s*38px/);
 });
 
+test('LP1 is installable and shows a short branded loader before its content is ready', async () => {
+  const manifest = await readFile(manifestPath, 'utf8');
+  const serviceWorker = await readFile(serviceWorkerPath, 'utf8');
+
+  assert.match(page, /<link rel="manifest" href="manifest\.webmanifest">/);
+  assert.match(page, /<body class="is-loading">/);
+  assert.match(page, /id="app-loader"/);
+  assert.match(page, /navigator\.serviceWorker\.register\("service-worker\.js", \{ scope: "\.\/" \}\)/);
+  assert.match(manifest, /"name": "ريفيزي"/);
+  assert.match(manifest, /"src": "pwa-icon\.svg"/);
+  assert.match(serviceWorker, /self\.addEventListener\(['"]fetch['"]/);
+  assert.match(serviceWorker, /request\.destination === "video"/);
+});
+
 test('LP1 preserves the original payment design and flow around the video', () => {
   assert.doesNotMatch(page, /src="revizy-logo-primary-as-text\.png"/);
   assert.match(page, /h1\s*\{[\s\S]*?font-size:\s*2\.2rem[\s\S]*?line-height:\s*2/);
@@ -38,11 +54,11 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /class="header-spark"/);
   assert.match(page, /\.header-spark\s*\{[\s\S]*?top:\s*140px[\s\S]*?transform:\s*rotate\(282deg\)\s*skew\(8deg\)/);
   assert.match(page, /class="header-mark"/);
-  assert.match(page, /<header class="header">[\s\S]*?<img class="header-children" src="parts\/par-1\.png"/);
+  assert.match(page, /<header class="header">[\s\S]*?<img class="header-children" src="parts\/par-1\.webp"/);
   assert.match(page, /\.header-children\s*\{[\s\S]*?width:\s*100%/);
   assert.match(page, /id="header-prompt-tags"/);
   assert.ok(page.indexOf('class="subtitle"') < page.indexOf('id="header-prompt-tags"'));
-  assert.match(page, /id="header-prompt-tags"[\s\S]*?<\/div>\s*<div class="header-tracing-illustration"[\s\S]*?src="parts\/par-6\.png"[\s\S]*?<section class="video-section"[\s\S]*?<section class="revision-benefits"[\s\S]*?<div class="header-learning">/);
+  assert.match(page, /id="header-prompt-tags"[\s\S]*?<\/div>\s*<div class="header-tracing-illustration"[\s\S]*?src="parts\/par-6\.webp"[\s\S]*?<section class="video-section"[\s\S]*?<section class="revision-benefits"[\s\S]*?<div class="header-learning">/);
   assert.match(page, /\.header-tracing-illustration img \{\s+display: block;\s+width: min\(70px, 72vw\)/);
   assert.match(page, /class="revision-benefit"[\s\S]*?>مسار واضح/);
   assert.match(page, /تمارين مناسبة/);
@@ -71,13 +87,13 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /أنشطة تفاعلية متنوعة كتساعد ولدك أو بنتك يفهم، يتدرّب، ويتقدّم خطوة بخطوة/);
   assert.match(page, /class="header-features"/);
   for (let index = 1; index <= 8; index += 1) {
-    assert.match(page, new RegExp(`features/feat-${index}\\.png`));
+    assert.match(page, new RegExp(`features/feat-${index}\\.webp`));
   }
-  assert.ok(page.indexOf('features/feat-7.png') < page.indexOf('features/feat-8.png'));
-  assert.ok(page.indexOf('features/feat-8.png') < page.indexOf('features/feat-1.png'));
-  assert.match(page, /features\/feat-7\.png"[\s\S]*?>الحوارات/);
-  assert.match(page, /features\/feat-8\.png"[\s\S]*?>البطاقات التعليمية/);
-  assert.match(page, /class="header-feature-more"><img src="features\/feat-0\.png"[\s\S]*?>المزيد/);
+  assert.ok(page.indexOf('features/feat-7.webp') < page.indexOf('features/feat-8.webp'));
+  assert.ok(page.indexOf('features/feat-8.webp') < page.indexOf('features/feat-1.webp'));
+  assert.match(page, /features\/feat-7\.webp"[\s\S]*?>الحوارات/);
+  assert.match(page, /features\/feat-8\.webp"[\s\S]*?>البطاقات التعليمية/);
+  assert.match(page, /class="header-feature-more"><img src="features\/feat-0\.webp"[\s\S]*?>المزيد/);
   assert.doesNotMatch(page, /المزيد قريبًا/);
   assert.match(page, /\.header-features\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(page, /class="plans"/);
@@ -166,11 +182,11 @@ test('LP1 ends with a local trust footer for Madrastna, pioneer schools, and the
   assert.equal((page.match(/class="trust-credit"/g) || []).length, 3);
   assert.doesNotMatch(page, /class="trust-grid"/);
   assert.doesNotMatch(page, /class="trust-card"/);
-  assert.match(page, /<img src="credits\/madrastna\.png" alt="مدرستنا">/);
+  assert.match(page, /<img src="credits\/madrastna\.webp" alt="مدرستنا">/);
   assert.match(page, /ريفيزي يساهم في جعل المدرسة ذات جودة للجميع/);
-  assert.match(page, /<img src="credits\/pionniers\.png" alt="EE TaRL Label AES">/);
+  assert.match(page, /<img src="credits\/pionniers\.webp" alt="EE TaRL Label AES">/);
   assert.match(page, /ريفيزي مطابق تماماً لدروس المدرسة الرائدة/);
-  assert.match(page, /<img src="credits\/men\.png" alt="وزارة التربية الوطنية والتعليم الأولي والرياضة">/);
+  assert.match(page, /<img src="credits\/men\.webp" alt="وزارة التربية الوطنية والتعليم الأولي والرياضة">/);
   assert.match(page, /\.trust-logo img \{\s+display: block;\s+width: 100%;\s+height: 100%;\s+object-fit: contain;/);
   assert.match(page, /\.trust-logo--pioneers \{\s+width: 112px;\s+height: 112px;/);
   assert.match(page, /ريفيزي مطابق لمنهاج وتوصيات وزارة التربية الوطنية/);
@@ -201,8 +217,8 @@ test('LP1 keeps the revision comparison section hidden until it is needed', () =
 
 test('LP1 shows the full-width screenshot swiper directly below the header', () => {
   assert.match(page, /class="learning-screens-swiper"/);
-  assert.match(page, /images\/boy-screenshots\.png/);
-  assert.match(page, /images\/girl-screenshots\.png/);
+  assert.match(page, /images\/boy-screenshots\.webp/);
+  assert.match(page, /images\/girl-screenshots\.webp/);
   assert.match(page, /function showLearningSlide\(index\)/);
   assert.match(page, /setInterval\([^;]+, 4000\)/);
   assert.match(page, /data-learning-slide/);
@@ -215,7 +231,7 @@ test('LP1 shows the full-width screenshot swiper directly below the header', () 
 });
 
 test('LP1 presents the pioneer-school workbooks beneath its curriculum introduction', () => {
-  assert.match(page, /<figure class="curriculum-livrets"[^>]*>\s*<img src="parts\/livrets-raida\.png" alt="كتب الفرنسية الخاصة بالمدرسة الرائدة">\s*<figcaption>محتوى مطابق تماماً للدروس لي كايقراوها فالمدارس<\/figcaption>/);
+  assert.match(page, /<figure class="curriculum-livrets"[^>]*>\s*<img src="parts\/livrets-raida\.webp" alt="كتب الفرنسية الخاصة بالمدرسة الرائدة">\s*<figcaption>محتوى مطابق تماماً للدروس لي كايقراوها فالمدارس<\/figcaption>/);
 });
 
 test('LP1 keeps the scrs gallery in its own compact-arrow swiper', () => {
@@ -223,7 +239,7 @@ test('LP1 keeps the scrs gallery in its own compact-arrow swiper', () => {
   assert.match(page, /<section class="scrs-swiper" id="scrs-swiper"[^>]*aria-labelledby="scrs-gallery-title"/);
   assert.match(page, /class="scrs-swiper"/);
   for (let index = 1; index <= 12; index += 1) {
-    assert.match(page, new RegExp(`scrs/scr-${index}\\.png`));
+    assert.match(page, new RegExp(`scrs/scr-${index}\\.webp`));
   }
   assert.match(page, /id="scrs-prev"/);
   assert.match(page, /id="scrs-next"/);

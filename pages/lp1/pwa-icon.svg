@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>ريفيزي</title>
+  <rect width="512" height="512" rx="112" fill="#243857"/>
+  <circle cx="357" cy="137" r="35" fill="#FF9800"/>
+  <path fill="#fff" d="M145 369V143h91c68 0 109 32 109 90 0 38-19 66-52 79l61 57h-69l-50-50h-25v50zm65-105h23c29 0 46-12 46-33s-17-33-46-33h-23z"/>
+</svg>
