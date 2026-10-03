@@ -1753,20 +1753,9 @@
                         <input id="parent-city" name="parent_city" type="text" autocomplete="address-level2" required placeholder="مثال: الدار البيضاء">
                     </div>
 
-                    <fieldset class="form-group grade-selector-group" aria-describedby="grade-selector-help">
+                    <fieldset class="form-group grade-selector-group">
                         <legend id="grade-selector-title">المستوى الدراسي للتلميذ</legend>
                         <div class="grade-selectors" id="grade-selectors"></div>
-                        <p id="grade-selector-help" class="footer-note">كتب اسم كل تلميذ واختار المستوى الدراسي ديالو.</p>
-                    </fieldset>
-
-                    <fieldset class="form-group">
-                        <legend>شنو بغيتي ولدك أو بنتك يقوّي؟</legend>
-                        <div class="choice-grid" id="learning-need-options">
-                            <label class="choice-control"><input type="radio" name="learning_need" value="اللغة العربية" required><span>اللغة العربية</span></label>
-                            <label class="choice-control"><input type="radio" name="learning_need" value="اللغة الفرنسية"><span>اللغة الفرنسية</span></label>
-                            <label class="choice-control"><input type="radio" name="learning_need" value="الرياضيات"><span>الرياضيات</span></label>
-                            <label class="choice-control"><input type="radio" name="learning_need" value="مراجعة منظمة فكل المواد"><span>مراجعة فكل المواد</span></label>
-                        </div>
                     </fieldset>
 
                     <button id="whatsapp-btn" class="whatsapp-button" type="button" disabled onclick="sendWhatsApp()">
@@ -2191,8 +2180,7 @@
             const hasStudentNames = names.length === studentCount && names.every(name => name.trim());
             const isReady = hasContactDetails
                 && hasGrades
-                && hasStudentNames
-                && Boolean(formData.get('learning_need'));
+                && hasStudentNames;
             whatsappBtn.disabled = !isReady;
         }
 
@@ -2208,7 +2196,7 @@
             const gradeDetails = formData.getAll('student_grade')
                 .map((grade, index) => `الابن ${index + 1}: ${studentNames[index].trim()} — ${grade}`)
                 .join('\n');
-            const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالمراجعة اللي محتاجين: ${formData.get('learning_need')}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`;
+            const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`;
             const whatsappUrl = `https://wa.me/212624853412?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
