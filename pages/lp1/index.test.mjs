@@ -80,6 +80,8 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /class="plans"/);
   assert.match(page, /id="plan-selector"/);
   assert.match(page, /activationIntro\.after\(planSelector\)/);
+  assert.match(page, /\.activation-card \.plan-selector \.plans\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(page, /\.activation-card \.plan-selector \.plan-period\s*\{\s*display:\s*none/);
   assert.equal((page.match(/class="plan-card/g) || []).length, 3);
   assert.match(page, /aria-label="تلميذ واحد، اشتراك سنوي، 249 درهم"/);
   assert.match(page, /aria-label="تلميذان، اشتراك سنوي للإخوة والأخوات، 399 درهم"/);

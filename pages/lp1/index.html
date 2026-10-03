@@ -358,6 +358,93 @@
             padding-left: 0;
         }
 
+        .activation-card .plan-selector .plans {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .activation-card .plan-selector .plan-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 132px;
+            padding: 29px 6px 10px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .activation-card .plan-selector .radio-container {
+            position: absolute;
+            top: 9px;
+            right: 9px;
+            margin: 0;
+        }
+
+        .activation-card .plan-selector .radio-outer {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+        }
+
+        .activation-card .plan-selector .radio-inner {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        .activation-card .plan-selector .plan-details,
+        .activation-card .plan-selector .price-container {
+            display: block;
+            flex: 0 0 auto;
+        }
+
+        .activation-card .plan-selector .plan-title {
+            min-height: 2.4em;
+            margin: 0 0 4px;
+            color: var(--primary);
+            font-size: 0.79rem;
+            line-height: 1.25;
+        }
+
+        .activation-card .plan-selector .plan-period {
+            display: none;
+        }
+
+        .activation-card .plan-selector .price-row {
+            justify-content: center;
+            margin: 1px 0 5px;
+        }
+
+        .activation-card .plan-selector .price {
+            font-size: 1.55rem;
+        }
+
+        .activation-card .plan-selector .currency {
+            margin-right: 2px;
+            font-size: 0.7rem;
+        }
+
+        .activation-card .plan-selector .plan-savings {
+            justify-content: center;
+            gap: 2px;
+            margin: 0;
+            color: #10B981;
+            font-size: 0.58rem;
+            line-height: 1.35;
+            white-space: nowrap;
+        }
+
+        .activation-card .plan-selector .badge {
+            top: -8px;
+            left: 5px;
+            padding: 3px 6px;
+            border-radius: 8px;
+            font-size: 0.55rem;
+            white-space: nowrap;
+        }
+
         .plan-card {
             display: flex;
             align-items: center;
