@@ -99,6 +99,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /فعّل اشتراك ريفيزي/);
   assert.match(page, /id="parent-name"/);
   assert.match(page, /id="parent-phone"/);
+  assert.match(page, /placeholder="06xxxxxxxx"/);
   assert.match(page, /id="parent-phone-error"/);
   assert.match(page, /function normalizeMoroccanPhone\(phone\)/);
   assert.match(page, /function validateMoroccanPhone\(\)/);
