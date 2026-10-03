@@ -59,13 +59,14 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /\.header-prompt-tags span:nth-child\(3n \+ 2\)\s*\{[\s\S]*?background:\s*#FFF3D8/);
   assert.match(page, /\.header-highlight\s*\{[\s\S]*?background:\s*#FFE0A3/);
   assert.match(page, /باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟/);
-  assert.match(page, /<span class="header-curriculum">جميع مواد المنهاج<\/span>/);
+  assert.match(page, /<section class="header-learning-section" aria-labelledby="curriculum-title">[\s\S]*?<span class="header-curriculum" id="curriculum-title">جميع مواد المنهاج<\/span>[\s\S]*?class="header-subjects"/);
   assert.match(page, /ريفيزي كيتضمن جميع المواد اللي كيقراها ولدك أو بنتك فالمدرسة الرائدة/);
   assert.match(page, /\.header-learning \.header-curriculum-description\s*\{/);
   const headerMarkup = page.slice(page.indexOf('<header class="header">'), page.indexOf('</header>'));
   assert.doesNotMatch(headerMarkup, /ريفيزي كيعطي لولدك طريق واضح باش يراجع دروسو/);
   assert.doesNotMatch(headerMarkup, /محتوى منظم فالعربية والفرنسية والرياضيات/);
-  assert.match(page, /<span class="header-curriculum">ميزات ريفيزي<\/span>/);
+  assert.match(page, /<section class="header-learning-section" aria-labelledby="features-title">[\s\S]*?<span class="header-curriculum" id="features-title">ميزات ريفيزي<\/span>[\s\S]*?class="header-features"/);
+  assert.match(page, /\.header-learning-section \+ \.header-learning-section \{\s+margin-top: 18px;/);
   assert.match(page, /أنشطة تفاعلية متنوعة كتساعد ولدك أو بنتك يفهم، يتدرّب، ويتقدّم خطوة بخطوة/);
   assert.match(page, /class="header-features"/);
   for (let index = 1; index <= 8; index += 1) {
