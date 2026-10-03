@@ -1211,6 +1211,28 @@
             -webkit-user-select: none;
         }
 
+        .scrs-gallery-intro {
+            margin: 0 24px 12px;
+            text-align: center;
+        }
+
+        .scrs-gallery-intro h2 {
+            margin: 0 0 5px;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 800;
+            line-height: 1.45;
+        }
+
+        .scrs-gallery-intro p {
+            max-width: 320px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            font-weight: 500;
+            line-height: 1.65;
+        }
+
         .scrs-track {
             display: flex;
             direction: ltr;
@@ -1991,7 +2013,11 @@
             </div>
         </section>
 
-        <section class="scrs-swiper" id="scrs-swiper" aria-roledescription="carousel" aria-label="لقطات إضافية من تطبيق ريفيزي">
+        <div class="scrs-gallery-intro">
+            <h2 id="scrs-gallery-title">تصفح ميزات ريفيزي</h2>
+            <p>شوف أمثلة من الأنشطة اللي كيتعلّم بها ولدك أو بنتك بطريقة تفاعلية.</p>
+        </div>
+        <section class="scrs-swiper" id="scrs-swiper" aria-roledescription="carousel" aria-labelledby="scrs-gallery-title">
             <div class="scrs-track" id="scrs-track">
                 <figure class="scrs-slide"><img src="scrs/scr-1.png" alt="لقطة من تطبيق ريفيزي 1" draggable="false"></figure>
                 <figure class="scrs-slide"><img src="scrs/scr-2.png" alt="لقطة من تطبيق ريفيزي 2" draggable="false"></figure>

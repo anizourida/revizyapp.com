@@ -215,6 +215,8 @@ test('LP1 shows the full-width screenshot swiper directly below the header', () 
 });
 
 test('LP1 keeps the scrs gallery in its own compact-arrow swiper', () => {
+  assert.match(page, /<div class="scrs-gallery-intro">\s*<h2 id="scrs-gallery-title">تصفح ميزات ريفيزي<\/h2>\s*<p>شوف أمثلة من الأنشطة اللي كيتعلّم بها ولدك أو بنتك بطريقة تفاعلية\.<\/p>/);
+  assert.match(page, /<section class="scrs-swiper" id="scrs-swiper"[^>]*aria-labelledby="scrs-gallery-title"/);
   assert.match(page, /class="scrs-swiper"/);
   for (let index = 1; index <= 12; index += 1) {
     assert.match(page, new RegExp(`scrs/scr-${index}\\.png`));
