@@ -80,7 +80,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /class="plans"/);
   assert.equal((page.match(/class="plan-card/g) || []).length, 3);
   assert.match(page, /تلميذ واحد[\s\S]*?350 درهم[\s\S]*?249/);
-  assert.match(page, /تلميذان[\s\S]*?500 درهم[\s\S]*?399/);
+  assert.match(page, /<button class="plan-card"[\s\S]*?<span class="badge">إخوة وأخوات<\/span>[\s\S]*?تلميذان[\s\S]*?500 درهم[\s\S]*?399/);
   assert.match(page, /3 إخوة وأخوات[\s\S]*?600 درهم[\s\S]*?449/);
   assert.doesNotMatch(page, /اشتراك شهري/);
   assert.match(page, /class="payment-section"/);
