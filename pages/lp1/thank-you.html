@@ -81,19 +81,6 @@
             transform: rotate(-10deg);
         }
 
-        .offer-bar {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            min-height: 42px;
-            padding: 9px 24px;
-            place-items: center;
-            background: #ffaf01;
-            color: #fff;
-            font-size: .78rem;
-            font-weight: 800;
-        }
-
         .thank-you-illustration {
             position: relative;
             z-index: 1;
@@ -207,8 +194,7 @@
             gap: 10px;
         }
 
-        .whatsapp-link,
-        .home-link {
+        .whatsapp-link {
             display: flex;
             min-height: 52px;
             align-items: center;
@@ -229,17 +215,8 @@
         .whatsapp-link img { width: 22px; height: 22px; object-fit: contain; }
         .whatsapp-link:hover { background: #10976c; }
 
-        .home-link {
-            border: 1px solid #d6e0ec;
-            background: #fff;
-            color: var(--primary);
-        }
-
-        .home-link:hover { border-color: #1c2c45; color: #fff; }
-        .whatsapp-link:active,
-        .home-link:active { transform: scale(.98); }
-        .whatsapp-link:focus-visible,
-        .home-link:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+        .whatsapp-link:active { transform: scale(.98); }
+        .whatsapp-link:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
 
         .note {
             margin: 16px auto 0;
@@ -253,7 +230,6 @@
 <body>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2359056121533443&ev=PageView&noscript=1" alt=""></noscript>
     <div class="page">
-        <div class="offer-bar">ريفيزي معاكم خطوة بخطوة فالمراجعة فالدار</div>
         <figure class="thank-you-illustration">
             <img src="parts/par-2.webp" alt="طفل وطفلة سعيدان من ريفيزي">
         </figure>
@@ -281,13 +257,32 @@
             </section>
 
             <div class="contact-actions">
-                <a class="whatsapp-link" href="https://wa.me/212624853412" target="_blank" rel="noopener noreferrer">
+                <a class="whatsapp-link" id="thank-you-whatsapp" href="https://wa.me/212624853412" target="_blank" rel="noopener noreferrer">
                     <img src="whatsapp.webp" alt="">تواصل معنا فواتساب دابا
                 </a>
-                <a class="home-link" href="index.html">رجع للصفحة الرئيسية</a>
             </div>
             <p class="note">إلى بقى عندك شي سؤال، صيفط لينا رسالة فواتساب وغادي نعاونوك.</p>
         </main>
     </div>
+    <script>
+        const whatsappLink = document.getElementById('thank-you-whatsapp');
+        const draftKey = 'revizy-lp1-whatsapp-draft';
+        let whatsappMessage = 'السلام عليكم، بغيت نعرف خطوات تفعيل اشتراك ريفيزي.';
+
+        try {
+            const savedDraft = JSON.parse(sessionStorage.getItem('revizy-lp1-whatsapp-draft') || '{}');
+            if (typeof savedDraft.message === 'string' && savedDraft.message.trim()) {
+                whatsappMessage = savedDraft.message;
+            }
+        } catch {
+            sessionStorage.removeItem('revizy-lp1-whatsapp-draft');
+        }
+
+        whatsappLink.href = `https://wa.me/212624853412?text=${encodeURIComponent(whatsappMessage)}`;
+        whatsappLink.addEventListener('click', () => {
+            if (typeof window.fbq === 'function') window.fbq('track', 'Contact');
+            sessionStorage.removeItem('revizy-lp1-whatsapp-draft');
+        });
+    </script>
 </body>
 </html>

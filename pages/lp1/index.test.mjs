@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const page = await readFile(new URL('./index.html', import.meta.url), 'utf8');
+const thankYouPage = await readFile(new URL('./thank-you.html', import.meta.url), 'utf8');
 const manifestPath = new URL('./manifest.webmanifest', import.meta.url);
 const serviceWorkerPath = new URL('./service-worker.js', import.meta.url);
 const videoPosterPath = new URL('./video-poster.webp', import.meta.url);
@@ -60,16 +61,31 @@ test('LP1 gives ad visitors a persistent, accessible route to the activation for
   assert.match(page, /activationCta\.classList\.toggle\('is-hidden'/);
 });
 
-test('LP1 tracks only page views and completed WhatsApp contact intent with Meta Pixel', () => {
+test('LP1 saves a validated activation request before redirecting to the WhatsApp thank-you page', () => {
   assert.match(page, /fbq\('init', '2359056121533443'\)/);
   assert.match(page, /fbq\('track', 'PageView'\)/);
   assert.match(page, /www\.facebook\.com\/tr\?id=2359056121533443&ev=PageView&noscript=1/);
 
-  const whatsappFlow = page.slice(page.indexOf('function sendWhatsApp()'), page.indexOf("activationForm.addEventListener('input'"));
-  assert.match(whatsappFlow, /typeof window\.fbq === 'function'/);
-  assert.match(whatsappFlow, /window\.fbq\('track', 'Contact'\)/);
-  assert.doesNotMatch(whatsappFlow, /fbq\([^;]*(?:parent_name|parent_phone|parent_city|student_name|student_grade)/);
-  assert.doesNotMatch(page, /fbq\('track', 'Lead'/);
+  assert.match(page, /const FORM_SUBMIT_URL = 'https:\/\/revizy-lp1-api\.3nizou\.workers\.dev\/';/);
+  assert.match(page, /await fetch\(FORM_SUBMIT_URL, \{/);
+  assert.match(page, /method: 'POST'/);
+  assert.match(page, /response\.ok && result\.ok === true/);
+  assert.match(page, /const WHATSAPP_DRAFT_KEY = 'revizy-lp1-whatsapp-draft';/);
+  assert.match(page, /sessionStorage\.setItem\(WHATSAPP_DRAFT_KEY/);
+  assert.match(page, /window\.location\.assign\('thank-you\.html'\)/);
+  assert.doesNotMatch(page, /window\.open\(whatsappUrl/);
+  assert.match(page, /<div class="form-honeypot"[^>]*>[\s\S]*?<input id="website" name="website"/);
+  assert.match(page, /window\.fbq\('track', 'Lead'\)/);
+  assert.doesNotMatch(page, /fbq\([^;]*(?:parent_name|parent_phone|parent_city|student_name|student_grade)/);
+});
+
+test('LP1 thank-you page has no offer or home link and opens WhatsApp with the saved draft', () => {
+  assert.doesNotMatch(thankYouPage, /offer-bar/);
+  assert.doesNotMatch(thankYouPage, /home-link/);
+  assert.match(thankYouPage, /sessionStorage\.getItem\('revizy-lp1-whatsapp-draft'/);
+  assert.match(thankYouPage, /sessionStorage\.removeItem\('revizy-lp1-whatsapp-draft'/);
+  assert.match(thankYouPage, /https:\/\/wa\.me\/212624853412\?text=/);
+  assert.doesNotMatch(thankYouPage, /URLSearchParams|location\.search/);
 });
 
 test('LP1 reserves image layout, defers noncritical media, and exposes accessible document landmarks', async () => {
@@ -181,7 +197,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.doesNotMatch(page, /شنو بغيتي ولدك أو بنتك يقوّي؟/);
   assert.doesNotMatch(page, /كتب اسم كل تلميذ واختار المستوى الدراسي ديالو/);
   assert.doesNotMatch(page, /learning_need/);
-  assert.match(page, /صيفط طلب التفعيل فواتساب/);
+  assert.match(page, /صيفط طلب التفعيل/);
   assert.doesNotMatch(page, /Attijari/);
   assert.doesNotMatch(page, /CIH/);
   assert.doesNotMatch(page, /RIDA ANIZOU/);

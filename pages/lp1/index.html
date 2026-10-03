@@ -1586,6 +1586,30 @@
             line-height: 1.45;
         }
 
+        .form-submit-status {
+            min-height: 1.5em;
+            margin: 10px 0 0;
+            color: #52637D;
+            font-size: 0.76rem;
+            font-weight: 600;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .form-submit-status.is-error { color: #C2410C; }
+
+        .form-honeypot {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         .grade-selectors {
             display: grid;
             gap: 10px;
@@ -2215,6 +2239,10 @@
                 </div>
 
                 <form class="activation-form" id="activation-form" novalidate>
+                    <div class="form-honeypot" aria-hidden="true">
+                        <label for="website">الموقع الإلكتروني</label>
+                        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+                    </div>
                     <div class="form-field">
                         <label for="parent-name">الاسم الكامل</label>
                         <input id="parent-name" name="parent_name" type="text" autocomplete="name" required placeholder="الاسم ديالك">
@@ -2234,10 +2262,11 @@
                         <div class="grade-selectors" id="grade-selectors"></div>
                     </fieldset>
 
-                    <button id="whatsapp-btn" class="whatsapp-button" type="button" disabled onclick="sendWhatsApp()">
+                    <button id="whatsapp-btn" class="whatsapp-button" type="submit" disabled>
                         <img src="whatsapp.webp" alt="">
-                        صيفط طلب التفعيل فواتساب
+                        صيفط طلب التفعيل
                     </button>
+                    <p class="form-submit-status" id="form-submit-status" role="status" aria-live="polite"></p>
                     <p class="footer-note">غادي نتواصلو معاك فواتساب باش نكملو معاك خطوات التفعيل بطريقة واضحة.</p>
                 </form>
             </div>
@@ -2636,6 +2665,7 @@
         const trustFooter = document.getElementById('trust-footer');
         const activationCta = document.getElementById('activation-cta');
         const whatsappBtn = document.getElementById('whatsapp-btn');
+        const formSubmitStatus = document.getElementById('form-submit-status');
         const parentPhoneInput = document.getElementById('parent-phone');
         const parentPhoneError = document.getElementById('parent-phone-error');
         const gradeSelectorTitle = document.getElementById('grade-selector-title');
@@ -2723,28 +2753,68 @@
             return isValid;
         }
 
-        function sendWhatsApp() {
-            updateActivationButton();
-            if (whatsappBtn.disabled) return;
+        const FORM_SUBMIT_URL = 'https://revizy-lp1-api.3nizou.workers.dev/';
+        const WHATSAPP_DRAFT_KEY = 'revizy-lp1-whatsapp-draft';
 
+        function buildActivationDraft() {
+            updateActivationButton();
             const formData = new FormData(activationForm);
             const selectedPlan = document.querySelector('.plan-card.active');
             const planName = selectedPlan.querySelector('.plan-title').textContent.trim();
             const price = selectedPlan.dataset.price;
             const studentNames = formData.getAll('student_name');
-            const gradeDetails = formData.getAll('student_grade')
+            const students = formData.getAll('student_grade')
                 .map((grade, index) => {
                     const childName = studentNames[index]?.trim() || `اسم الابن ${index + 1}`;
-                    return `الابن ${index + 1}: ${childName} — ${grade}`;
-                })
-                .join('\n');
-            const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`;
-            const whatsappUrl = `https://wa.me/212624853412?text=${encodeURIComponent(message)}`;
-            if (typeof window.fbq === 'function') {
-                window.fbq('track', 'Contact');
-            }
-            window.open(whatsappUrl, '_blank');
+                    return { name: childName, grade };
+                });
+            const gradeDetails = students.map((student, index) => `الابن ${index + 1}: ${student.name} — ${student.grade}`).join('\n');
+
+            return {
+                payload: {
+                    landing_page: 'lp1',
+                    parent_name: formData.get('parent_name')?.trim(),
+                    parent_phone: normalizeMoroccanPhone(formData.get('parent_phone')?.trim() || ''),
+                    parent_city: formData.get('parent_city')?.trim(),
+                    plan_name: planName,
+                    price_mad: Number(price),
+                    students,
+                    website: formData.get('website')?.trim() || ''
+                },
+                message: `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`
+            };
         }
+
+        async function submitActivationRequest(event) {
+            event.preventDefault();
+            updateActivationButton();
+            if (whatsappBtn.disabled) return;
+
+            const { payload, message } = buildActivationDraft();
+            whatsappBtn.disabled = true;
+            formSubmitStatus.classList.remove('is-error');
+            formSubmitStatus.textContent = 'كنصيفطو طلبك دابا…';
+
+            try {
+                const response = await fetch(FORM_SUBMIT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json().catch(() => ({}));
+                if (!(response.ok && result.ok === true)) throw new Error('SUBMISSION_FAILED');
+
+                sessionStorage.setItem(WHATSAPP_DRAFT_KEY, JSON.stringify({ message }));
+                if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
+                window.location.assign('thank-you.html');
+            } catch {
+                formSubmitStatus.classList.add('is-error');
+                formSubmitStatus.textContent = 'ما قدرناش نصيفطو الطلب دابا. تأكد من الإنترنت وعاود حاول.';
+                updateActivationButton();
+            }
+        }
+
+        activationForm.addEventListener('submit', submitActivationRequest);
 
         activationForm.addEventListener('input', updateActivationButton);
         activationForm.addEventListener('change', updateActivationButton);
