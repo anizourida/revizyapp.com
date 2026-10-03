@@ -157,6 +157,10 @@ test('LP1 provides Revizy-specific expandable answers after activation', () => {
 
 test('LP1 ends with a local trust footer for Madrastna, pioneer schools, and the ministry', () => {
   assert.match(page, /<footer class="trust-footer" id="trust-footer"/);
+  assert.match(page, /class="trust-credits"/);
+  assert.equal((page.match(/class="trust-credit"/g) || []).length, 3);
+  assert.doesNotMatch(page, /class="trust-grid"/);
+  assert.doesNotMatch(page, /class="trust-card"/);
   assert.match(page, /class="trust-mark trust-mark--madrastna"/);
   assert.match(page, /ريفيزي يساهم في جعل المدرسة ذات جودة للجميع/);
   assert.match(page, /class="trust-mark trust-mark--pioneers"/);

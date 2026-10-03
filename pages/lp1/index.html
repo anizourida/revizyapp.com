@@ -1658,26 +1658,28 @@
             font-weight: 800;
         }
 
-        .trust-grid {
+        .trust-credits {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 8px;
+            gap: 22px;
         }
 
-        .trust-card {
+        .trust-credit {
             display: grid;
-            grid-template-rows: 58px auto;
-            align-items: center;
-            min-width: 0;
-            padding: 10px 7px 11px;
-            border: 1px solid #F1E4D1;
-            border-radius: 15px;
-            background: #FFFDF9;
+            justify-items: center;
+            gap: 10px;
+            padding: 2px 0 22px;
+            border-bottom: 1px solid #F1E4D1;
+        }
+
+        .trust-credit:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
         }
 
         .trust-mark {
             display: grid;
             place-items: center;
+            min-height: 62px;
             min-width: 0;
             color: var(--primary);
             font-weight: 800;
@@ -1685,34 +1687,34 @@
         }
 
         .trust-mark--madrastna b {
-            font-size: clamp(0.74rem, 3.2vw, 0.94rem);
+            font-size: 1.3rem;
         }
 
         .trust-mark--madrastna small {
             margin-top: 4px;
             color: #5BAEBA;
             font-family: inherit;
-            font-size: clamp(0.43rem, 2vw, 0.55rem);
+            font-size: 0.68rem;
             font-weight: 700;
             direction: ltr;
         }
 
         .trust-mark--pioneers {
-            grid-template-columns: repeat(2, 25px);
-            grid-template-rows: repeat(2, 25px);
-            gap: 2px;
+            grid-template-columns: repeat(2, 32px);
+            grid-template-rows: repeat(2, 32px);
+            gap: 3px;
         }
 
         .trust-mark--pioneers span {
             display: grid;
             place-items: center;
-            width: 25px;
-            height: 25px;
+            width: 32px;
+            height: 32px;
             border-radius: 9px 9px 2px 9px;
             background: #2DAF16;
             color: white;
             font-family: Arial, sans-serif;
-            font-size: 0.55rem;
+            font-size: 0.66rem;
             font-weight: 800;
         }
 
@@ -1727,25 +1729,26 @@
         .trust-mark--men span:first-child {
             display: grid;
             place-items: center;
-            width: 28px;
-            height: 28px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: #C1272D;
             color: white;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .trust-mark--men span:last-child {
-            font-size: clamp(0.5rem, 2.2vw, 0.64rem);
+            font-size: 0.78rem;
             line-height: 1.25;
         }
 
-        .trust-card p {
-            margin: 8px 0 0;
+        .trust-credit p {
+            max-width: 330px;
+            margin: 0;
             color: #52637D;
-            font-size: clamp(0.56rem, 2.25vw, 0.67rem);
+            font-size: 0.82rem;
             font-weight: 600;
-            line-height: 1.5;
+            line-height: 1.7;
         }
 
         .trust-copyright {
@@ -2146,21 +2149,21 @@
 
         <footer class="trust-footer" id="trust-footer" aria-label="التزامات ريفيزي التعليمية">
             <p class="trust-footer-title">ريفيزي كيدعم تعلّم ولدك أو بنتك بثقة</p>
-            <div class="trust-grid">
-                <article class="trust-card">
+            <div class="trust-credits">
+                <article class="trust-credit">
                     <div class="trust-mark trust-mark--madrastna" aria-label="مدرستنا">
                         <b>مدرستنا</b>
                         <small>madrastna.ma</small>
                     </div>
                     <p>ريفيزي يساهم في جعل المدرسة ذات جودة للجميع.</p>
                 </article>
-                <article class="trust-card">
+                <article class="trust-credit">
                     <div class="trust-mark trust-mark--pioneers" aria-label="EE TaRL Label AES">
                         <span>EE</span><span>TaRL</span><span>Label</span><span>AES</span>
                     </div>
                     <p>ريفيزي مطابق تماماً لدروس المدرسة الرائدة.</p>
                 </article>
-                <article class="trust-card">
+                <article class="trust-credit">
                     <div class="trust-mark trust-mark--men" aria-label="وزارة التربية الوطنية">
                         <span aria-hidden="true">★</span>
                         <span>وزارة التربية<br>الوطنية</span>
