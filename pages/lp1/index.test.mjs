@@ -161,6 +161,12 @@ test('LP1 keeps the learning-promise section hidden until it is needed', () => {
   assert.equal((page.match(/class="learning-topic"/g) || []).length, 4);
 });
 
+test('LP1 keeps the subscription-features content grouped and hidden until it is needed', () => {
+  assert.match(page, /<section class="subscription-features"[^>]*\bhidden>/);
+  assert.match(page, /<p class="section-title" id="subscription-features-title">مميزات الاشتراك<\/p>/);
+  assert.match(page, /class="subscription-features"[\s\S]*?class="features"[\s\S]*?حذف الإعلانات/);
+});
+
 test('LP1 keeps the revision comparison section hidden until it is needed', () => {
   assert.match(page, /<section class="revizy-contrast"[^>]*\bhidden>/);
   assert.match(page, /بلا ريفيزي ولا مع ريفيزي؟/);
