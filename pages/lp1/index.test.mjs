@@ -97,15 +97,15 @@ test('LP1 has a moving annual-plan offer ticker above the header', () => {
   assert.match(page, /@keyframes offerTicker/);
 });
 
-test('LP1 explains Revizy learning support with original Darija copy', () => {
-  assert.match(page, /class="learning-promise"/);
+test('LP1 keeps the learning-promise section hidden until it is needed', () => {
+  assert.match(page, /<section class="learning-promise"[^>]*\bhidden>/);
   assert.match(page, /المراجعة فالدار ما خاصهاش تولّي ضغط/);
   assert.match(page, /العربية والفرنسية والرياضيات/);
   assert.equal((page.match(/class="learning-topic"/g) || []).length, 4);
 });
 
-test('LP1 contrasts revision with and without Revizy using parent-facing Darija copy', () => {
-  assert.match(page, /class="revizy-contrast"/);
+test('LP1 keeps the revision comparison section hidden until it is needed', () => {
+  assert.match(page, /<section class="revizy-contrast"[^>]*\bhidden>/);
   assert.match(page, /بلا ريفيزي ولا مع ريفيزي؟/);
   assert.match(page, /class="revizy-contrast-card revizy-contrast-card--without"/);
   assert.match(page, /class="revizy-contrast-card revizy-contrast-card--with"/);
