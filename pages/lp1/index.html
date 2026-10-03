@@ -135,6 +135,7 @@
         .header h1,
         .header-prompt-tags,
         .header .subtitle,
+        .header-tracing-illustration,
         .header-spark,
         .header-mark {
             z-index: 1;
@@ -194,6 +195,20 @@
 
         .header-prompt-tags span:nth-child(3n) {
             transform: rotate(1.2deg);
+        }
+
+        .header-tracing-illustration {
+            position: relative;
+            display: grid;
+            place-items: center;
+            margin: -5px auto 8px;
+            pointer-events: none;
+        }
+
+        .header-tracing-illustration img {
+            display: block;
+            width: min(280px, 72vw);
+            height: auto;
         }
 
         @keyframes promptFloat {
@@ -1765,6 +1780,9 @@
                 <span class="header-highlight">كايشد التيليفون بلا فائدة؟</span>
                 <span class="header-highlight">الواجبات ولات معركة؟</span>
                 <span class="header-highlight">باغي يتعلم بوحدو بلا ما تبقى حدا راسو؟</span>
+            </div>
+            <div class="header-tracing-illustration" aria-hidden="true">
+                <img src="parts/par-6.png" alt="">
             </div>
             <section class="video-section" aria-label="فيديو يشرح تطبيق ريفيزي">
                 <div class="video-divider" aria-hidden="true"></div>
