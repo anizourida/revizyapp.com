@@ -161,11 +161,11 @@ test('LP1 ends with a local trust footer for Madrastna, pioneer schools, and the
   assert.equal((page.match(/class="trust-credit"/g) || []).length, 3);
   assert.doesNotMatch(page, /class="trust-grid"/);
   assert.doesNotMatch(page, /class="trust-card"/);
-  assert.match(page, /class="trust-mark trust-mark--madrastna"/);
+  assert.match(page, /<img src="credits\/madrastna\.png" alt="مدرستنا">/);
   assert.match(page, /ريفيزي يساهم في جعل المدرسة ذات جودة للجميع/);
-  assert.match(page, /class="trust-mark trust-mark--pioneers"/);
+  assert.match(page, /<img src="credits\/pionniers\.png" alt="EE TaRL Label AES">/);
   assert.match(page, /ريفيزي مطابق تماماً لدروس المدرسة الرائدة/);
-  assert.match(page, /class="trust-mark trust-mark--men"/);
+  assert.match(page, /<img src="credits\/men\.png" alt="وزارة التربية الوطنية والتعليم الأولي والرياضة">/);
   assert.match(page, /ريفيزي مطابق لمنهاج وتوصيات وزارة التربية الوطنية/);
   assert.match(page, /© 2026 ريفيزي — جميع الحقوق محفوظة/);
   assert.match(page, /faqSection\.after\(trustFooter\)/);

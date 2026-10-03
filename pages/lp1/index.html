@@ -1676,70 +1676,32 @@
             border-bottom: 0;
         }
 
-        .trust-mark {
+        .trust-logo {
             display: grid;
             place-items: center;
-            min-height: 62px;
-            min-width: 0;
-            color: var(--primary);
-            font-weight: 800;
-            line-height: 1;
+            width: min(290px, 100%);
+            height: 82px;
         }
 
-        .trust-mark--madrastna b {
-            font-size: 1.3rem;
+        .trust-logo img {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
 
-        .trust-mark--madrastna small {
-            margin-top: 4px;
-            color: #5BAEBA;
-            font-family: inherit;
-            font-size: 0.68rem;
-            font-weight: 700;
-            direction: ltr;
+        .trust-logo--madrastna {
+            height: 88px;
         }
 
-        .trust-mark--pioneers {
-            grid-template-columns: repeat(2, 32px);
-            grid-template-rows: repeat(2, 32px);
-            gap: 3px;
+        .trust-logo--pioneers {
+            height: 104px;
         }
 
-        .trust-mark--pioneers span {
-            display: grid;
-            place-items: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 9px 9px 2px 9px;
-            background: #2DAF16;
-            color: white;
-            font-family: Arial, sans-serif;
-            font-size: 0.66rem;
-            font-weight: 800;
-        }
-
-        .trust-mark--pioneers span:nth-child(2) { background: #029DD9; border-radius: 9px 9px 9px 2px; }
-        .trust-mark--pioneers span:nth-child(3) { background: #FFA500; border-radius: 9px 2px 9px 9px; }
-        .trust-mark--pioneers span:nth-child(4) { background: #ED2F5B; border-radius: 2px 9px 9px; }
-
-        .trust-mark--men {
-            gap: 4px;
-        }
-
-        .trust-mark--men span:first-child {
-            display: grid;
-            place-items: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #C1272D;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .trust-mark--men span:last-child {
-            font-size: 0.78rem;
-            line-height: 1.25;
+        .trust-logo--men {
+            height: 72px;
         }
 
         .trust-credit p {
@@ -2151,22 +2113,20 @@
             <p class="trust-footer-title">ريفيزي كيدعم تعلّم ولدك أو بنتك بثقة</p>
             <div class="trust-credits">
                 <article class="trust-credit">
-                    <div class="trust-mark trust-mark--madrastna" aria-label="مدرستنا">
-                        <b>مدرستنا</b>
-                        <small>madrastna.ma</small>
+                    <div class="trust-logo trust-logo--madrastna">
+                        <img src="credits/madrastna.png" alt="مدرستنا">
                     </div>
                     <p>ريفيزي يساهم في جعل المدرسة ذات جودة للجميع.</p>
                 </article>
                 <article class="trust-credit">
-                    <div class="trust-mark trust-mark--pioneers" aria-label="EE TaRL Label AES">
-                        <span>EE</span><span>TaRL</span><span>Label</span><span>AES</span>
+                    <div class="trust-logo trust-logo--pioneers">
+                        <img src="credits/pionniers.png" alt="EE TaRL Label AES">
                     </div>
                     <p>ريفيزي مطابق تماماً لدروس المدرسة الرائدة.</p>
                 </article>
                 <article class="trust-credit">
-                    <div class="trust-mark trust-mark--men" aria-label="وزارة التربية الوطنية">
-                        <span aria-hidden="true">★</span>
-                        <span>وزارة التربية<br>الوطنية</span>
+                    <div class="trust-logo trust-logo--men">
+                        <img src="credits/men.png" alt="وزارة التربية الوطنية والتعليم الأولي والرياضة">
                     </div>
                     <p>ريفيزي مطابق لمنهاج وتوصيات وزارة التربية الوطنية.</p>
                 </article>
