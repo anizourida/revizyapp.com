@@ -48,6 +48,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /تمارين مناسبة/);
   assert.match(page, /تقدّم متدرّج/);
   assert.match(page, /\.revision-benefits\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.doesNotMatch(page, /revision-benefit-icon/);
   assert.match(page, /function chooseHeaderPrompts\(amount\)/);
   assert.match(page, /chooseHeaderPrompts\(5\)/);
   assert.match(page, /'باغي تراجع معاه؟'/);
