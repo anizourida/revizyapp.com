@@ -31,13 +31,15 @@ test('LP1 contains an accessible custom player for the local Revizy video', () =
   assert.match(page, /width:\s*38px/);
 });
 
-test('LP1 is installable and shows a short branded loader before its content is ready', async () => {
+test('LP1 is installable and renders its header immediately without a blocking loader', async () => {
   const manifest = await readFile(manifestPath, 'utf8');
   const serviceWorker = await readFile(serviceWorkerPath, 'utf8');
 
   assert.match(page, /<link rel="manifest" href="manifest\.webmanifest">/);
-  assert.match(page, /<body class="is-loading">/);
-  assert.match(page, /id="app-loader"/);
+  assert.match(page, /<body>/);
+  assert.doesNotMatch(page, /id="app-loader"/);
+  assert.doesNotMatch(page, /\bis-loading\b/);
+  assert.match(page, /<img class="header-children"[^>]+fetchpriority="high"[^>]+loading="eager"/);
   assert.match(page, /navigator\.serviceWorker\.register\("service-worker\.js", \{ scope: "\.\/" \}\)/);
   assert.match(manifest, /"name": "ريفيزي"/);
   assert.match(manifest, /"src": "pwa-icon\.svg"/);

@@ -44,87 +44,6 @@
             margin: 0;
         }
 
-        body.is-loading {
-            overflow: hidden;
-        }
-
-        .app-loader {
-            position: fixed;
-            z-index: 100;
-            inset: 0;
-            display: grid;
-            place-items: center;
-            padding: 24px;
-            background: #FFFEFC;
-            color: var(--primary);
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 280ms ease, visibility 280ms ease;
-        }
-
-        body:not(.is-loading) .app-loader {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .app-loader-content {
-            display: grid;
-            justify-items: center;
-            gap: 13px;
-        }
-
-        .app-loader-mark {
-            display: grid;
-            width: 68px;
-            height: 68px;
-            border-radius: 22px;
-            place-items: center;
-            background: var(--primary);
-            color: #fff;
-            font-size: 2rem;
-            font-weight: 800;
-            box-shadow: 0 12px 30px rgba(36, 56, 87, 0.18);
-        }
-
-        .app-loader-mark::after {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #FF9800;
-            content: "";
-            transform: translate(20px, -20px);
-        }
-
-        .app-loader-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-        }
-
-        .app-loader-progress {
-            width: 122px;
-            height: 4px;
-            overflow: hidden;
-            border-radius: 999px;
-            background: #FFF0D2;
-        }
-
-        .app-loader-progress::after {
-            display: block;
-            width: 48%;
-            height: 100%;
-            border-radius: inherit;
-            background: #FF9800;
-            content: "";
-            animation: loaderProgress 1s ease-in-out infinite alternate;
-        }
-
-        @keyframes loaderProgress {
-            from { transform: translateX(-35%); }
-            to { transform: translateX(140%); }
-        }
-
         .container {
             width: 100%;
             max-width: 480px;
@@ -135,13 +54,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             margin: 0;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .offer-ticker {
@@ -1873,15 +1786,7 @@
         }
     </style>
 </head>
-<body class="is-loading">
-    <div class="app-loader" id="app-loader" role="status" aria-live="polite" aria-label="جاري تحميل ريفيزي">
-        <div class="app-loader-content">
-            <span class="app-loader-mark" aria-hidden="true">R</span>
-            <span class="app-loader-title">ريفيزي</span>
-            <span class="app-loader-progress" aria-hidden="true"></span>
-        </div>
-    </div>
-
+<body>
     <div class="container">
         <div class="offer-ticker" aria-label="عرض خاص: الاشتراك السنوي بـ 249 درهم، وفر 99 درهم">
             <div class="offer-ticker-track" aria-hidden="true">
@@ -1892,7 +1797,7 @@
         <header class="header">
             <span class="header-spark" aria-hidden="true"></span>
             <span class="header-mark" aria-hidden="true">•</span>
-            <img class="header-children" src="parts/par-1.webp" alt="طفلان يراجعان معاً على جهاز لوحي">
+            <img class="header-children" src="parts/par-1.webp" alt="طفلان يراجعان معاً على جهاز لوحي" fetchpriority="high" loading="eager" decoding="async">
             <h1>ولدك او بنتك <span class="header-highlight">فالمدرسة الرائدة؟</span></h1>
             <p class="subtitle">باغي تراجع معاه فالدار بطريقة سهلة وممتعة؟ ريفيزي معاكم خطوة بخطوة.</p>
             <div class="header-prompt-tags" id="header-prompt-tags" aria-label="مواقف كتعيشها فالمراجعة">
@@ -2284,21 +2189,6 @@
     </div>
 
     <script>
-        const appLoader = document.getElementById('app-loader');
-        let appLoaderHidden = false;
-
-        function hideAppLoader() {
-            if (appLoaderHidden) return;
-            appLoaderHidden = true;
-            document.body.classList.remove('is-loading');
-            window.setTimeout(() => appLoader.remove(), 320);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            window.setTimeout(hideAppLoader, 450);
-        }, { once: true });
-        window.setTimeout(hideAppLoader, 3500);
-
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register("service-worker.js", { scope: "./" })
