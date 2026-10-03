@@ -343,6 +343,21 @@
             margin-bottom: 25px;
         }
 
+        .plan-selector {
+            display: none;
+        }
+
+        .activation-card .plan-selector {
+            display: block;
+            padding: 0 0 6px;
+        }
+
+        .activation-card .plan-selector .section-title,
+        .activation-card .plan-selector .plans {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
         .plan-card {
             display: flex;
             align-items: center;
@@ -1544,6 +1559,7 @@
             </div>
         </section>
 
+        <section class="plan-selector" id="plan-selector" aria-label="اختر خطتك">
         <p class="section-title">اختر خطتك</p>
         <div class="plans" role="radiogroup" aria-label="اختيار الاشتراك السنوي">
             <button class="plan-card active" type="button" role="radio" aria-checked="true" aria-label="تلميذ واحد، اشتراك سنوي، 249 درهم" data-price="249" data-student-count="1" onclick="selectPlan(this)">
@@ -1596,6 +1612,7 @@
                 </div>
             </button>
         </div>
+        </section>
 
         <p class="section-title">مميزات الاشتراك</p>
         <div class="features">
@@ -2115,6 +2132,8 @@
         });
 
         const activationForm = document.getElementById('activation-form');
+        const planSelector = document.getElementById('plan-selector');
+        const activationIntro = document.querySelector('.activation-intro');
         const whatsappBtn = document.getElementById('whatsapp-btn');
         const gradeSelectorTitle = document.getElementById('grade-selector-title');
         const gradeSelectors = document.getElementById('grade-selectors');
@@ -2203,6 +2222,7 @@
 
         activationForm.addEventListener('input', updateActivationButton);
         activationForm.addEventListener('change', updateActivationButton);
+        activationIntro.after(planSelector);
         renderGradeSelectors(1);
     </script>
 </body>
