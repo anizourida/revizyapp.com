@@ -394,13 +394,18 @@
             border-radius: 50%;
         }
 
-        .activation-card .plan-selector .plan-details,
+        .activation-card .plan-selector .plan-details {
+            display: contents;
+        }
+
         .activation-card .plan-selector .price-container {
             display: block;
             flex: 0 0 auto;
+            order: 2;
         }
 
         .activation-card .plan-selector .plan-title {
+            order: 1;
             min-height: 2.4em;
             margin: 0 0 4px;
             color: var(--primary);
@@ -427,6 +432,7 @@
         }
 
         .activation-card .plan-selector .plan-savings {
+            order: 3;
             justify-content: center;
             gap: 2px;
             margin: 0;
