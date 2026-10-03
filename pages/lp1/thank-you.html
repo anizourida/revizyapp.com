@@ -81,10 +81,27 @@
             font-weight: 800;
         }
 
+        .thank-you-illustration {
+            position: relative;
+            z-index: 1;
+            height: 205px;
+            margin: 0;
+            overflow: hidden;
+            background: #1c2c45;
+        }
+
+        .thank-you-illustration img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 46%;
+        }
+
         main {
             position: relative;
             z-index: 1;
-            padding: 58px 24px 42px;
+            padding: 0 24px 42px;
             text-align: center;
         }
 
@@ -92,11 +109,12 @@
             display: grid;
             width: 76px;
             height: 76px;
-            margin: 0 auto 22px;
+            margin: -38px auto 22px;
             border-radius: 50%;
             place-items: center;
             background: var(--yellow);
             color: var(--primary);
+            border: 5px solid var(--cream);
             box-shadow: 0 10px 24px rgba(255, 152, 0, .17);
         }
 
@@ -201,6 +219,9 @@
 <body>
     <div class="page">
         <div class="offer-bar">ريفيزي معاكم خطوة بخطوة فالمراجعة فالدار</div>
+        <figure class="thank-you-illustration">
+            <img src="parts/par-2.png" alt="طفل وطفلة سعيدان من ريفيزي">
+        </figure>
         <main>
             <div class="success-mark" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.2 4L19 6.7"></path></svg>
