@@ -1259,6 +1259,24 @@
             gap: 10px;
         }
 
+        .student-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+            gap: 10px;
+        }
+
+        .student-row .form-field {
+            min-width: 0;
+            margin: 0;
+        }
+
+        .student-row input,
+        .student-row select {
+            min-width: 0;
+            padding: 12px 8px;
+            font-size: 0.8rem;
+        }
+
         .grade-selector {
             width: 100%;
             min-height: 50px;
@@ -1738,7 +1756,7 @@
                     <fieldset class="form-group grade-selector-group" aria-describedby="grade-selector-help">
                         <legend id="grade-selector-title">المستوى الدراسي للتلميذ</legend>
                         <div class="grade-selectors" id="grade-selectors"></div>
-                        <p id="grade-selector-help" class="footer-note">اختار المستوى الدراسي لكل تلميذ داخل الاشتراك.</p>
+                        <p id="grade-selector-help" class="footer-note">كتب اسم كل تلميذ واختار المستوى الدراسي ديالو.</p>
                     </fieldset>
 
                     <fieldset class="form-group">
@@ -2121,18 +2139,45 @@
         ];
 
         function renderGradeSelectors(studentCount) {
+            const previousNames = Array.from(gradeSelectors.querySelectorAll('input'), input => input.value);
+            const previousGrades = Array.from(gradeSelectors.querySelectorAll('select'), select => select.value);
             gradeSelectorTitle.textContent = studentCount === 1
-                ? 'المستوى الدراسي للتلميذ'
-                : `المستوى الدراسي لـ ${studentCount} تلاميذ`;
+                ? 'معلومات التلميذ'
+                : 'معلومات التلاميذ';
 
             gradeSelectors.replaceChildren(...Array.from({ length: studentCount }, (_, index) => {
+                const row = document.createElement('div');
+                row.className = 'student-row';
+                const nameField = document.createElement('div');
+                nameField.className = 'form-field';
+                const nameLabel = document.createElement('label');
+                nameLabel.htmlFor = `student-name-${index}`;
+                nameLabel.textContent = `اسم التلميذ ${index + 1}`;
+                const input = document.createElement('input');
+                input.id = nameLabel.htmlFor;
+                input.name = 'student_name';
+                input.type = 'text';
+                input.required = true;
+                input.placeholder = 'اسم التلميذ';
+                input.value = previousNames[index] || '';
+                nameField.append(nameLabel, input);
+
+                const gradeField = document.createElement('div');
+                gradeField.className = 'form-field';
+                const gradeLabel = document.createElement('label');
+                gradeLabel.htmlFor = `student-grade-${index}`;
+                gradeLabel.textContent = 'المستوى الدراسي';
                 const select = document.createElement('select');
+                select.id = gradeLabel.htmlFor;
                 select.className = 'grade-selector';
                 select.name = 'student_grade';
                 select.required = true;
                 select.setAttribute('aria-label', `المستوى الدراسي للتلميذ ${index + 1}`);
                 select.innerHTML = `<option value="" selected disabled>اختار مستوى التلميذ ${index + 1}</option>${primarySchoolGrades.map((grade) => `<option value="${grade}">${grade}</option>`).join('')}`;
-                return select;
+                select.value = previousGrades[index] || '';
+                gradeField.append(gradeLabel, select);
+                row.append(nameField, gradeField);
+                return row;
             }));
             updateActivationButton();
         }
@@ -2141,9 +2186,14 @@
             const formData = new FormData(activationForm);
             const hasContactDetails = ['parent_name', 'parent_phone', 'parent_city']
                 .every((field) => formData.get(field)?.trim());
-            const hasGrades = formData.getAll('student_grade').every(Boolean);
+            const studentCount = Number(document.querySelector('.plan-card.active').dataset.studentCount);
+            const names = formData.getAll('student_name');
+            const grades = formData.getAll('student_grade');
+            const hasGrades = grades.length === studentCount && grades.every(Boolean);
+            const hasStudentNames = names.length === studentCount && names.every(name => name.trim());
             const isReady = hasContactDetails
                 && hasGrades
+                && hasStudentNames
                 && Boolean(formData.get('learning_need'));
             whatsappBtn.disabled = !isReady;
         }
@@ -2156,8 +2206,9 @@
             const selectedPlan = document.querySelector('.plan-card.active');
             const planName = selectedPlan.querySelector('.plan-title').textContent.trim();
             const price = selectedPlan.dataset.price;
+            const studentNames = formData.getAll('student_name');
             const gradeDetails = formData.getAll('student_grade')
-                .map((grade, index) => `التلميذ ${index + 1}: ${grade}`)
+                .map((grade, index) => `التلميذ ${index + 1}: ${studentNames[index].trim()} — ${grade}`)
                 .join('\n');
             const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالمراجعة اللي محتاجين: ${formData.get('learning_need')}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`;
             const whatsappUrl = `https://wa.me/212624853412?text=${encodeURIComponent(message)}`;
