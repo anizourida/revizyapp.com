@@ -91,9 +91,20 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /3 إخوة وأخوات[\s\S]*?600 درهم[\s\S]*?449/);
   assert.doesNotMatch(page, /اشتراك شهري/);
   assert.match(page, /class="payment-section"/);
+  assert.match(page, /class="activation-card"/);
+  assert.match(page, /فعّل اشتراك ريفيزي/);
+  assert.match(page, /id="parent-name"/);
+  assert.match(page, /id="parent-phone"/);
+  assert.match(page, /id="parent-city"/);
+  assert.match(page, /شنو بغيتي ولدك أو بنتك يقوّي؟/);
+  assert.match(page, /اختار البنك اللي غادي تحوّل منه/);
+  assert.match(page, /صيفط طلب التفعيل فواتساب/);
+  assert.doesNotMatch(page, /class="bank-select"/);
   assert.match(page, /function selectPlan\(element\)/);
   assert.match(page, /const price = element\.dataset\.price/);
   assert.match(page, /function selectBank\(bank\)/);
+  assert.match(page, /function updateActivationButton\(\)/);
+  assert.match(page, /formData\.get\('parent_name'\)/);
 });
 
 test('LP1 has a moving annual-plan offer ticker above the header', () => {

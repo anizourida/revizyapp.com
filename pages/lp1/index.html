@@ -1156,53 +1156,201 @@
             }
         }
 
-        /* Payment Section */
+        /* Activation request — a clear parent journey, not a bank form. */
         .payment-section {
-            padding: 10px 24px 40px;
+            padding: 10px 24px 44px;
             margin-top: auto;
         }
 
-        .bank-select {
+        .activation-card {
+            overflow: hidden;
+            border: 1px solid #F1E4D1;
+            border-radius: 24px;
+            background: #FFFEFC;
+            box-shadow: 0 14px 32px rgba(36, 56, 87, 0.08);
+        }
+
+        .activation-intro {
+            padding: 24px 20px 20px;
+            text-align: center;
+            border-bottom: 1px solid #F6EBDD;
+            background: linear-gradient(145deg, #FFF9ED, #FFFEFC 65%);
+        }
+
+        .activation-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            color: #A96B00;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .activation-price {
+            display: inline-block;
+            margin: 2px 0 8px;
+            color: var(--primary);
+            font-size: 2.55rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -1.5px;
+        }
+
+        .activation-price small {
+            margin-right: 4px;
+            font-size: 0.9rem;
+            letter-spacing: 0;
+        }
+
+        .activation-intro h2 {
+            color: var(--primary);
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        .activation-intro p {
+            max-width: 330px;
+            margin: 8px auto 0;
+            color: #52637D;
+            font-size: 0.84rem;
+            font-weight: 500;
+            line-height: 1.7;
+        }
+
+        .activation-form {
+            padding: 20px;
+        }
+
+        .form-field {
+            display: grid;
+            gap: 7px;
+            margin-bottom: 15px;
+        }
+
+        .form-field label,
+        .form-group legend {
+            color: var(--primary);
+            font-size: 0.88rem;
+            font-weight: 800;
+        }
+
+        .form-field input {
             width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: 2px solid var(--border);
+            min-height: 50px;
+            padding: 12px 14px;
+            border: 1px solid #D9E1EC;
+            border-radius: 14px;
             background: white;
-            font-size: 1rem;
-            font-weight: 600;
             color: var(--text-main);
-            margin-bottom: 25px;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: left 16px center;
-            background-size: 20px;
-            padding-left: 45px;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .bank-select:focus {
+            font: inherit;
+            font-size: 0.92rem;
             outline: none;
-            border-color: var(--app-yellow);
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        /* Receipt Style Details */
-        .receipt-container {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 0;
-            padding: 20px 24px 30px;
-            margin-bottom: 30px;
+        .form-field input::placeholder { color: #A8B2C1; }
+
+        .form-field input:focus {
+            border-color: var(--app-yellow);
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.18);
+        }
+
+        .form-group {
+            min-width: 0;
+            margin: 22px 0 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .form-group legend { margin-bottom: 10px; }
+
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px;
+        }
+
+        .choice-control {
             position: relative;
+            display: block;
+            cursor: pointer;
+        }
+
+        .choice-control input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .choice-control span {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 52px;
+            padding: 10px 12px;
+            border: 1px solid #D9E1EC;
+            border-radius: 14px;
+            background: white;
+            color: #52637D;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: border-color 0.2s, background-color 0.2s, color 0.2s, transform 0.2s;
+        }
+
+        .choice-control span::after {
+            content: '';
+            width: 15px;
+            height: 15px;
+            border: 2px solid #A9B4C3;
+            border-radius: 50%;
+            flex: 0 0 auto;
+        }
+
+        .choice-control input:checked + span {
+            border-color: var(--app-yellow);
+            background: var(--app-yellow-light);
+            color: var(--primary);
+        }
+
+        .choice-control input:checked + span::after {
+            border: 5px solid var(--app-yellow);
+        }
+
+        .choice-control input:focus-visible + span {
+            outline: 3px solid rgba(251, 191, 36, 0.35);
+            outline-offset: 2px;
+        }
+
+        .bank-choices { grid-template-columns: 1fr 1fr; }
+
+        .bank-choices span {
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+            text-align: center;
+            min-height: 68px;
+            font-size: 0.92rem;
+        }
+
+        .bank-choices small {
+            color: #7E8CA1;
+            font-size: 0.68rem;
+            font-weight: 600;
+        }
+
+        .receipt-container {
             display: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-top: 13px;
+            padding: 15px;
+            border: 1px solid #F0D99F;
+            border-radius: 16px;
+            background: #FFFDF8;
         }
 
         .receipt-container.active {
             display: block;
-            animation: fadeIn 0.4s ease;
-            direction: ltr;
+            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
@@ -1210,51 +1358,35 @@
             to { opacity: 1; }
         }
 
+        .receipt-kicker {
+            margin-bottom: 4px;
+            color: #A96B00;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
         .info-row {
-            padding: 15px 0;
-            border-bottom: 1px dashed #e5e7eb;
+            padding: 11px 0;
+            border-bottom: 1px dashed #EBDCC5;
         }
 
         .info-row:last-child {
             border-bottom: none;
         }
 
-        .labels {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .label-fr {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #9ca3af;
-            text-transform: uppercase;
-        }
-
         .label-ar {
-            font-family: 'Noto Naskh Arabic', 'Rubik', serif;
-            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.76rem;
             font-weight: 700;
-            color: var(--primary);
+            color: #697993;
         }
 
         .value {
-            font-size: 1.4rem;
+            font-size: 0.88rem;
             font-weight: 700;
-            color: #111827;
+            color: var(--primary);
             word-break: break-all;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .beneficiary {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #111827;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1262,10 +1394,11 @@
         }
 
         .copy-btn {
-            background: #F1F5F9;
+            flex: 0 0 auto;
+            background: white;
             border: none;
             padding: 6px;
-            border-radius: 8px;
+            border-radius: 7px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -1274,7 +1407,7 @@
         }
 
         .copy-btn:hover {
-            background: var(--border);
+            background: #FDE7B9;
             color: var(--primary);
         }
 
@@ -1296,51 +1429,29 @@
             pointer-events: none;
         }
 
-        /* App Style Button */
-        .cta-button {
-            display: block;
-            width: 100%;
-            background: var(--app-yellow);
-            color: var(--text-main);
-            text-align: center;
-            padding: 18px;
-            border-radius: 24px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 1.15rem;
-            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:active {
-            transform: scale(0.97);
-        }
-
-        /* Checkbox Style */
         .confirmation-container {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 20px;
+            margin: 18px 0 14px;
             cursor: pointer;
-            padding: 16px 20px;
-            background: #F1F5F9;
-            border-radius: 12px;
+            padding: 13px 14px;
+            background: #F8FAFC;
+            border: 1px solid var(--border);
+            border-radius: 14px;
         }
 
         .confirmation-container input {
             width: 20px;
             height: 20px;
             cursor: pointer;
-            accent-color: #10B981;
+            accent-color: var(--app-yellow);
         }
 
         .confirmation-text {
             font-size: 0.95rem;
             font-weight: 600;
-            color: #475569;
+            color: #52637D;
             user-select: none;
             -webkit-user-select: none;
         }
@@ -1352,11 +1463,11 @@
             justify-content: center;
             gap: 12px;
             width: 100%;
-            background: #075e54; /* Darker WhatsApp Green */
+            background: var(--primary);
             color: white;
             text-align: center;
-            padding: 18px;
-            border-radius: 24px;
+            padding: 16px;
+            border-radius: 16px;
             text-decoration: none;
             font-weight: 800;
             font-size: 1.15rem;
@@ -1372,7 +1483,7 @@
         }
 
         .whatsapp-button:disabled {
-            background: #94A3B8;
+            background: #B9C3D0;
             box-shadow: none;
             cursor: not-allowed;
             opacity: 0.7;
@@ -1386,7 +1497,7 @@
             text-align: center;
             font-size: 0.85rem;
             color: var(--text-muted);
-            margin-top: 25px;
+            margin-top: 16px;
             line-height: 1.6;
             padding: 0 10px;
         }
@@ -1703,127 +1814,77 @@
             </div>
         </section>
 
-        <div class="payment-section">
-            <p class="section-title" style="padding: 0;">طريقة الدفع (تحويل بنكي)</p>
-            <select class="bank-select" onchange="selectBank(this.value)">
-                <option value="" selected disabled>اختر البنك...</option>
-                <option value="attijari">Attijariwafa Bank</option>
-                <option value="cih">CIH Bank</option>
-            </select>
+        <section class="payment-section" aria-labelledby="activation-title">
+            <div class="activation-card">
+                <div class="activation-intro">
+                    <span class="activation-eyebrow">✦ اشتراك سنوي مختار</span>
+                    <div class="activation-price"><span class="activation-amount">249</span><small>درهم</small></div>
+                    <h2 id="activation-title">فعّل اشتراك ريفيزي</h2>
+                    <p>عمّر معلوماتك، دير التحويل البنكي، وصيفط لينا الوصل فواتساب باش نفعّلو الحساب.</p>
+                </div>
 
-            <div id="details-attijari" class="receipt-container">
-                <div class="info-row">
-                    <div class="labels">
-                        <span class="label-fr">Banque</span>
-                        <span class="label-ar">البنك</span>
+                <form class="activation-form" id="activation-form" novalidate>
+                    <div class="form-field">
+                        <label for="parent-name">الاسم الكامل</label>
+                        <input id="parent-name" name="parent_name" type="text" autocomplete="name" required placeholder="الاسم ديالك">
                     </div>
-                    <div class="value">
-                        <span>Attijariwafa Bank</span>
-                        <button class="copy-btn" onclick="copyToClipboard('Attijariwafa Bank')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        </button>
+                    <div class="form-field">
+                        <label for="parent-phone">رقم الواتساب</label>
+                        <input id="parent-phone" name="parent_phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="06XXXXXXXX">
                     </div>
-                </div>
-                <div class="info-row">
-                    <div class="labels">
-                        <span class="label-fr">Numéro de compte</span>
-                        <span class="label-ar">رقم الحساب</span>
+                    <div class="form-field">
+                        <label for="parent-city">المدينة</label>
+                        <input id="parent-city" name="parent_city" type="text" autocomplete="address-level2" required placeholder="مثال: الدار البيضاء">
                     </div>
-                    <div class="value">
-                        <span>007095000405530040000532</span>
-                        <button class="copy-btn" onclick="copyToClipboard('007095000405530040000532')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        </button>
+
+                    <fieldset class="form-group">
+                        <legend>شنو بغيتي ولدك أو بنتك يقوّي؟</legend>
+                        <div class="choice-grid" id="learning-need-options">
+                            <label class="choice-control"><input type="radio" name="learning_need" value="اللغة العربية" required><span>اللغة العربية</span></label>
+                            <label class="choice-control"><input type="radio" name="learning_need" value="اللغة الفرنسية"><span>اللغة الفرنسية</span></label>
+                            <label class="choice-control"><input type="radio" name="learning_need" value="الرياضيات"><span>الرياضيات</span></label>
+                            <label class="choice-control"><input type="radio" name="learning_need" value="مراجعة منظمة فكل المواد"><span>مراجعة فكل المواد</span></label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <legend>اختار البنك اللي غادي تحوّل منه</legend>
+                        <div class="choice-grid bank-choices" id="bank-choices">
+                            <label class="choice-control"><input type="radio" name="bank" value="attijari" required><span>Attijariwafa <small>تحويل بنكي</small></span></label>
+                            <label class="choice-control"><input type="radio" name="bank" value="cih"><span>CIH Bank <small>تحويل بنكي</small></span></label>
+                        </div>
+                    </fieldset>
+
+                    <div id="details-attijari" class="receipt-container" aria-live="polite">
+                        <p class="receipt-kicker">حوّل المبلغ لهذه المعلومات</p>
+                        <div class="info-row"><span class="label-ar">البنك</span><div class="value"><span>Attijariwafa Bank</span><button class="copy-btn" type="button" aria-label="نسخ اسم البنك" onclick="copyToClipboard('Attijariwafa Bank')">نسخ</button></div></div>
+                        <div class="info-row"><span class="label-ar">رقم الحساب</span><div class="value"><span>007095000405530040000532</span><button class="copy-btn" type="button" aria-label="نسخ رقم الحساب" onclick="copyToClipboard('007095000405530040000532')">نسخ</button></div></div>
+                        <div class="info-row"><span class="label-ar">المستفيد</span><div class="value"><span>Monsieur RIDA ANIZOU</span><button class="copy-btn" type="button" aria-label="نسخ اسم المستفيد" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">نسخ</button></div></div>
+                        <div class="info-row"><span class="label-ar">المبلغ</span><div class="value"><span><span class="receipt-amount">249</span> درهم</span></div></div>
                     </div>
-                </div>
-                <div class="info-row">
-                    <div class="labels">
-                        <span class="label-fr">Bénéficiaire</span>
-                        <span class="label-ar">المستفيد</span>
+
+                    <div id="details-cih" class="receipt-container" aria-live="polite">
+                        <p class="receipt-kicker">حوّل المبلغ لهذه المعلومات</p>
+                        <div class="info-row"><span class="label-ar">البنك</span><div class="value"><span>CIH Bank</span><button class="copy-btn" type="button" aria-label="نسخ اسم البنك" onclick="copyToClipboard('CIH Bank')">نسخ</button></div></div>
+                        <div class="info-row"><span class="label-ar">رقم الحساب</span><div class="value"><span>42256665211022000</span><button class="copy-btn" type="button" aria-label="نسخ رقم الحساب" onclick="copyToClipboard('42256665211022000')">نسخ</button></div></div>
+                        <div class="info-row"><span class="label-ar">المستفيد</span><div class="value"><span>Monsieur RIDA ANIZOU</span><button class="copy-btn" type="button" aria-label="نسخ اسم المستفيد" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">نسخ</button></div></div>
+                        <div class="info-row"><span class="label-ar">المبلغ</span><div class="value"><span><span class="receipt-amount">249</span> درهم</span></div></div>
                     </div>
-                    <div class="beneficiary">
-                        <span>Monsieur RIDA ANIZOU</span>
-                        <button class="copy-btn" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="info-row">
-                    <div class="labels">
-                        <span class="label-fr">Montant</span>
-                        <span class="label-ar">المبلغ</span>
-                    </div>
-                    <div class="value" style="display: block; text-align: right;">
-                        <span class="receipt-amount">249</span>
-                        <span style="font-size: 0.9rem; margin-left: 6px;">درهم</span>
-                    </div>
-                </div>
+
+                    <label class="confirmation-container">
+                        <input type="checkbox" id="confirm-payment" disabled>
+                        <span class="confirmation-text">حوّلت المبلغ واخترت البنك اللي استعملت.</span>
+                    </label>
+
+                    <button id="whatsapp-btn" class="whatsapp-button" type="button" disabled onclick="sendWhatsApp()">
+                        <img src="whatsapp.png" alt="">
+                        صيفط طلب التفعيل فواتساب
+                    </button>
+                    <p class="footer-note">غادي نتواصلو معاك فواتساب لتأكيد التفعيل. حضّر وصل التحويل باش تصيفطو مع الطلب.</p>
+                </form>
             </div>
-
-            <div id="details-cih" class="receipt-container">
-                <div class="info-row">
-                    <div class="labels">
-                        <span class="label-fr">Banque</span>
-                        <span class="label-ar">البنك</span>
-                    </div>
-                    <div class="value">
-                        <span>CIH Bank</span>
-                        <button class="copy-btn" onclick="copyToClipboard('CIH Bank')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="info-row">
-                    <div class="labels">
-                        <span class="label-fr">Numéro de compte</span>
-                        <span class="label-ar">رقم الحساب</span>
-                    </div>
-                    <div class="value">
-                        <span>42256665211022000</span>
-                        <button class="copy-btn" onclick="copyToClipboard('42256665211022000')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="info-row">
-                    <div class="labels">
-                        <span class="label-fr">Bénéficiaire</span>
-                        <span class="label-ar">المستفيد</span>
-                    </div>
-                    <div class="beneficiary">
-                        <span>Monsieur RIDA ANIZOU</span>
-                        <button class="copy-btn" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="info-row">
-                    <div class="labels">
-                        <span class="label-fr">Montant</span>
-                        <span class="label-ar">المبلغ</span>
-                    </div>
-                    <div class="value" style="display: block; text-align: right;">
-                        <span class="receipt-amount">249</span>
-                        <span style="font-size: 0.9rem; margin-left: 6px;">درهم</span>
-                    </div>
-                </div>
-            </div>
-
-            <label class="confirmation-container">
-                <input type="checkbox" id="confirm-payment" onchange="toggleWhatsAppButton()" disabled>
-                <span class="confirmation-text">لقد قمت بتحويل المبلغ</span>
-            </label>
-
-            <button id="whatsapp-btn" class="whatsapp-button" disabled onclick="sendWhatsApp()">
-                <img src="whatsapp.png" alt="WhatsApp">
-                إرسال وصل الدفع
-            </button>
-            <div id="toast">تم النسخ بنجاح!</div>
-
-            <p class="footer-note">
-                يرجى إجراء التحويل ثم إرسال الإيصال إلى رقم الواتساب <strong>+212 624-853412</strong>. سيتم تفعيل حسابك خلال 24 ساعة.
-            </p>
-        </div>
+            <div id="toast" role="status" aria-live="polite">تم النسخ بنجاح!</div>
+        </section>
     </div>
 
     <script>
@@ -2149,6 +2210,9 @@
             document.querySelectorAll('.receipt-amount').forEach(el => {
                 el.innerText = price;
             });
+            document.querySelectorAll('.activation-amount').forEach(el => {
+                el.innerText = price;
+            });
         }
 
         const planCards = Array.from(document.querySelectorAll('.plan-card'));
@@ -2172,46 +2236,58 @@
             });
         });
 
+        const activationForm = document.getElementById('activation-form');
+        const activationBankInputs = Array.from(document.querySelectorAll('input[name="bank"]'));
+        const confirmationCheckbox = document.getElementById('confirm-payment');
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+
         function selectBank(bank) {
             const detailContainers = document.querySelectorAll('.receipt-container');
-            const checkbox = document.getElementById('confirm-payment');
-            const whatsappBtn = document.getElementById('whatsapp-btn');
 
             detailContainers.forEach(detail => detail.classList.remove('active'));
 
             if (bank) {
                 document.getElementById('details-' + bank).classList.add('active');
-                checkbox.disabled = false;
+                confirmationCheckbox.disabled = false;
             } else {
-                checkbox.disabled = true;
+                confirmationCheckbox.disabled = true;
             }
 
-            // Reset checkbox and button
-            checkbox.checked = false;
-            whatsappBtn.disabled = true;
+            confirmationCheckbox.checked = false;
+            updateActivationButton();
         }
 
-        function toggleWhatsAppButton() {
-            const bankSelect = document.querySelector('.bank-select');
-            const checkbox = document.getElementById('confirm-payment');
-            const button = document.getElementById('whatsapp-btn');
-
-            if (!bankSelect.value) {
-                checkbox.checked = false;
-                button.disabled = true;
-                return;
-            }
-
-            button.disabled = !checkbox.checked;
+        function updateActivationButton() {
+            const formData = new FormData(activationForm);
+            const hasContactDetails = ['parent_name', 'parent_phone', 'parent_city']
+                .every((field) => formData.get(field)?.trim());
+            const isReady = hasContactDetails
+                && Boolean(formData.get('learning_need'))
+                && Boolean(formData.get('bank'))
+                && confirmationCheckbox.checked;
+            whatsappBtn.disabled = !isReady;
         }
 
         function sendWhatsApp() {
-            const bank = document.querySelector('.bank-select').value;
+            updateActivationButton();
+            if (whatsappBtn.disabled) return;
+
+            const formData = new FormData(activationForm);
+            const bank = formData.get('bank');
             const bankName = bank === 'attijari' ? 'Attijariwafa Bank' : 'CIH Bank';
-            const message = `السلام عليكم، لقد قمت بالتحويل البنكي عبر ${bankName} لاشتراك ريفيزي. إليكم وصل الدفع.`;
+            const selectedPlan = document.querySelector('.plan-card.active');
+            const planName = selectedPlan.querySelector('.plan-title').textContent.trim();
+            const price = selectedPlan.dataset.price;
+            const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمراجعة اللي محتاجين: ${formData.get('learning_need')}\nالخطة: ${planName} (${price} درهم)\nالبنك: ${bankName}\n\nحوّلت المبلغ وغادي نصيفط وصل الدفع هنا.`;
             const whatsappUrl = `https://wa.me/212624853412?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
+
+        activationForm.addEventListener('input', updateActivationButton);
+        activationForm.addEventListener('change', (event) => {
+            if (event.target.name === 'bank') selectBank(event.target.value);
+            updateActivationButton();
+        });
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
