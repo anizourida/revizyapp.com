@@ -1637,6 +1637,124 @@
             color: var(--primary);
         }
 
+        .trust-footer {
+            padding: 2px 24px 30px;
+            direction: rtl;
+            text-align: center;
+        }
+
+        .trust-footer::before {
+            content: '';
+            display: block;
+            height: 1px;
+            margin: 0 0 22px;
+            background: #F1E4D1;
+        }
+
+        .trust-footer-title {
+            margin: 0 0 13px;
+            color: var(--primary);
+            font-size: 0.95rem;
+            font-weight: 800;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .trust-card {
+            display: grid;
+            grid-template-rows: 58px auto;
+            align-items: center;
+            min-width: 0;
+            padding: 10px 7px 11px;
+            border: 1px solid #F1E4D1;
+            border-radius: 15px;
+            background: #FFFDF9;
+        }
+
+        .trust-mark {
+            display: grid;
+            place-items: center;
+            min-width: 0;
+            color: var(--primary);
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .trust-mark--madrastna b {
+            font-size: clamp(0.74rem, 3.2vw, 0.94rem);
+        }
+
+        .trust-mark--madrastna small {
+            margin-top: 4px;
+            color: #5BAEBA;
+            font-family: inherit;
+            font-size: clamp(0.43rem, 2vw, 0.55rem);
+            font-weight: 700;
+            direction: ltr;
+        }
+
+        .trust-mark--pioneers {
+            grid-template-columns: repeat(2, 25px);
+            grid-template-rows: repeat(2, 25px);
+            gap: 2px;
+        }
+
+        .trust-mark--pioneers span {
+            display: grid;
+            place-items: center;
+            width: 25px;
+            height: 25px;
+            border-radius: 9px 9px 2px 9px;
+            background: #2DAF16;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 0.55rem;
+            font-weight: 800;
+        }
+
+        .trust-mark--pioneers span:nth-child(2) { background: #029DD9; border-radius: 9px 9px 9px 2px; }
+        .trust-mark--pioneers span:nth-child(3) { background: #FFA500; border-radius: 9px 2px 9px 9px; }
+        .trust-mark--pioneers span:nth-child(4) { background: #ED2F5B; border-radius: 2px 9px 9px; }
+
+        .trust-mark--men {
+            gap: 4px;
+        }
+
+        .trust-mark--men span:first-child {
+            display: grid;
+            place-items: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #C1272D;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .trust-mark--men span:last-child {
+            font-size: clamp(0.5rem, 2.2vw, 0.64rem);
+            line-height: 1.25;
+        }
+
+        .trust-card p {
+            margin: 8px 0 0;
+            color: #52637D;
+            font-size: clamp(0.56rem, 2.25vw, 0.67rem);
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .trust-copyright {
+            margin: 18px 0 0;
+            color: #75839A;
+            font-size: 0.68rem;
+            font-weight: 600;
+        }
+
         @media (min-width: 481px) {
             body {
                 padding: 0;
@@ -2025,6 +2143,33 @@
                 </form>
             </div>
         </section>
+
+        <footer class="trust-footer" id="trust-footer" aria-label="التزامات ريفيزي التعليمية">
+            <p class="trust-footer-title">ريفيزي كيدعم تعلّم ولدك أو بنتك بثقة</p>
+            <div class="trust-grid">
+                <article class="trust-card">
+                    <div class="trust-mark trust-mark--madrastna" aria-label="مدرستنا">
+                        <b>مدرستنا</b>
+                        <small>madrastna.ma</small>
+                    </div>
+                    <p>ريفيزي يساهم في جعل المدرسة ذات جودة للجميع.</p>
+                </article>
+                <article class="trust-card">
+                    <div class="trust-mark trust-mark--pioneers" aria-label="EE TaRL Label AES">
+                        <span>EE</span><span>TaRL</span><span>Label</span><span>AES</span>
+                    </div>
+                    <p>ريفيزي مطابق تماماً لدروس المدرسة الرائدة.</p>
+                </article>
+                <article class="trust-card">
+                    <div class="trust-mark trust-mark--men" aria-label="وزارة التربية الوطنية">
+                        <span aria-hidden="true">★</span>
+                        <span>وزارة التربية<br>الوطنية</span>
+                    </div>
+                    <p>ريفيزي مطابق لمنهاج وتوصيات وزارة التربية الوطنية.</p>
+                </article>
+            </div>
+            <p class="trust-copyright">© 2026 ريفيزي — جميع الحقوق محفوظة.</p>
+        </footer>
     </div>
 
     <script>
@@ -2378,6 +2523,7 @@
         const activationIntro = document.querySelector('.activation-intro');
         const paymentSection = document.querySelector('.payment-section');
         const faqSection = document.querySelector('.faq-section');
+        const trustFooter = document.getElementById('trust-footer');
         const whatsappBtn = document.getElementById('whatsapp-btn');
         const parentPhoneInput = document.getElementById('parent-phone');
         const parentPhoneError = document.getElementById('parent-phone-error');
@@ -2490,6 +2636,7 @@
         activationForm.addEventListener('change', updateActivationButton);
         activationIntro.after(planSelector);
         paymentSection.after(faqSection);
+        faqSection.after(trustFooter);
         renderGradeSelectors(1);
     </script>
 </body>

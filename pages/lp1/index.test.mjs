@@ -155,6 +155,18 @@ test('LP1 provides Revizy-specific expandable answers after activation', () => {
   assert.equal((page.match(/class="faq-item"/g) || []).length, 7);
 });
 
+test('LP1 ends with a local trust footer for Madrastna, pioneer schools, and the ministry', () => {
+  assert.match(page, /<footer class="trust-footer" id="trust-footer"/);
+  assert.match(page, /class="trust-mark trust-mark--madrastna"/);
+  assert.match(page, /ريفيزي يساهم في جعل المدرسة ذات جودة للجميع/);
+  assert.match(page, /class="trust-mark trust-mark--pioneers"/);
+  assert.match(page, /ريفيزي مطابق تماماً لدروس المدرسة الرائدة/);
+  assert.match(page, /class="trust-mark trust-mark--men"/);
+  assert.match(page, /ريفيزي مطابق لمنهاج وتوصيات وزارة التربية الوطنية/);
+  assert.match(page, /© 2026 ريفيزي — جميع الحقوق محفوظة/);
+  assert.match(page, /faqSection\.after\(trustFooter\)/);
+});
+
 test('LP1 keeps the learning-promise section hidden until it is needed', () => {
   assert.match(page, /<section class="learning-promise"[^>]*\bhidden>/);
   assert.match(page, /المراجعة فالدار ما خاصهاش تولّي ضغط/);
