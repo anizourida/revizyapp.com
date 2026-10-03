@@ -1931,7 +1931,7 @@
 
         <section class="faq-section" aria-labelledby="faq-title">
             <span class="faq-kicker">قبل ما تفعّل اشتراك ريفيزي</span>
-            <h2 id="faq-title">أسئلة كتجينا بزاف</h2>
+            <h2 id="faq-title">أسئلة متكررة</h2>
             <p class="faq-intro">كل ما خاصك تعرف قبل ما يبدأ ولدك أو بنتك المراجعة مع ريفيزي.</p>
 
             <div class="faq-list">
@@ -2378,6 +2378,8 @@
         const activationForm = document.getElementById('activation-form');
         const planSelector = document.getElementById('plan-selector');
         const activationIntro = document.querySelector('.activation-intro');
+        const paymentSection = document.querySelector('.payment-section');
+        const faqSection = document.querySelector('.faq-section');
         const whatsappBtn = document.getElementById('whatsapp-btn');
         const parentPhoneInput = document.getElementById('parent-phone');
         const parentPhoneError = document.getElementById('parent-phone-error');
@@ -2489,6 +2491,7 @@
         activationForm.addEventListener('input', updateActivationButton);
         activationForm.addEventListener('change', updateActivationButton);
         activationIntro.after(planSelector);
+        paymentSection.after(faqSection);
         renderGradeSelectors(1);
     </script>
 </body>

@@ -140,10 +140,11 @@ test('LP1 has a moving annual-plan offer ticker above the header', () => {
   assert.match(page, /@keyframes offerTicker/);
 });
 
-test('LP1 provides Revizy-specific expandable answers before activation', () => {
+test('LP1 provides Revizy-specific expandable answers after activation', () => {
   assert.match(page, /class="faq-section"/);
   assert.match(page, /قبل ما تفعّل اشتراك ريفيزي/);
-  assert.match(page, /أسئلة كتجينا بزاف/);
+  assert.match(page, /أسئلة متكررة/);
+  assert.match(page, /paymentSection\.after\(faqSection\)/);
   assert.match(page, /شنو هو ريفيزي؟/);
   assert.match(page, /واش ريفيزي غير فيديوهات؟/);
   assert.match(page, /واش نقدر نشرك أكثر من ابن؟/);
