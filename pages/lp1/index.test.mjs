@@ -43,7 +43,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /id="header-prompt-tags"/);
   assert.ok(page.indexOf('class="subtitle"') < page.indexOf('id="header-prompt-tags"'));
   assert.match(page, /id="header-prompt-tags"[\s\S]*?<\/div>\s*<div class="header-tracing-illustration"[\s\S]*?src="parts\/par-6\.png"[\s\S]*?<section class="video-section"[\s\S]*?<section class="revision-benefits"[\s\S]*?<div class="header-learning">/);
-  assert.match(page, /\.header-tracing-illustration img \{\s+display: block;\s+width: min\(280px, 72vw\)/);
+  assert.match(page, /\.header-tracing-illustration img \{\s+display: block;\s+width: min\(70px, 72vw\)/);
   assert.match(page, /class="revision-benefit"[\s\S]*?>مسار واضح/);
   assert.match(page, /تمارين مناسبة/);
   assert.match(page, /تقدّم متدرّج/);
