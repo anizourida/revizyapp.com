@@ -140,6 +140,16 @@ test('LP1 has a moving annual-plan offer ticker above the header', () => {
   assert.match(page, /@keyframes offerTicker/);
 });
 
+test('LP1 provides Revizy-specific expandable answers before activation', () => {
+  assert.match(page, /class="faq-section"/);
+  assert.match(page, /قبل ما تفعّل اشتراك ريفيزي/);
+  assert.match(page, /أسئلة كتجينا بزاف/);
+  assert.match(page, /شنو هو ريفيزي؟/);
+  assert.match(page, /واش ريفيزي غير فيديوهات؟/);
+  assert.match(page, /واش نقدر نشرك أكثر من ابن؟/);
+  assert.equal((page.match(/class="faq-item"/g) || []).length, 7);
+});
+
 test('LP1 keeps the learning-promise section hidden until it is needed', () => {
   assert.match(page, /<section class="learning-promise"[^>]*\bhidden>/);
   assert.match(page, /المراجعة فالدار ما خاصهاش تولّي ضغط/);
