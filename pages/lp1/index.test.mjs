@@ -111,6 +111,7 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /function renderGradeSelectors\(studentCount\)/);
   assert.match(page, /renderGradeSelectors\(1\)/);
   assert.match(page, /formData\.getAll\('student_grade'\)/);
+  assert.match(page, /studentNames\[index\]\?\.trim\(\) \|\| `اسم الابن \$\{index \+ 1\}`/);
   assert.match(page, /المستوى السادس ابتدائي/);
   assert.doesNotMatch(page, /شنو بغيتي ولدك أو بنتك يقوّي؟/);
   assert.doesNotMatch(page, /كتب اسم كل تلميذ واختار المستوى الدراسي ديالو/);

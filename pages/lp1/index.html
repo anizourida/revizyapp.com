@@ -2281,8 +2281,7 @@
                 input.id = nameLabel.htmlFor;
                 input.name = 'student_name';
                 input.type = 'text';
-                input.required = true;
-                input.placeholder = 'اسم الابن';
+                input.placeholder = `اسم الابن ${index + 1}`;
                 input.value = previousNames[index] || '';
                 nameField.append(nameLabel, input);
 
@@ -2312,14 +2311,11 @@
                 .every((field) => formData.get(field)?.trim());
             const hasValidMoroccanPhone = validateMoroccanPhone();
             const studentCount = Number(document.querySelector('.plan-card.active').dataset.studentCount);
-            const names = formData.getAll('student_name');
             const grades = formData.getAll('student_grade');
             const hasGrades = grades.length === studentCount && grades.every(Boolean);
-            const hasStudentNames = names.length === studentCount && names.every(name => name.trim());
             const isReady = hasContactDetails
                 && hasValidMoroccanPhone
-                && hasGrades
-                && hasStudentNames;
+                && hasGrades;
             whatsappBtn.disabled = !isReady;
         }
 
@@ -2352,7 +2348,10 @@
             const price = selectedPlan.dataset.price;
             const studentNames = formData.getAll('student_name');
             const gradeDetails = formData.getAll('student_grade')
-                .map((grade, index) => `الابن ${index + 1}: ${studentNames[index].trim()} — ${grade}`)
+                .map((grade, index) => {
+                    const childName = studentNames[index]?.trim() || `اسم الابن ${index + 1}`;
+                    return `الابن ${index + 1}: ${childName} — ${grade}`;
+                })
                 .join('\n');
             const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`;
             const whatsappUrl = `https://wa.me/212624853412?text=${encodeURIComponent(message)}`;
