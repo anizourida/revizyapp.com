@@ -1322,140 +1322,6 @@
             outline-offset: 2px;
         }
 
-        .bank-choices { grid-template-columns: 1fr 1fr; }
-
-        .bank-choices span {
-            flex-direction: column;
-            justify-content: center;
-            gap: 4px;
-            text-align: center;
-            min-height: 68px;
-            font-size: 0.92rem;
-        }
-
-        .bank-choices small {
-            color: #7E8CA1;
-            font-size: 0.68rem;
-            font-weight: 600;
-        }
-
-        .receipt-container {
-            display: none;
-            margin-top: 13px;
-            padding: 15px;
-            border: 1px solid #F0D99F;
-            border-radius: 16px;
-            background: #FFFDF8;
-        }
-
-        .receipt-container.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .receipt-kicker {
-            margin-bottom: 4px;
-            color: #A96B00;
-            font-size: 0.72rem;
-            font-weight: 800;
-        }
-
-        .info-row {
-            padding: 11px 0;
-            border-bottom: 1px dashed #EBDCC5;
-        }
-
-        .info-row:last-child {
-            border-bottom: none;
-        }
-
-        .label-ar {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.76rem;
-            font-weight: 700;
-            color: #697993;
-        }
-
-        .value {
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--primary);
-            word-break: break-all;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .copy-btn {
-            flex: 0 0 auto;
-            background: white;
-            border: none;
-            padding: 6px;
-            border-radius: 7px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            color: var(--text-muted);
-            transition: all 0.2s;
-        }
-
-        .copy-btn:hover {
-            background: #FDE7B9;
-            color: var(--primary);
-        }
-
-        /* Toast Feedback */
-        #toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #334155;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 1000;
-            pointer-events: none;
-        }
-
-        .confirmation-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 18px 0 14px;
-            cursor: pointer;
-            padding: 13px 14px;
-            background: #F8FAFC;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-        }
-
-        .confirmation-container input {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: var(--app-yellow);
-        }
-
-        .confirmation-text {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #52637D;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
         /* WhatsApp Button */
         .whatsapp-button {
             display: flex;
@@ -1820,7 +1686,7 @@
                     <span class="activation-eyebrow">✦ اشتراك سنوي مختار</span>
                     <div class="activation-price"><span class="activation-amount">249</span><small>درهم</small></div>
                     <h2 id="activation-title">فعّل اشتراك ريفيزي</h2>
-                    <p>عمّر معلوماتك، دير التحويل البنكي، وصيفط لينا الوصل فواتساب باش نفعّلو الحساب.</p>
+                    <p>عمّر معلوماتك وصيفط الطلب فواتساب. الفريق ديالنا غادي يتواصل معاك باش يكمل معاك التفعيل.</p>
                 </div>
 
                 <form class="activation-form" id="activation-form" novalidate>
@@ -1847,43 +1713,13 @@
                         </div>
                     </fieldset>
 
-                    <fieldset class="form-group">
-                        <legend>اختار البنك اللي غادي تحوّل منه</legend>
-                        <div class="choice-grid bank-choices" id="bank-choices">
-                            <label class="choice-control"><input type="radio" name="bank" value="attijari" required><span>Attijariwafa <small>تحويل بنكي</small></span></label>
-                            <label class="choice-control"><input type="radio" name="bank" value="cih"><span>CIH Bank <small>تحويل بنكي</small></span></label>
-                        </div>
-                    </fieldset>
-
-                    <div id="details-attijari" class="receipt-container" aria-live="polite">
-                        <p class="receipt-kicker">حوّل المبلغ لهذه المعلومات</p>
-                        <div class="info-row"><span class="label-ar">البنك</span><div class="value"><span>Attijariwafa Bank</span><button class="copy-btn" type="button" aria-label="نسخ اسم البنك" onclick="copyToClipboard('Attijariwafa Bank')">نسخ</button></div></div>
-                        <div class="info-row"><span class="label-ar">رقم الحساب</span><div class="value"><span>007095000405530040000532</span><button class="copy-btn" type="button" aria-label="نسخ رقم الحساب" onclick="copyToClipboard('007095000405530040000532')">نسخ</button></div></div>
-                        <div class="info-row"><span class="label-ar">المستفيد</span><div class="value"><span>Monsieur RIDA ANIZOU</span><button class="copy-btn" type="button" aria-label="نسخ اسم المستفيد" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">نسخ</button></div></div>
-                        <div class="info-row"><span class="label-ar">المبلغ</span><div class="value"><span><span class="receipt-amount">249</span> درهم</span></div></div>
-                    </div>
-
-                    <div id="details-cih" class="receipt-container" aria-live="polite">
-                        <p class="receipt-kicker">حوّل المبلغ لهذه المعلومات</p>
-                        <div class="info-row"><span class="label-ar">البنك</span><div class="value"><span>CIH Bank</span><button class="copy-btn" type="button" aria-label="نسخ اسم البنك" onclick="copyToClipboard('CIH Bank')">نسخ</button></div></div>
-                        <div class="info-row"><span class="label-ar">رقم الحساب</span><div class="value"><span>42256665211022000</span><button class="copy-btn" type="button" aria-label="نسخ رقم الحساب" onclick="copyToClipboard('42256665211022000')">نسخ</button></div></div>
-                        <div class="info-row"><span class="label-ar">المستفيد</span><div class="value"><span>Monsieur RIDA ANIZOU</span><button class="copy-btn" type="button" aria-label="نسخ اسم المستفيد" onclick="copyToClipboard('Monsieur RIDA ANIZOU')">نسخ</button></div></div>
-                        <div class="info-row"><span class="label-ar">المبلغ</span><div class="value"><span><span class="receipt-amount">249</span> درهم</span></div></div>
-                    </div>
-
-                    <label class="confirmation-container">
-                        <input type="checkbox" id="confirm-payment" disabled>
-                        <span class="confirmation-text">حوّلت المبلغ واخترت البنك اللي استعملت.</span>
-                    </label>
-
                     <button id="whatsapp-btn" class="whatsapp-button" type="button" disabled onclick="sendWhatsApp()">
                         <img src="whatsapp.png" alt="">
                         صيفط طلب التفعيل فواتساب
                     </button>
-                    <p class="footer-note">غادي نتواصلو معاك فواتساب لتأكيد التفعيل. حضّر وصل التحويل باش تصيفطو مع الطلب.</p>
+                    <p class="footer-note">غادي نتواصلو معاك فواتساب باش نكملو معاك خطوات التفعيل بطريقة واضحة.</p>
                 </form>
             </div>
-            <div id="toast" role="status" aria-live="polite">تم النسخ بنجاح!</div>
         </section>
     </div>
 
@@ -2205,11 +2041,7 @@
             element.classList.add('active');
             element.setAttribute('aria-checked', 'true');
 
-            // Update receipt amounts
             const price = element.dataset.price;
-            document.querySelectorAll('.receipt-amount').forEach(el => {
-                el.innerText = price;
-            });
             document.querySelectorAll('.activation-amount').forEach(el => {
                 el.innerText = price;
             });
@@ -2237,34 +2069,14 @@
         });
 
         const activationForm = document.getElementById('activation-form');
-        const activationBankInputs = Array.from(document.querySelectorAll('input[name="bank"]'));
-        const confirmationCheckbox = document.getElementById('confirm-payment');
         const whatsappBtn = document.getElementById('whatsapp-btn');
-
-        function selectBank(bank) {
-            const detailContainers = document.querySelectorAll('.receipt-container');
-
-            detailContainers.forEach(detail => detail.classList.remove('active'));
-
-            if (bank) {
-                document.getElementById('details-' + bank).classList.add('active');
-                confirmationCheckbox.disabled = false;
-            } else {
-                confirmationCheckbox.disabled = true;
-            }
-
-            confirmationCheckbox.checked = false;
-            updateActivationButton();
-        }
 
         function updateActivationButton() {
             const formData = new FormData(activationForm);
             const hasContactDetails = ['parent_name', 'parent_phone', 'parent_city']
                 .every((field) => formData.get(field)?.trim());
             const isReady = hasContactDetails
-                && Boolean(formData.get('learning_need'))
-                && Boolean(formData.get('bank'))
-                && confirmationCheckbox.checked;
+                && Boolean(formData.get('learning_need'));
             whatsappBtn.disabled = !isReady;
         }
 
@@ -2273,31 +2085,16 @@
             if (whatsappBtn.disabled) return;
 
             const formData = new FormData(activationForm);
-            const bank = formData.get('bank');
-            const bankName = bank === 'attijari' ? 'Attijariwafa Bank' : 'CIH Bank';
             const selectedPlan = document.querySelector('.plan-card.active');
             const planName = selectedPlan.querySelector('.plan-title').textContent.trim();
             const price = selectedPlan.dataset.price;
-            const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمراجعة اللي محتاجين: ${formData.get('learning_need')}\nالخطة: ${planName} (${price} درهم)\nالبنك: ${bankName}\n\nحوّلت المبلغ وغادي نصيفط وصل الدفع هنا.`;
+            const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمراجعة اللي محتاجين: ${formData.get('learning_need')}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`;
             const whatsappUrl = `https://wa.me/212624853412?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
         activationForm.addEventListener('input', updateActivationButton);
-        activationForm.addEventListener('change', (event) => {
-            if (event.target.name === 'bank') selectBank(event.target.value);
-            updateActivationButton();
-        });
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('toast');
-                toast.style.opacity = '1';
-                setTimeout(() => {
-                    toast.style.opacity = '0';
-                }, 2000);
-            });
-        }
+        activationForm.addEventListener('change', updateActivationButton);
     </script>
 </body>
 </html>
