@@ -167,6 +167,8 @@ test('LP1 ends with a local trust footer for Madrastna, pioneer schools, and the
   assert.match(page, /<img src="credits\/pionniers\.png" alt="EE TaRL Label AES">/);
   assert.match(page, /ريفيزي مطابق تماماً لدروس المدرسة الرائدة/);
   assert.match(page, /<img src="credits\/men\.png" alt="وزارة التربية الوطنية والتعليم الأولي والرياضة">/);
+  assert.match(page, /\.trust-logo img \{\s+display: block;\s+width: 100%;\s+height: 100%;\s+object-fit: contain;/);
+  assert.match(page, /\.trust-logo--pioneers \{\s+width: 112px;\s+height: 112px;/);
   assert.match(page, /ريفيزي مطابق لمنهاج وتوصيات وزارة التربية الوطنية/);
   assert.match(page, /© 2026 ريفيزي — جميع الحقوق محفوظة/);
   assert.match(page, /faqSection\.after\(trustFooter\)/);
