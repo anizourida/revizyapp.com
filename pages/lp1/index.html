@@ -13,6 +13,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Meta Pixel: page view only. Form details are never included in browser events. -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '2359056121533443');
+        fbq('track', 'PageView');
+    </script>
     <style>
         :root {
             --primary: #243857;
@@ -1838,6 +1851,7 @@
     </style>
 </head>
 <body>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2359056121533443&ev=PageView&noscript=1" alt=""></noscript>
     <div class="container">
         <div class="offer-ticker" aria-label="عرض خاص: الاشتراك السنوي بـ 249 درهم، وفر 99 درهم">
             <div class="offer-ticker-track" aria-hidden="true">
@@ -2708,6 +2722,9 @@
                 .join('\n');
             const message = `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`;
             const whatsappUrl = `https://wa.me/212624853412?text=${encodeURIComponent(message)}`;
+            if (typeof window.fbq === 'function') {
+                window.fbq('track', 'Contact');
+            }
             window.open(whatsappUrl, '_blank');
         }
 

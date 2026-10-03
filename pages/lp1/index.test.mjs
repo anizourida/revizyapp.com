@@ -58,6 +58,18 @@ test('LP1 gives ad visitors a persistent, accessible route to the activation for
   assert.match(page, /activationCta\.classList\.toggle\('is-hidden'/);
 });
 
+test('LP1 tracks only page views and completed WhatsApp contact intent with Meta Pixel', () => {
+  assert.match(page, /fbq\('init', '2359056121533443'\)/);
+  assert.match(page, /fbq\('track', 'PageView'\)/);
+  assert.match(page, /www\.facebook\.com\/tr\?id=2359056121533443&ev=PageView&noscript=1/);
+
+  const whatsappFlow = page.slice(page.indexOf('function sendWhatsApp()'), page.indexOf("activationForm.addEventListener('input'"));
+  assert.match(whatsappFlow, /typeof window\.fbq === 'function'/);
+  assert.match(whatsappFlow, /window\.fbq\('track', 'Contact'\)/);
+  assert.doesNotMatch(whatsappFlow, /fbq\([^;]*(?:parent_name|parent_phone|parent_city|student_name|student_grade)/);
+  assert.doesNotMatch(page, /fbq\('track', 'Lead'/);
+});
+
 test('LP1 preserves the original payment design and flow around the video', () => {
   assert.doesNotMatch(page, /src="revizy-logo-primary-as-text\.png"/);
   assert.match(page, /h1\s*\{[\s\S]*?font-size:\s*2\.2rem[\s\S]*?line-height:\s*2/);
