@@ -347,6 +347,8 @@
             display: flex;
             align-items: center;
             width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
             background: white;
             padding: 20px;
             border-radius: 20px;
@@ -357,6 +359,11 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .plan-card:focus-visible {
+            outline: 3px solid var(--app-yellow);
+            outline-offset: 3px;
         }
 
         .plan-card.active {
@@ -1512,7 +1519,7 @@
 
         <p class="section-title">اختر خطتك</p>
         <div class="plans" role="radiogroup" aria-label="اختيار الاشتراك السنوي">
-            <button class="plan-card active" type="button" role="radio" aria-checked="true" data-price="249" onclick="selectPlan(this)">
+            <button class="plan-card active" type="button" role="radio" aria-checked="true" aria-label="تلميذ واحد، اشتراك سنوي، 249 درهم" data-price="249" onclick="selectPlan(this)">
                 <div class="radio-container">
                     <div class="radio-outer">
                         <div class="radio-inner"></div>
@@ -1528,7 +1535,7 @@
                 </div>
             </button>
 
-            <button class="plan-card" type="button" role="radio" aria-checked="false" data-price="399" onclick="selectPlan(this)">
+            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="تلميذان، اشتراك سنوي للإخوة والأخوات، 399 درهم" data-price="399" onclick="selectPlan(this)">
                 <span class="badge">إخوة وأخوات</span>
                 <div class="radio-container">
                     <div class="radio-outer">
@@ -1545,7 +1552,7 @@
                 </div>
             </button>
 
-            <button class="plan-card" type="button" role="radio" aria-checked="false" data-price="449" onclick="selectPlan(this)">
+            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="3 إخوة وأخوات، اشتراك سنوي، 449 درهم" data-price="449" onclick="selectPlan(this)">
                 <span class="badge">إخوة وأخوات</span>
                 <div class="radio-container">
                     <div class="radio-outer">
@@ -2143,6 +2150,27 @@
                 el.innerText = price;
             });
         }
+
+        const planCards = Array.from(document.querySelectorAll('.plan-card'));
+        planCards.forEach((card, index) => {
+            card.addEventListener('keydown', (event) => {
+                const isPreviousKey = event.key === 'ArrowRight' || event.key === 'ArrowUp';
+                const isNextKey = event.key === 'ArrowLeft' || event.key === 'ArrowDown';
+                const isBoundaryKey = event.key === 'Home' || event.key === 'End';
+
+                if (!isPreviousKey && !isNextKey && !isBoundaryKey) return;
+
+                event.preventDefault();
+                const nextIndex = event.key === 'Home'
+                    ? 0
+                    : event.key === 'End'
+                        ? planCards.length - 1
+                        : (index + (isNextKey ? 1 : -1) + planCards.length) % planCards.length;
+                const nextPlan = planCards[nextIndex];
+                selectPlan(nextPlan);
+                nextPlan.focus();
+            });
+        });
 
         function selectBank(bank) {
             const detailContainers = document.querySelectorAll('.receipt-container');

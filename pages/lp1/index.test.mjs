@@ -79,6 +79,13 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /\.header-features\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(page, /class="plans"/);
   assert.equal((page.match(/class="plan-card/g) || []).length, 3);
+  assert.match(page, /aria-label="تلميذ واحد، اشتراك سنوي، 249 درهم"/);
+  assert.match(page, /aria-label="تلميذان، اشتراك سنوي للإخوة والأخوات، 399 درهم"/);
+  assert.match(page, /aria-label="3 إخوة وأخوات، اشتراك سنوي، 449 درهم"/);
+  assert.match(page, /\.plan-card:focus-visible\s*\{/);
+  assert.match(page, /planCards\.forEach\(\(card, index\) =>/);
+  assert.match(page, /event\.key === 'ArrowRight'/);
+  assert.match(page, /event\.key === 'Home'/);
   assert.match(page, /تلميذ واحد[\s\S]*?350 درهم[\s\S]*?249/);
   assert.match(page, /<button class="plan-card"[\s\S]*?<span class="badge">إخوة وأخوات<\/span>[\s\S]*?تلميذان[\s\S]*?500 درهم[\s\S]*?399/);
   assert.match(page, /3 إخوة وأخوات[\s\S]*?600 درهم[\s\S]*?449/);
