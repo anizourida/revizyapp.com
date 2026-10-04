@@ -21,3 +21,15 @@ test('queues a Pushover notification only after saving a verified lead', async (
   assert.ok(notifyPosition > savePosition, 'notify only after the D1 insert succeeds');
   assert.ok(successPosition > notifyPosition, 'success remains independent of notification delivery');
 });
+
+test('provides a protected, read-only lead dashboard with WhatsApp contact links', async () => {
+  const source = await readFile(sourceUrl, 'utf8');
+
+  assert.match(source, /url\.pathname === '\/admin'/);
+  assert.match(source, /env\.ADMIN_USERNAME/);
+  assert.match(source, /env\.ADMIN_PASSWORD/);
+  assert.match(source, /WWW-Authenticate/);
+  assert.match(source, /SELECT[\s\S]+FROM form_submissions[\s\S]+ORDER BY created_at DESC/);
+  assert.match(source, /https:\/\/wa\.me\/212/);
+  assert.match(source, /تواصل عبر واتساب/);
+});
