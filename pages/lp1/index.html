@@ -2711,7 +2711,7 @@
                 select.name = 'student_grade';
                 select.required = true;
                 select.setAttribute('aria-label', `المستوى الدراسي للابن ${index + 1}`);
-                select.innerHTML = `<option value="" selected disabled>اختار مستوى الابن ${index + 1}</option>${primarySchoolGrades.map((grade) => `<option value="${grade}">${grade}</option>`).join('')}`;
+                select.innerHTML = `<option value="" selected disabled>اختر مستوى الابن ${index + 1}</option>${primarySchoolGrades.map((grade) => `<option value="${grade}">${grade}</option>`).join('')}`;
                 select.value = previousGrades[index] || '';
                 gradeField.append(gradeLabel, select);
                 row.append(nameField, gradeField);
