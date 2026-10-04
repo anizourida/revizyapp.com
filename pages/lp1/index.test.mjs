@@ -52,8 +52,8 @@ test('LP1 is installable and renders its header immediately without a blocking l
 
 test('LP1 gives ad visitors a persistent, accessible route to the activation form', () => {
   assert.match(page, /<a class="sticky-activation-cta" id="activation-cta" href="#activation-title"/);
-  assert.match(page, /aria-label="أرسل طلب الاشتراك في ريفيزي"/);
-  assert.match(page, />\s*أرسل طلب الاشتراك\s*<\/a>/);
+  assert.match(page, /aria-label="اشترك الآن في ريفيزي"/);
+  assert.match(page, />\s*اشترك الآن\s*<\/a>/);
   assert.match(page, /\.sticky-activation-cta\s*\{[\s\S]*?position:\s*fixed/);
   assert.match(page, /\.sticky-activation-cta\s*\{[\s\S]*?background:\s*var\(--app-yellow\)/);
   assert.doesNotMatch(page, /@media \(min-width: 481px\)\s*\{\s*\.sticky-activation-cta\s*\{\s*display:\s*none/);
