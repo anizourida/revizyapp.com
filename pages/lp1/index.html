@@ -13,7 +13,9 @@
     <link rel="apple-touch-icon" href="pwa-icon-192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://challenges.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <!-- Meta Pixel: page view only. Form details are never included in browser events. -->
     <script>
         !function(f,b,e,v,n,t,s)
@@ -1598,6 +1600,12 @@
 
         .form-submit-status.is-error { color: #C2410C; }
 
+        .turnstile-field {
+            display: grid;
+            justify-items: center;
+            margin: 18px 0 0;
+        }
+
         .form-honeypot {
             position: absolute;
             width: 1px;
@@ -2262,6 +2270,10 @@
                         <div class="grade-selectors" id="grade-selectors"></div>
                     </fieldset>
 
+                    <div class="turnstile-field">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFNIbj2b4roG4Xem" data-action="lp1_activation" data-theme="light" data-size="flexible"></div>
+                    </div>
+
                     <button id="whatsapp-btn" class="whatsapp-button" type="submit" disabled>
                         <img src="whatsapp.webp" alt="">
                         صيفط طلب التفعيل
@@ -2779,6 +2791,7 @@
                     plan_name: planName,
                     price_mad: Number(price),
                     students,
+                    turnstile_token: formData.get('cf-turnstile-response') || '',
                     website: formData.get('website')?.trim() || ''
                 },
                 message: `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`
@@ -2791,6 +2804,11 @@
             if (whatsappBtn.disabled) return;
 
             const { payload, message } = buildActivationDraft();
+            if (!payload.turnstile_token) {
+                formSubmitStatus.classList.add('is-error');
+                formSubmitStatus.textContent = 'كمّل التحقق الأمني قبل ما تصيفط الطلب.';
+                return;
+            }
             whatsappBtn.disabled = true;
             formSubmitStatus.classList.remove('is-error');
             formSubmitStatus.textContent = 'كنصيفطو طلبك دابا…';

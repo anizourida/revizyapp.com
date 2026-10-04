@@ -75,6 +75,9 @@ test('LP1 saves a validated activation request before redirecting to the WhatsAp
   assert.match(page, /window\.location\.assign\('thank-you\.html'\)/);
   assert.doesNotMatch(page, /window\.open\(whatsappUrl/);
   assert.match(page, /<div class="form-honeypot"[^>]*>[\s\S]*?<input id="website" name="website"/);
+  assert.match(page, /https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/);
+  assert.match(page, /<div class="cf-turnstile"[^>]+data-sitekey="0x4AAAAAAFNIbj2b4roG4Xem"[^>]+data-action="lp1_activation"/);
+  assert.match(page, /turnstile_token: formData\.get\('cf-turnstile-response'\) \|\| ''/);
   assert.match(page, /window\.fbq\('track', 'Lead'\)/);
   assert.doesNotMatch(page, /fbq\([^;]*(?:parent_name|parent_phone|parent_city|student_name|student_grade)/);
 });
