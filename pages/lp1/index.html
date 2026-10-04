@@ -1451,23 +1451,18 @@
             gap: 8px;
             padding: 11px 16px;
             border-radius: 18px;
-            background: var(--primary);
-            box-shadow: 0 10px 24px rgba(36, 56, 87, 0.24);
-            color: #fff;
-            font-size: 0.92rem;
+            background: var(--app-yellow);
+            box-shadow: 0 10px 24px rgba(251, 191, 36, 0.32);
+            color: var(--primary);
+            font-size: 1rem;
             font-weight: 800;
             text-decoration: none;
             transform: translateX(50%);
             transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
         }
 
-        .sticky-activation-cta strong {
-            color: var(--app-yellow);
-            font-size: 1rem;
-        }
-
         .sticky-activation-cta:focus-visible {
-            outline: 3px solid var(--app-yellow);
+            outline: 3px solid var(--primary);
             outline-offset: 3px;
         }
 
@@ -1476,12 +1471,6 @@
             opacity: 0;
             pointer-events: none;
             transform: translate(50%, 14px);
-        }
-
-        @media (min-width: 481px) {
-            .sticky-activation-cta {
-                display: none;
-            }
         }
 
         .activation-card {
@@ -2312,8 +2301,8 @@
         </footer>
     </div>
 
-    <a class="sticky-activation-cta" id="activation-cta" href="#activation-title" aria-label="فعّل اشتراك ريفيزي ابتداءً من 249 درهم">
-        فعّل اشتراكك <strong>ابتداءً من 249 درهم</strong>
+    <a class="sticky-activation-cta" id="activation-cta" href="#activation-title" aria-label="اشترك الآن في ريفيزي">
+        اشترك الآن
     </a>
 
     <script>
