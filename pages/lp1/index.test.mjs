@@ -202,7 +202,8 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.doesNotMatch(page, /شنو بغيتي ولدك أو بنتك يقوّي؟/);
   assert.doesNotMatch(page, /كتب اسم كل تلميذ واختار المستوى الدراسي ديالو/);
   assert.doesNotMatch(page, /learning_need/);
-  assert.match(page, /صيفط طلب التفعيل/);
+  assert.match(page, /أرسل طلب الاشتراك/);
+  assert.doesNotMatch(page, /صيفط طلب التفعيل/);
   assert.doesNotMatch(page, /Attijari/);
   assert.doesNotMatch(page, /CIH/);
   assert.doesNotMatch(page, /RIDA ANIZOU/);
