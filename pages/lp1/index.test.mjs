@@ -74,6 +74,7 @@ test('LP1 saves a validated activation request before redirecting to the WhatsAp
   assert.match(page, /response\.ok && result\.ok === true/);
   assert.match(page, /const WHATSAPP_DRAFT_KEY = 'revizy-lp1-whatsapp-draft';/);
   assert.match(page, /sessionStorage\.setItem\(WHATSAPP_DRAFT_KEY/);
+  assert.match(page, /الخطة: \$\{planName\} \(\$\{price\} درهم لمدة سنة كاملة\)/);
   assert.match(page, /window\.location\.assign\('thank-you\.html'\)/);
   assert.doesNotMatch(page, /window\.open\(whatsappUrl/);
   assert.match(page, /<div class="form-honeypot"[^>]*>[\s\S]*?<input id="website" name="website"/);
@@ -90,6 +91,7 @@ test('LP1 thank-you page has no offer or home link and opens WhatsApp with the s
   assert.match(thankYouPage, /sessionStorage\.getItem\('revizy-lp1-whatsapp-draft'/);
   assert.match(thankYouPage, /sessionStorage\.removeItem\('revizy-lp1-whatsapp-draft'/);
   assert.match(thankYouPage, /https:\/\/wa\.me\/212624853412\?text=/);
+  assert.match(thankYouPage, /اشتراك ريفيزي السنوي \(لمدة سنة كاملة\)/);
   assert.doesNotMatch(thankYouPage, /URLSearchParams|location\.search/);
 });
 
@@ -166,11 +168,12 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /id="plan-selector"/);
   assert.match(page, /activationIntro\.after\(planSelector\)/);
   assert.match(page, /\.activation-card \.plan-selector \.plans\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
-  assert.match(page, /\.activation-card \.plan-selector \.plan-period\s*\{\s*display:\s*none/);
+  assert.match(page, /\.activation-card \.plan-selector \.plan-period\s*\{[\s\S]*?display:\s*block/);
   assert.equal((page.match(/class="plan-card/g) || []).length, 3);
-  assert.match(page, /aria-label="ابن واحد، اشتراك سنوي، 249 درهم"/);
-  assert.match(page, /aria-label="ابنان، اشتراك سنوي، 399 درهم"/);
-  assert.match(page, /aria-label="3 أبناء، اشتراك سنوي، 449 درهم"/);
+  assert.match(page, /aria-label="ابن واحد، اشتراك لمدة سنة كاملة، 249 درهم"/);
+  assert.match(page, /aria-label="ابنان، اشتراك لمدة سنة كاملة، 399 درهم"/);
+  assert.match(page, /aria-label="3 أبناء، اشتراك لمدة سنة كاملة، 449 درهم"/);
+  assert.match(page, /اشتراك لمدة سنة كاملة/);
   assert.match(page, /\.plan-card:focus-visible\s*\{/);
   assert.match(page, /planCards\.forEach\(\(card, index\) =>/);
   assert.match(page, /event\.key === 'ArrowRight'/);

@@ -445,7 +445,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-height: 132px;
+            min-height: 146px;
             padding: 29px 6px 10px;
             border-radius: 16px;
             text-align: center;
@@ -477,7 +477,7 @@
         .activation-card .plan-selector .price-container {
             display: block;
             flex: 0 0 auto;
-            order: 3;
+            order: 4;
         }
 
         .activation-card .plan-selector .plan-title {
@@ -490,12 +490,19 @@
         }
 
         .activation-card .plan-selector .plan-period {
-            display: none;
+            display: block;
+            align-self: center;
+            order: 2;
+            margin-bottom: 2px;
+            color: #52637D;
+            font-size: 0.58rem;
+            font-weight: 700;
+            line-height: 1.3;
         }
 
         .activation-card .plan-selector .plan-original-price {
             align-self: center;
-            order: 2;
+            order: 3;
             margin-bottom: 2px;
             font-size: 0.58rem;
         }
@@ -515,7 +522,7 @@
         }
 
         .activation-card .plan-selector .plan-savings {
-            order: 4;
+            order: 5;
             justify-content: center;
             gap: 2px;
             margin: 0;
@@ -1995,7 +2002,7 @@
         <section class="plan-selector" id="plan-selector" aria-label="اختر خطتك">
         <p class="section-title">اختر خطتك</p>
         <div class="plans" role="radiogroup" aria-label="اختيار الاشتراك السنوي">
-            <button class="plan-card active" type="button" role="radio" aria-checked="true" aria-label="ابن واحد، اشتراك سنوي، 249 درهم" data-price="249" data-student-count="1" onclick="selectPlan(this)">
+            <button class="plan-card active" type="button" role="radio" aria-checked="true" aria-label="ابن واحد، اشتراك لمدة سنة كاملة، 249 درهم" data-price="249" data-student-count="1" onclick="selectPlan(this)">
                 <div class="radio-container">
                     <div class="radio-outer">
                         <div class="radio-inner"></div>
@@ -2003,7 +2010,7 @@
                 </div>
                 <div class="plan-details">
                     <div class="plan-title">ابن واحد</div>
-                    <div class="plan-period">اشتراك سنوي</div>
+                    <div class="plan-period">لمدة سنة كاملة</div>
                     <span class="plan-original-price">350 درهم</span>
                 </div>
                 <div class="price-container">
@@ -2012,7 +2019,7 @@
                 <div class="plan-savings">وفّر 101 درهم</div>
             </button>
 
-            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="ابنان، اشتراك سنوي، 399 درهم" data-price="399" data-student-count="2" onclick="selectPlan(this)">
+            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="ابنان، اشتراك لمدة سنة كاملة، 399 درهم" data-price="399" data-student-count="2" onclick="selectPlan(this)">
                 <span class="badge">إخوة</span>
                 <div class="radio-container">
                     <div class="radio-outer">
@@ -2021,7 +2028,7 @@
                 </div>
                 <div class="plan-details">
                     <div class="plan-title">ابنان</div>
-                    <div class="plan-period">اشتراك سنوي</div>
+                    <div class="plan-period">لمدة سنة كاملة</div>
                     <span class="plan-original-price">500 درهم</span>
                 </div>
                 <div class="price-container">
@@ -2030,7 +2037,7 @@
                 <div class="plan-savings">وفّر 101 درهم</div>
             </button>
 
-            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="3 أبناء، اشتراك سنوي، 449 درهم" data-price="449" data-student-count="3" onclick="selectPlan(this)">
+            <button class="plan-card" type="button" role="radio" aria-checked="false" aria-label="3 أبناء، اشتراك لمدة سنة كاملة، 449 درهم" data-price="449" data-student-count="3" onclick="selectPlan(this)">
                 <span class="badge">إخوة</span>
                 <div class="radio-container">
                     <div class="radio-outer">
@@ -2039,7 +2046,7 @@
                 </div>
                 <div class="plan-details">
                     <div class="plan-title">3 أبناء</div>
-                    <div class="plan-period">اشتراك سنوي</div>
+                    <div class="plan-period">لمدة سنة كاملة</div>
                     <span class="plan-original-price">600 درهم</span>
                 </div>
                 <div class="price-container">
@@ -2782,7 +2789,7 @@
                     turnstile_token: formData.get('cf-turnstile-response') || '',
                     website: formData.get('website')?.trim() || ''
                 },
-                message: `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالخطة: ${planName} (${price} درهم)\n\nبغيت نعرف خطوات التفعيل.`
+                message: `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالخطة: ${planName} (${price} درهم لمدة سنة كاملة)\n\nبغيت نعرف خطوات التفعيل.`
             };
         }
 
