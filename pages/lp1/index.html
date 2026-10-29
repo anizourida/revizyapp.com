@@ -1724,7 +1724,7 @@
             outline-offset: 2px;
         }
 
-        /* WhatsApp Button */
+        /* Activation submit button */
         .whatsapp-button {
             display: flex;
             align-items: center;
@@ -1746,7 +1746,7 @@
             cursor: pointer;
         }
 
-        .whatsapp-button img {
+        .whatsapp-button svg {
             width: 24px;
             height: 24px;
             object-fit: contain;
@@ -2203,7 +2203,7 @@
                 </details>
                 <details class="faq-item">
                     <summary>كيفاش كنفعّل الاشتراك؟</summary>
-                    <p class="faq-answer">اختار الخطة، عمّر المعلومات، وصيفط الطلب فواتساب. الفريق ديالنا غادي يتواصل معاك باش يكمل معاك التفعيل.</p>
+                    <p class="faq-answer">اختار الخطة وعمّر المعلومات. من بعد إرسال الطلب، غادي تمشي مباشرة لـ Google Play باش تحمّل تطبيق ريفيزي.</p>
                 </details>
             </div>
         </section>
@@ -2238,7 +2238,7 @@
                     <span class="activation-eyebrow">✦ اشتراك سنوي مختار</span>
                     <div class="activation-price"><span class="activation-amount">249</span><small>درهم</small></div>
                     <h2 id="activation-title">فعّل اشتراك ريفيزي</h2>
-                    <p>عمّر معلوماتك وصيفط الطلب فواتساب. الفريق ديالنا غادي يتواصل معاك باش يكمل معاك التفعيل.</p>
+                    <p>عمّر معلوماتك وأرسل الطلب. من بعد، غادي تمشي مباشرة لـ Google Play باش تحمّل تطبيق ريفيزي.</p>
                 </div>
 
                 <form class="activation-form" id="activation-form" novalidate>
@@ -2251,9 +2251,9 @@
                         <input id="parent-name" name="parent_name" type="text" autocomplete="name" required placeholder="الاسم ديالك">
                     </div>
                     <div class="form-field">
-                        <label for="parent-phone">رقم الواتساب</label>
+                        <label for="parent-phone">رقم الهاتف</label>
                         <input id="parent-phone" name="parent_phone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="parent-phone-error" placeholder="06xxxxxxxx">
-                        <small class="form-error" id="parent-phone-error" hidden>دخل رقم واتساب مغربي صحيح: 06 أو 07، أو +212 6/7.</small>
+                        <small class="form-error" id="parent-phone-error" hidden>دخل رقم هاتف مغربي صحيح: 06 أو 07، أو +212 6/7.</small>
                     </div>
                     <div class="form-field">
                         <label for="parent-city">المدينة</label>
@@ -2270,11 +2270,11 @@
                     </div>
 
                     <button id="whatsapp-btn" class="whatsapp-button" type="submit" disabled>
-                        <img src="whatsapp.webp" alt="">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"></path></svg>
                         أرسل طلب الاشتراك
                     </button>
                     <p class="form-submit-status" id="form-submit-status" role="status" aria-live="polite"></p>
-                    <p class="footer-note">غادي نتواصلو معاك فواتساب باش نكملو معاك خطوات التفعيل بطريقة واضحة.</p>
+                    <p class="footer-note">من بعد ما يتسجّل طلبك، غادي يتحلّ Google Play باش تحمّل ريفيزي.</p>
                 </form>
             </div>
         </section>
@@ -2755,15 +2755,15 @@
             const hasError = !isEmpty && !isValid;
 
             parentPhoneInput.classList.toggle('is-invalid', hasError);
-            parentPhoneInput.setCustomValidity(hasError ? 'رقم الواتساب يجب أن يكون رقماً مغربياً صحيحاً.' : '');
+            parentPhoneInput.setCustomValidity(hasError ? 'رقم الهاتف يجب أن يكون رقماً مغربياً صحيحاً.' : '');
             parentPhoneError.hidden = !hasError;
             return isValid;
         }
 
         const FORM_SUBMIT_URL = 'https://revizy-lp1-api.3nizou.workers.dev/';
-        const WHATSAPP_DRAFT_KEY = 'revizy-lp1-whatsapp-draft';
+        const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.revizyapp';
 
-        function buildActivationDraft() {
+        function buildActivationPayload() {
             updateActivationButton();
             const formData = new FormData(activationForm);
             const selectedPlan = document.querySelector('.plan-card.active');
@@ -2775,21 +2775,17 @@
                     const childName = studentNames[index]?.trim() || `اسم الابن ${index + 1}`;
                     return { name: childName, grade };
                 });
-            const gradeDetails = students.map((student, index) => `الابن ${index + 1}: ${student.name} — ${student.grade}`).join('\n');
 
             return {
-                payload: {
-                    landing_page: 'lp1',
-                    parent_name: formData.get('parent_name')?.trim(),
-                    parent_phone: normalizeMoroccanPhone(formData.get('parent_phone')?.trim() || ''),
-                    parent_city: formData.get('parent_city')?.trim(),
-                    plan_name: planName,
-                    price_mad: Number(price),
-                    students,
-                    turnstile_token: formData.get('cf-turnstile-response') || '',
-                    website: formData.get('website')?.trim() || ''
-                },
-                message: `السلام عليكم، بغيت نفعّل اشتراك ريفيزي.\n\nالاسم: ${formData.get('parent_name')}\nرقم الواتساب: ${formData.get('parent_phone')}\nالمدينة: ${formData.get('parent_city')}\nالمستويات الدراسية:\n${gradeDetails}\nالخطة: ${planName} (${price} درهم لمدة سنة كاملة)\n\nبغيت نعرف خطوات التفعيل.`
+                landing_page: 'lp1',
+                parent_name: formData.get('parent_name')?.trim(),
+                parent_phone: normalizeMoroccanPhone(formData.get('parent_phone')?.trim() || ''),
+                parent_city: formData.get('parent_city')?.trim(),
+                plan_name: planName,
+                price_mad: Number(price),
+                students,
+                turnstile_token: formData.get('cf-turnstile-response') || '',
+                website: formData.get('website')?.trim() || ''
             };
         }
 
@@ -2798,7 +2794,7 @@
             updateActivationButton();
             if (whatsappBtn.disabled) return;
 
-            const { payload, message } = buildActivationDraft();
+            const payload = buildActivationPayload();
             if (!payload.turnstile_token) {
                 formSubmitStatus.classList.add('is-error');
                 formSubmitStatus.textContent = 'كمّل التحقق الأمني قبل ما تصيفط الطلب.';
@@ -2817,9 +2813,8 @@
                 const result = await response.json().catch(() => ({}));
                 if (!(response.ok && result.ok === true)) throw new Error('SUBMISSION_FAILED');
 
-                sessionStorage.setItem(WHATSAPP_DRAFT_KEY, JSON.stringify({ message }));
                 if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
-                window.location.assign('thank-you.html');
+                window.location.assign(PLAY_STORE_URL);
             } catch {
                 formSubmitStatus.classList.add('is-error');
                 formSubmitStatus.textContent = 'ما قدرناش نصيفطو الطلب دابا. تأكد من الإنترنت وعاود حاول.';

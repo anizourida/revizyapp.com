@@ -63,7 +63,7 @@ test('LP1 gives ad visitors a persistent, accessible route to the activation for
   assert.match(page, /activationCta\.classList\.toggle\('is-hidden'/);
 });
 
-test('LP1 saves a validated activation request before redirecting to the WhatsApp thank-you page', () => {
+test('LP1 saves a validated activation request before redirecting directly to Google Play', () => {
   assert.match(page, /fbq\('init', '2359056121533443'\)/);
   assert.match(page, /fbq\('track', 'PageView'\)/);
   assert.match(page, /www\.facebook\.com\/tr\?id=2359056121533443&ev=PageView&noscript=1/);
@@ -72,10 +72,9 @@ test('LP1 saves a validated activation request before redirecting to the WhatsAp
   assert.match(page, /await fetch\(FORM_SUBMIT_URL, \{/);
   assert.match(page, /method: 'POST'/);
   assert.match(page, /response\.ok && result\.ok === true/);
-  assert.match(page, /const WHATSAPP_DRAFT_KEY = 'revizy-lp1-whatsapp-draft';/);
-  assert.match(page, /sessionStorage\.setItem\(WHATSAPP_DRAFT_KEY/);
-  assert.match(page, /الخطة: \$\{planName\} \(\$\{price\} درهم لمدة سنة كاملة\)/);
-  assert.match(page, /window\.location\.assign\('thank-you\.html'\)/);
+  assert.match(page, /const PLAY_STORE_URL = 'https:\/\/play\.google\.com\/store\/apps\/details\?id=com\.revizyapp';/);
+  assert.doesNotMatch(page, /WHATSAPP_DRAFT_KEY|sessionStorage|wa\.me/);
+  assert.match(page, /window\.location\.assign\(PLAY_STORE_URL\)/);
   assert.doesNotMatch(page, /window\.open\(whatsappUrl/);
   assert.match(page, /<div class="form-honeypot"[^>]*>[\s\S]*?<input id="website" name="website"/);
   assert.match(page, /https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/);
@@ -85,13 +84,13 @@ test('LP1 saves a validated activation request before redirecting to the WhatsAp
   assert.doesNotMatch(page, /fbq\([^;]*(?:parent_name|parent_phone|parent_city|student_name|student_grade)/);
 });
 
-test('LP1 thank-you page has no offer or home link and opens WhatsApp with the saved draft', () => {
+test('LP1 legacy thank-you page forwards to Google Play with a download fallback', () => {
   assert.doesNotMatch(thankYouPage, /offer-bar/);
   assert.doesNotMatch(thankYouPage, /home-link/);
-  assert.match(thankYouPage, /sessionStorage\.getItem\('revizy-lp1-whatsapp-draft'/);
-  assert.match(thankYouPage, /sessionStorage\.removeItem\('revizy-lp1-whatsapp-draft'/);
-  assert.match(thankYouPage, /https:\/\/wa\.me\/212624853412\?text=/);
-  assert.match(thankYouPage, /اشتراك ريفيزي السنوي \(لمدة سنة كاملة\)/);
+  assert.match(thankYouPage, /http-equiv="refresh" content="0; url=https:\/\/play\.google\.com\/store\/apps\/details\?id=com\.revizyapp"/);
+  assert.match(thankYouPage, /window\.location\.replace\('https:\/\/play\.google\.com\/store\/apps\/details\?id=com\.revizyapp'\)/);
+  assert.match(thankYouPage, /id="thank-you-play-store" href="https:\/\/play\.google\.com\/store\/apps\/details\?id=com\.revizyapp"/);
+  assert.doesNotMatch(thankYouPage, /واتساب|wa\.me|sessionStorage|fbq\('track', 'Contact'\)/);
   assert.doesNotMatch(thankYouPage, /URLSearchParams|location\.search/);
 });
 
@@ -126,8 +125,8 @@ test('LP1 preserves the original payment design and flow around the video', () =
   assert.match(page, /\.header-children\s*\{[\s\S]*?width:\s*100%/);
   assert.match(page, /id="header-prompt-tags"/);
   assert.ok(page.indexOf('class="subtitle"') < page.indexOf('id="header-prompt-tags"'));
-  assert.match(page, /id="header-prompt-tags"[\s\S]*?<\/div>\s*<div class="header-tracing-illustration"[\s\S]*?src="parts\/par-6\.webp"[\s\S]*?<section class="video-section"[\s\S]*?<section class="revision-benefits"[\s\S]*?<div class="header-learning">/);
-  assert.match(page, /\.header-tracing-illustration img \{\s+display: block;\s+width: min\(70px, 72vw\)/);
+  assert.match(page, /id="header-prompt-tags"[\s\S]*?<\/div>\s*<div class="header-tracing-illustration"[\s\S]*?<video src="parts\/arrow\.webm"[\s\S]*?<section class="video-section"[\s\S]*?<section class="revision-benefits"[\s\S]*?<div class="header-learning">/);
+  assert.match(page, /\.header-tracing-illustration video \{\s+display: block;\s+width: min\(70px, 72vw\)/);
   assert.match(page, /class="revision-benefit"[\s\S]*?>مسار واضح/);
   assert.match(page, /تمارين مناسبة/);
   assert.match(page, /تقدّم متدرّج/);

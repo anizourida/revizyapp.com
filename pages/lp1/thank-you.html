@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=https://play.google.com/store/apps/details?id=com.revizyapp">
     <title>شكراً | ريفيزي</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -194,29 +195,29 @@
             gap: 10px;
         }
 
-        .whatsapp-link {
+        .play-store-link {
             display: flex;
             min-height: 52px;
             align-items: center;
             justify-content: center;
             border-radius: 14px;
-            color: #fff;
+            color: var(--primary);
             font-size: .92rem;
             font-weight: 800;
             text-decoration: none;
             transition: transform .18s ease, background .18s ease, border-color .18s ease;
         }
 
-        .whatsapp-link {
+        .play-store-link {
             gap: 9px;
-            background: #16b784;
+            background: var(--yellow);
         }
 
-        .whatsapp-link img { width: 22px; height: 22px; object-fit: contain; }
-        .whatsapp-link:hover { background: #10976c; }
+        .play-store-link svg { width: 22px; height: 22px; }
+        .play-store-link:hover { background: #ffd180; }
 
-        .whatsapp-link:active { transform: scale(.98); }
-        .whatsapp-link:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+        .play-store-link:active { transform: scale(.98); }
+        .play-store-link:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
 
         .note {
             margin: 16px auto 0;
@@ -238,51 +239,34 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.2 4L19 6.7"></path></svg>
             </div>
             <h1>شكراً، توصّلنا بطلبك</h1>
-            <p class="intro">غادي نتواصلو معاك فواتساب باش نكملو معاك تفعيل اشتراك ريفيزي بطريقة واضحة.</p>
+            <p class="intro">غادي تمشي مباشرة لـ Google Play باش تحمّل تطبيق ريفيزي.</p>
 
             <section class="next-steps" aria-labelledby="steps-title">
                 <h2 id="steps-title">شنو غادي يوقع دابا؟</h2>
                 <div class="step">
                     <span class="step-number">1</span>
-                    <div><strong>كنراجعو المعلومات ديالك</strong><span>باش نلقاو الخطة والمستويات المناسبة للأبناء.</span></div>
+                    <div><strong>حمّل تطبيق ريفيزي</strong><span>من Google Play على الهاتف أو الجهاز اللوحي.</span></div>
                 </div>
                 <div class="step">
                     <span class="step-number">2</span>
-                    <div><strong>كنرجعو ليك فواتساب</strong><span>الفريق ديال ريفيزي غادي يتواصل معاك مباشرة.</span></div>
+                    <div><strong>حلّ التطبيق</strong><span>واتبع الخطوات اللي كيبينها ليك.</span></div>
                 </div>
                 <div class="step">
                     <span class="step-number">3</span>
-                    <div><strong>كنكملو معاك التفعيل</strong><span>وغادي تاخذ جميع الخطوات اللي خاصك باش يبدا ولدك أو بنتك.</span></div>
+                    <div><strong>اكتشف أنشطة ريفيزي</strong><span>واختار المستوى المناسب لولدك أو بنتك.</span></div>
                 </div>
             </section>
 
             <div class="contact-actions">
-                <a class="whatsapp-link" id="thank-you-whatsapp" href="https://wa.me/212624853412" target="_blank" rel="noopener noreferrer">
-                    <img src="whatsapp.webp" alt="">تواصل معنا فواتساب دابا
+                <a class="play-store-link" id="thank-you-play-store" href="https://play.google.com/store/apps/details?id=com.revizyapp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"></path></svg>حمّل ريفيزي من Google Play
                 </a>
             </div>
-            <p class="note">إلى بقى عندك شي سؤال، صيفط لينا رسالة فواتساب وغادي نعاونوك.</p>
+            <p class="note">إلى ما تحلّش Google Play بوحدو، اضغط على الزر باش تحمّل التطبيق.</p>
         </main>
     </div>
     <script>
-        const whatsappLink = document.getElementById('thank-you-whatsapp');
-        const draftKey = 'revizy-lp1-whatsapp-draft';
-        let whatsappMessage = 'السلام عليكم، بغيت نعرف خطوات تفعيل اشتراك ريفيزي السنوي (لمدة سنة كاملة).';
-
-        try {
-            const savedDraft = JSON.parse(sessionStorage.getItem('revizy-lp1-whatsapp-draft') || '{}');
-            if (typeof savedDraft.message === 'string' && savedDraft.message.trim()) {
-                whatsappMessage = savedDraft.message;
-            }
-        } catch {
-            sessionStorage.removeItem('revizy-lp1-whatsapp-draft');
-        }
-
-        whatsappLink.href = `https://wa.me/212624853412?text=${encodeURIComponent(whatsappMessage)}`;
-        whatsappLink.addEventListener('click', () => {
-            if (typeof window.fbq === 'function') window.fbq('track', 'Contact');
-            sessionStorage.removeItem('revizy-lp1-whatsapp-draft');
-        });
+        window.location.replace('https://play.google.com/store/apps/details?id=com.revizyapp');
     </script>
 </body>
 </html>

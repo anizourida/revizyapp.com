@@ -1,4 +1,4 @@
-const CACHE_NAME = 'revizy-lp1-v5';
+const CACHE_NAME = 'revizy-lp1-v6';
 const APP_SHELL = [
   './',
   './index.html',
